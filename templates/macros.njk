@@ -1,0 +1,195 @@
+{% macro table(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th width="1">Number</th>
+      <th width="1">Semester</th>
+      <th width="1">Grade</th>
+      <th width="1">Credit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row.HIST_COURSE_NAME }}</td>
+      <td>{{ row.HIST_COURSE_NUM }}</td>
+      <td>{{ row.HIST_SEMESTER }}</td>
+      <td>{{ row.HIST_SEM_GRADE }}</td>
+      <td>{{ row.HIST_CREDIT_EARNED }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro year_grade_row(year_grade, fall_rows, spring_rows) %}
+<div style="display: flex; column-gap: 1rem;">
+  <div style="flex-grow: 1;">
+    <h4 style="display: flex; column-gap: 1rem;">
+      <div style="flex-grow: 1;">GRADE: {{year_grade.HIST_GRADE_LEVEL}}</div>
+      <div style="flex-grow: 1;">{{year_grade.FALL_BLDG_NAME}}</div>
+    </h4>
+    {{ table(fall_rows) }}
+  </div>
+  <div style="flex-grow: 1;">
+    <h4 style="display: flex; column-gap: 1rem;">
+      <div style="flex-grow: 1;"></div>
+      <div style="flex-grow: 1;">{{year_grade.SPRING_BLDG_NAME}}</div>
+    </h4>
+    {{ table(spring_rows) }}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro elementary(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>School</th>
+      <th>Grade</th>
+      <th>Next Grade</th>
+      <th>Reading</th>
+      <th>Language</th>
+      <th>Spelling</th>
+      <th>Hand Writing</th>
+      <th>Math</th>
+      <th>Social Studies</th>
+      <th>Science</th>
+      <th>Physical Education</th>
+      <th>Music</th>
+      <th>Art</th>
+      <th>Computers</th>
+      <th>Foreign Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td style="white-space: nowrap;">{{ row.SCHOOL_YEAR.slice(0,2) }}-{{ row.SCHOOL_YEAR.slice(2,4) }}</td>
+      <td>{{ row.SCHOOL }}</td>
+      <td>{{ row.GRADE_LEVEL }}</td>
+      <td>{{ row.PLACE }}</td>
+      <td>{{ row.RD }}</td>
+      <td>{{ row.LA }}</td>
+      <td>{{ row.SP }}</td>
+      <td>{{ row.HW }}</td>
+      <td>{{ row.MT }}</td>
+      <td>{{ row.SS }}</td>
+      <td>{{ row.SC }}</td>
+      <td>{{ row.PE }}</td>
+      <td>{{ row.MU }}</td>
+      <td>{{ row.AR }}</td>
+      <td>{{ row.CP }}</td>
+      <td>{{ row.FL }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+
+{% macro attendance(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Present</th>
+      <th>Absent</th>
+      <th>Non Member</th>
+      <th>School Code</th>
+      <th>School Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td style="white-space: nowrap;">{{ row.ATTENDANCE_YEAR.slice(0,2) }}-{{ row.ATTENDANCE_YEAR.slice(2,4) }}</td>
+      <td>{{ row.SUM_DAYS_PRESENT }}</td>
+      <td>{{ row.SUM_DAYS_ABSENT }}</td>
+      <td>{{ row.SUM_DAYS_NON_MEMBER }}</td>
+      <td>{{ row.SCHOOL }}</td>
+      <td>{{ row.BLDG_NAME }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro mobility(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>School Code</th>
+      <th>Entry Date</th>
+      <th>Entry Reason</th>
+      <th>Exit Date</th>
+      <th>Exit Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row.SCHOOL_CODE }}</td>
+      <td>{{ row.ENTRY_DATE | formatDate }}</td>
+      <td>{{ row.ENTRY_REASON_CODE }}</td>
+      <td>{{ row.EXIT_DATE | formatDate }}</td>
+      <td>{{ row.EXIT_REASON_CODE }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro addresshistory(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Change Date</th>
+      <th>Student Address</th>
+      <th>Zip Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row.address_date | formatDate }}</td>
+      <td>
+        {{ row.HOUSE_NUMBER.replace(r/^0+/, '') }}
+        {{ row.DIRECTION }} {{ row.STREET_NAME }}
+        &nbsp; {{ row.APARTMENT_LOT_NO }} {{ row.BLDG_LOT_NO }}
+      </td>
+      <td>{{ row.ZIP_CODE }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro student_test_list(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Grade</th>
+      <th>Test Name</th>
+      <th>Test Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row.GRADE }}</td>
+      <td>{{ row.TEST_NAME }}</td>
+      <td>{{ row.DATE }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}

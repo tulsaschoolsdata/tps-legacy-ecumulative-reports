@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  volumes:
+    image: tulsaschoolsdata/tps-legacy-ecum-reports
+    user: root
+    command: 'chown -f node: /home/node/app/node_modules'
+    volumes:
+      - node_modules:/home/node/app/node_modules
+
+  app:
+    image: tulsaschoolsdata/tps-legacy-ecum-reports
+    depends_on:
+      - volumes
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+
+volumes:
+  node_modules:

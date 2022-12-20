@@ -1,0 +1,356 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("MFLEGACY_STUDENT_DATABASE_URL")
+  schemas  = ["TSTU_Yr0809"]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY {
+  HIST_STUDENT_NUM Int
+  HIST_FROM_YEAR   Decimal  @db.Decimal(4, 0)
+  HIST_TO_YEAR     Decimal  @db.Decimal(4, 0)
+  HIST_SEMESTER    String   @db.NVarChar(1)
+  HIST_COURSE_NUM  Decimal  @db.Decimal(4, 0)
+  HIST_COURSE_NAME String?  @db.NVarChar(15)
+  HIST_LOCATION    Decimal? @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL String?  @db.NVarChar(2)
+  HIST_CREDIT      Decimal? @db.Decimal(3, 2)
+  HIST_SEM_GRADE   String?  @db.NVarChar(2)
+  HIST_COUNTER     Int
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ELL_ACCESS_TEST {
+  STUDENT_NUMBER     Int
+  SCHOOL_YEAR        String @db.NVarChar(4)
+  TIER               String @db.NVarChar(1)
+  CLUSTER            String @db.NVarChar(1)
+  OVRALL_SCALE_SCORE String @db.NVarChar(3)
+  OVRALL_PROF_LEVEL  String @db.NVarChar(3)
+  COMP_SCALE_SCORE   String @db.NVarChar(3)
+  COMP_PROF_LEVEL    String @db.NVarChar(3)
+  READ_SCALE_SCORE   String @db.NVarChar(3)
+  READ_PROF_LEVEL    String @db.NVarChar(3)
+  LISTEN_SCALE_SCORE String @db.NVarChar(3)
+  LISTEN_PROF_LEVEL  String @db.NVarChar(3)
+  ORAL_SCALE_SCORE   String @db.NVarChar(3)
+  ORAL_PROF_LEVEL    String @db.NVarChar(3)
+  WRITE_SCALE_SCORE  String @db.NVarChar(3)
+  WRITE_PROF_LEVEL   String @db.NVarChar(3)
+  SPEAK_SCALE_SCORE  String @db.NVarChar(3)
+  SPEAK_PROF_LEVEL   String @db.NVarChar(3)
+  LITRCY_SCALE_SCORE String @db.NVarChar(3)
+  LITRCY_PROF_LEVEL  String @db.NVarChar(3)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ELL_ENTRY_TABLE {
+  STUDENT_NUMBER   Int
+  ELL_ENTRY_DATE   DateTime  @db.SmallDateTime
+  ELL_EXIT_DATE    DateTime? @db.SmallDateTime
+  ELL_ENTRY_SCORE  String    @db.NVarChar(2)
+  ELL_TEST_YEAR01  String    @db.NVarChar(4)
+  ELL_TEST_SCORE01 String    @db.NVarChar(2)
+  ELL_TEST_YEAR02  String    @db.NVarChar(4)
+  ELL_TEST_SCORE02 String    @db.NVarChar(2)
+  ELL_TEST_YEAR03  String    @db.NVarChar(4)
+  ELL_TEST_SCORE03 String    @db.NVarChar(2)
+  ELL_TEST_YEAR04  String    @db.NVarChar(4)
+  ELL_TEST_SCORE04 String    @db.NVarChar(2)
+  ELL_TEST_YEAR05  String    @db.NVarChar(4)
+  ELL_TEST_SCORE05 String    @db.NVarChar(2)
+  ELL_TEST_YEAR06  String    @db.NVarChar(4)
+  ELL_TEST_SCORE06 String    @db.NVarChar(2)
+  ELL_TEST_YEAR07  String    @db.NVarChar(4)
+  ELL_TEST_SCORE07 String    @db.NVarChar(2)
+  ELL_TEST_YEAR08  String    @db.NVarChar(4)
+  ELL_TEST_SCORE08 String    @db.NVarChar(2)
+  ELL_TEST_YEAR09  String    @db.NVarChar(4)
+  ELL_TEST_SCORE09 String    @db.NVarChar(2)
+  ELL_TEST_YEAR10  String    @db.NVarChar(4)
+  ELL_TEST_SCORE10 String    @db.NVarChar(2)
+  ELL_TEST_YEAR11  String    @db.NVarChar(4)
+  ELL_TEST_SCORE11 String    @db.NVarChar(2)
+  ELL_TEST_YEAR12  String    @db.NVarChar(4)
+  ELL_TEST_SCORE12 String    @db.NVarChar(2)
+  ELL_TEST_YEAR13  String    @db.NVarChar(4)
+  ELL_TEST_SCORE13 String    @db.NVarChar(2)
+  ELL_TEST_YEAR14  String    @db.NVarChar(4)
+  ELL_TEST_SCORE14 String    @db.NVarChar(2)
+  ELL_TEST_YEAR15  String    @db.NVarChar(4)
+  ELL_TEST_SCORE15 String    @db.NVarChar(2)
+
+  @@ignore
+}
+
+model ELL_STUDENT_TABLE {
+  STUDENT_NUMBER     Int    @unique(map: "Idx_Student_Number", clustered: true)
+  LANG_ELL_LEP       String @db.NVarChar(1)
+  LANG_IMMIGRANT     String @db.NVarChar(1)
+  LANG_LANGUAGE      String @db.NVarChar(3)
+  LANG_ELL_YEARS     String @db.NVarChar(2)
+  LANG_BIRTH_COUNTRY String @db.NVarChar(15)
+  LANG_ELL_US_ENTRY  String @db.NVarChar(4)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ELL_WAPT_TEST {
+  STUDENT_NUMBER             Int
+  TEST_DATE_MM               String @db.NVarChar(2)
+  TEST_DATE_CCYY             String @db.NVarChar(4)
+  EC_KG_TEST_SCORE           String @db.NVarChar(3)
+  FRST_LISTEN_SPEAK          String @db.NVarChar(3)
+  FRST_READING               String @db.NVarChar(3)
+  FRST_WRITING               String @db.NVarChar(3)
+  FRST_CMP_PROF_LVL          String @db.NVarChar(3)
+  GRD1_12_LISTEN             String @db.NVarChar(4)
+  GRD1_12_SPEAK              String @db.NVarChar(4)
+  GRD1_12_READING            String @db.NVarChar(4)
+  GRD1_12_WRITING            String @db.NVarChar(4)
+  GRD1_12_CMP_PROF           String @db.NVarChar(4)
+  OUT_OF_DISTRICT_PROF_LEVEL String @db.NVarChar(4)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model EMER_CONTACT {
+  STUDENT_NUMBER     Int
+  CONTACT_LNAME      String?  @db.NVarChar(24)
+  CONTACT_FNAME      String?  @db.NVarChar(16)
+  CONTACT_MI         String?  @db.NVarChar(16)
+  CONTACT_PHONE      Decimal? @db.Decimal(10, 0)
+  CONTACT_PHONE_EXT  Decimal? @db.Decimal(5, 0)
+  STUDENT_PHY_NAME   String?  @db.NVarChar(24)
+  STUDENT_PHY_NO     Decimal? @db.Decimal(10, 0)
+  STUDENT_HOSPITAL   String?  @db.NVarChar(10)
+  SCONTACT_LNAME     String?  @db.NVarChar(24)
+  SCONTACT_FNAME     String?  @db.NVarChar(16)
+  SCONTACT_MNAME     String?  @db.NVarChar(16)
+  SCONTACT_PHONE     Decimal? @db.Decimal(10, 0)
+  SCONTACT_PHONE_EXT String?  @db.NVarChar(4)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model HEALTH {
+  STUDID            Int
+  IMMUNIZATION_TYPE String    @db.NVarChar(10)
+  FIRST_DATE        DateTime? @db.SmallDateTime
+  SECOND_DATE       DateTime? @db.SmallDateTime
+  THIRD_DATE        DateTime? @db.SmallDateTime
+  FOURTH_DATE       DateTime? @db.SmallDateTime
+  FIFTH_DATE        DateTime? @db.SmallDateTime
+  SIXTH_DATE        DateTime? @db.SmallDateTime
+  CERTIFIED_BY      String?   @db.NVarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model MOBILITY {
+  STUDID            Int
+  MOBILITY_COUNTER  Int       @db.SmallInt
+  ENTRY_DATE        DateTime? @db.SmallDateTime
+  EXIT_DATE         DateTime? @db.SmallDateTime
+  ENTRY_REASON_CODE String?   @db.NVarChar(2)
+  EXIT_REASON_CODE  String?   @db.NVarChar(2)
+  SCHOOL_CODE       Decimal?  @db.Decimal(3, 0)
+  BLDG_LEVEL        String?   @db.NVarChar(1)
+  TRANSFER_CODE     String?   @db.NVarChar(2)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model ROOMS_TABLE {
+  SCHOOL_NUMBER  Decimal  @db.Decimal(3, 0)
+  ROOM_NUM       String   @db.NVarChar(4)
+  ROOM_PERIOD    String   @db.NVarChar(1)
+  COURSE_NUM     Decimal  @db.Decimal(4, 0)
+  COURSE_SECTION Decimal  @db.Decimal(4, 0)
+  ROOM_TEACHER   String?  @db.NVarChar(20)
+  AVAIL_SEATS    Decimal? @db.Decimal(3, 0)
+  TOTALS_SEATS   Decimal? @db.Decimal(3, 0)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SCHEDULE_TABLE {
+  STUDENT_NUMBER   Int
+  SCHOOL_NUMBER    Decimal   @db.Decimal(3, 0)
+  COURSE_NUMBER    Decimal   @db.Decimal(4, 0)
+  COURSE_SECTION   Decimal   @db.Decimal(4, 0)
+  COURSE_TITLE     String?   @db.NVarChar(15)
+  SCHOOL_SEMESTER  String?   @db.NVarChar(1)
+  ROOM_NUM         String    @db.NVarChar(4)
+  ROOM_PERIOD      Decimal   @db.Decimal(1, 0)
+  CLASS_ENTRY_DATE DateTime? @db.SmallDateTime
+  CLASS_EXIT_DATE  DateTime? @db.SmallDateTime
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SCHOOL_TABLE {
+  SCHOOL_NUMBER     Decimal  @db.Decimal(3, 0)
+  SCHOOL_NAME       String?  @db.NVarChar(14)
+  SCHOOL_LUNCH_CODE String?  @db.NVarChar(1)
+  SCHOOL_MAILNAME   String?  @db.NVarChar(34)
+  SCHOOL_ADDRESS    String?  @db.NVarChar(34)
+  SCHOOL_CITY_STATE String?  @db.NVarChar(20)
+  SCHOOL_ZIP        Decimal? @db.Decimal(5, 0)
+  SCHOOL_ZIP2       Decimal? @db.Decimal(4, 0)
+  SCHOOL_XXX        String?  @db.NVarChar(1)
+  SCHOOL_AREA_CODE  Decimal? @db.Decimal(3, 0)
+  SCHOOL_PHONE      Decimal? @db.Decimal(7, 0)
+  SCHOOL_PRINCIPLE  String?  @db.NVarChar(25)
+  ALPHA_CODE        String?  @db.NVarChar(5)
+  STUDENT_LEVEL     Decimal? @db.Decimal(1, 0)
+  PERS_LEVEL        Decimal? @db.Decimal(1, 0)
+  LEVEL_NO3         String?  @db.NVarChar(1)
+  LEVEL_NO4         String?  @db.NVarChar(1)
+  TOTAL_TEACHERS    Int?     @db.SmallInt
+  TOTAL_STUDENTS    Int?     @db.SmallInt
+  TOTAL_ROOMS       Int?     @db.SmallInt
+  STD_REGION        Decimal  @db.Decimal(1, 0)
+  STD_REGION_NM     String   @db.NVarChar(4)
+  STD_DISTRICT      Decimal  @db.Decimal(1, 0)
+  STD_DISTRICT_NM   String   @db.NVarChar(25)
+  SUB_DISTRICT      Decimal  @db.Decimal(1, 0)
+  SUB_DISTRICT_NM   String   @db.NVarChar(25)
+  BLDG_FACIL_CODE   String   @db.NVarChar(3)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model STUDENT {
+  STUDENT_NUMBER     Int
+  STUDENT_SSN        Int?
+  STUDENT_LNAME      String    @db.NVarChar(24)
+  STUDENT_FNAME      String    @db.NVarChar(16)
+  STUDENT_MI         String?   @db.NVarChar(16)
+  STUDENT_BIRTHDATE  DateTime  @db.SmallDateTime
+  STUDENT_SEX        String?   @db.NVarChar(1)
+  STUDENT_PRILANG    String?   @db.NVarChar(1)
+  STUDENT_SECLANG    String?   @db.NVarChar(1)
+  STUDENT_HOUSE_NO   Decimal?  @db.Decimal(5, 0)
+  STUDENT_DIRECTION  String?   @db.NVarChar(1)
+  STUDENT_STREET     String?   @db.NVarChar(24)
+  STUDENT_APT_NO     String?   @db.NVarChar(5)
+  STUDENT_LOT_NO     String?   @db.NVarChar(6)
+  STUDENT_ZIP1       Decimal?  @db.Decimal(5, 0)
+  STUDENT_ZIP2       Decimal?  @db.Decimal(4, 0)
+  STUDENT_PHONE      Decimal?  @db.Decimal(10, 0)
+  STUDENT_ENTRY_DATE DateTime? @db.SmallDateTime
+  STUDENT_RACE       String?   @db.NVarChar(1)
+  STUDENT_GRADE      String?   @db.NVarChar(2)
+  IMMUN_STATUS       String?   @db.NVarChar(1)
+  STUDENT_STATUS     String    @db.NVarChar(1)
+  STUDENT_CURR_SCH   Decimal?  @db.Decimal(3, 0)
+  STUDENT_BLDG       Decimal?  @db.Decimal(3, 0)
+  GOESBYNAME         String?   @db.NVarChar(30)
+  GIFT_TALENT        String?   @db.NVarChar(1)
+  WEB_ACCESS         String?   @db.NVarChar(1)
+  STUDENT_DISABILITY String?   @db.NVarChar(1)
+  STUDENT_COUNSELOR  Decimal?  @db.Decimal(1, 0)
+  STUDENT_NUMBER_OK  Decimal   @db.Decimal(10, 0)
+  HOME_DISTRICT      String    @db.NVarChar(25)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model STUDENT_CLASS {
+  STUDENT_NUMBER    Int
+  COURSE_NUM        Decimal   @db.Decimal(4, 0)
+  COURSE_SECTION    Decimal   @db.Decimal(4, 0)
+  LOCATION_NUM      Decimal?  @db.Decimal(3, 0)
+  CLASS_CREDIT      Decimal?  @db.Decimal(3, 2)
+  SEMESTER_CODE     String?   @db.NVarChar(1)
+  COURSE_ENTRY_DATE DateTime? @db.SmallDateTime
+  EFFORT            String?   @db.NVarChar(1)
+  AVTS_CLASS        String?   @db.NVarChar(1)
+  DATE1_QUARTER     String?   @db.NVarChar(2)
+  CLASS1_GRADE      String?   @db.NVarChar(2)
+  PERIODS1_ABSENT   Decimal?  @db.Decimal(2, 0)
+  DATE2_QUARTER     String?   @db.NVarChar(2)
+  CLASS2_GRADE      String?   @db.NVarChar(2)
+  PERIODS2_ABSENT   Decimal?  @db.Decimal(2, 0)
+  DATE3_QUARTER     String?   @db.NVarChar(2)
+  CLASS3_GRADE      String?   @db.NVarChar(2)
+  PERIODS3_ABSENT   Decimal?  @db.Decimal(2, 0)
+  DATE4_QUARTER     String?   @db.NVarChar(2)
+  CLASS4_GRADE      String?   @db.NVarChar(2)
+  PERIODS4_ABSENT   Decimal?  @db.Decimal(2, 0)
+  DATE5_QUARTER     String?   @db.NVarChar(2)
+  CLASS5_GRADE      String?   @db.NVarChar(2)
+  PERIODS5_ABSENT   Decimal?  @db.Decimal(2, 0)
+  DATE6_QUARTER     String?   @db.NVarChar(2)
+  CLASS6_GRADE      String?   @db.NVarChar(2)
+  PERIODS6_ABSENT   Decimal?  @db.Decimal(2, 0)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model STUDENT_DEMO {
+  STUDENT_NUMBER    Int
+  PARENT_LNAME      String?  @db.NVarChar(24)
+  PARENT_FNAME      String?  @db.NVarChar(16)
+  PARENT_MI         String?  @db.NVarChar(16)
+  STUDENT_MAIL_ADDR String?  @db.NVarChar(30)
+  STUDENT_MAIL_ZIP  Decimal? @db.Decimal(5, 0)
+  STUDENT_ZIP2      Decimal? @db.Decimal(4, 0)
+  PARENT_EMPLOYER   String?  @db.NVarChar(25)
+  PARENT_BUS_PHONE  Decimal? @db.Decimal(10, 0)
+  PARENT_BUS_EXT    Decimal? @db.Decimal(5, 0)
+  SPARENT_LNAME     String?  @db.NVarChar(24)
+  SPARENT_FNAME     String?  @db.NVarChar(16)
+  SPARENT_MNAME     String?  @db.NVarChar(16)
+  SPARENT_EMPLOYER  String?  @db.NVarChar(25)
+  SPARENT_BUSPHONE  Decimal? @db.Decimal(10, 0)
+  SPARENT_BUS_EXT   Decimal? @db.Decimal(5, 0)
+  STUDENT_LIVES     String?  @db.NVarChar(1)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SUSPEND {
+  STUDID         Int
+  SEG_CODE       String   @db.NVarChar(1)
+  SCHOOL         String   @db.NVarChar(3)
+  NOTIFICATION   String   @db.NVarChar(1)
+  REASON         String   @db.NVarChar(2)
+  START_DATE     DateTime @db.SmallDateTime
+  END_DATE       DateTime @db.SmallDateTime
+  NUMBER_DAYS    Decimal  @db.Decimal(4, 1)
+  LOCATION       String   @db.NVarChar(2)
+  COMMENT_LINE_1 String   @db.NVarChar(75)
+  COMMENT_LINE_2 String   @db.NVarChar(75)
+  COMMENT_LINE_3 String   @db.NVarChar(75)
+  COMMENT_LINE_4 String   @db.NVarChar(75)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SUSPEND_REASON_CODES {
+  REASON             String @db.NVarChar(2)
+  REASON_DESCRIPTION String @db.NVarChar(35)
+
+  @@ignore
+}

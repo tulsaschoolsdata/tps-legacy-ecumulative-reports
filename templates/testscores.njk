@@ -1,0 +1,82 @@
+{% import "macros.njk" as macros %}
+<html>
+  <head>
+    <style>
+      html, body {
+        font-family: sans-serif;
+      }
+      #header {
+        font-weight: bold;
+      }
+      #header .banner {
+        text-align: center;
+        position: relative;
+      }
+      #header .banner .date {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      #header .student-name {
+        margin: 1rem 0;
+      }
+      #footer {
+        text-align: center;
+      }
+      table {
+        break-inside: avoid;
+        font-size: 85%
+      }
+      td, th {
+        margin: 0;
+        padding: 0.25rem;
+      }
+      thead tr {
+        background-color: #5974B4;
+      }
+      thead th {
+        color: #fff;
+        text-align: left;
+      }
+      tbody tr.odd {
+        background-color: #eee;
+      }
+      tbody tr.even {
+        background-color: #fff;
+      }
+      .page {
+        page-break-after: always;
+      }
+      .no-break {
+        break-inside: avoid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div class="banner">
+        <div>ELECTRONIC CUMULATIVE RECORD</div>
+        <div>TULSA PUBLIC SCHOOLS</div>
+        <div><small>Educational Measurements (Test Scores)</small></div>
+        <div class="date">Date: {{ date | formatDate }}</div>
+      </div>
+      <div class="student-name">
+        {{ student_data_transcript.STUDENT_LNAME | trim }},
+        {{ student_data_transcript.STUDENT_FNAME | trim }}
+        {{ student_data_transcript.STUDENT_MI | trim }}
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="no-break">
+        <h3>Student Test List</h3>
+
+        {{ macros.student_test_list(admin) }}
+      </div>
+    </div>
+
+    <div id="footer">
+      Page <span class="pageNumber"></span> of <span class="totalPages"></span>
+    </div>
+  </body>
+</html>

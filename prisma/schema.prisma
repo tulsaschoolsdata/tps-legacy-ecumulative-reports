@@ -1,0 +1,1414 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("ECUM_REPORT_STUDENT_DATABASE_URL")
+  schemas  = ["ECUM", "dbo"]
+}
+
+model ADDHIST_CICSTST1 {
+  STUDENT_NUMBER   Int
+  ADDR_DATE        String @db.NVarChar(8)
+  HOUSE_NUMBER     String @db.NVarChar(5)
+  DIRECTION        String @db.NVarChar(1)
+  STREET_NAME      String @db.NVarChar(14)
+  APARTMENT_LOT_NO String @db.NVarChar(5)
+  BLDG_LOT_NO      String @db.NVarChar(6)
+  ZIP_CODE         String @db.NVarChar(5)
+  ZIP_SUFFIX       String @db.NVarChar(4)
+
+  @@id([STUDENT_NUMBER, ADDR_DATE, HOUSE_NUMBER, DIRECTION, STREET_NAME, APARTMENT_LOT_NO, BLDG_LOT_NO], map: "PK_ADDHIST_CICSTST1")
+}
+
+model ATTEND_CICSTST1 {
+  STUDENT_NUMBER        Int
+  ATTENDANCE_YEAR       String @db.NVarChar(4)
+  QTR1_QUARTER          String @db.NVarChar(1)
+  QTR1_BLDG_LEVEL       String @db.NVarChar(1)
+  QTR1_SCHOOL           String @db.NVarChar(3)
+  QTR1_GRADE            String @db.NVarChar(2)
+  QTR1_DAYS_PRESENT     Int    @db.TinyInt
+  QTR1_DAYS_ABSENT      Int    @db.TinyInt
+  QTR1_DAYS_NON_MEMBER  Int    @db.TinyInt
+  QTR1_DAYS_TRANSPORTED Int    @db.TinyInt
+  QTR1_TRANSPORT_CODE   String @db.NVarChar(1)
+  QTR1_SPEC_ED_CODE     String @db.NVarChar(1)
+  QTR1_MEMBER_CODE      String @db.NVarChar(1)
+  QTR1_FED_EMP_CODE     String @db.NVarChar(1)
+  QTR1_SELF_CONTAIN     String @db.NVarChar(1)
+  QTR1_QTR_OUT_DIST     String @db.NVarChar(1)
+  QTR2_QUARTER          String @db.NVarChar(1)
+  QTR2_BLDG_LEVEL       String @db.NVarChar(1)
+  QTR2_SCHOOL           String @db.NVarChar(3)
+  QTR2_GRADE            String @db.NVarChar(2)
+  QTR2_DAYS_PRESENT     Int    @db.TinyInt
+  QTR2_DAYS_ABSENT      Int    @db.TinyInt
+  QTR2_DAYS_NON_MEMBER  Int    @db.TinyInt
+  QTR2_DAYS_TRANSPORTED Int    @db.TinyInt
+  QTR2_TRANSPORT_CODE   String @db.NVarChar(1)
+  QTR2_SPEC_ED_CODE     String @db.NVarChar(1)
+  QTR2_MEMBER_CODE      String @db.NVarChar(1)
+  QTR2_FED_EMP_CODE     String @db.NVarChar(1)
+  QTR2_SELF_CONTAIN     String @db.NVarChar(1)
+  QTR2_QTR_OUT_DIST     String @db.NVarChar(1)
+  QTR3_QUARTER          String @db.NVarChar(1)
+  QTR3_BLDG_LEVEL       String @db.NVarChar(1)
+  QTR3_SCHOOL           String @db.NVarChar(3)
+  QTR3_GRADE            String @db.NVarChar(2)
+  QTR3_DAYS_PRESENT     Int    @db.TinyInt
+  QTR3_DAYS_ABSENT      Int    @db.TinyInt
+  QTR3_DAYS_NON_MEMBER  Int    @db.TinyInt
+  QTR3_DAYS_TRANSPORTED Int    @db.TinyInt
+  QTR3_TRANSPORT_CODE   String @db.NVarChar(1)
+  QTR3_SPEC_ED_CODE     String @db.NVarChar(1)
+  QTR3_MEMBER_CODE      String @db.NVarChar(1)
+  QTR3_FED_EMP_CODE     String @db.NVarChar(1)
+  QTR3_SELF_CONTAIN     String @db.NVarChar(1)
+  QTR3_QTR_OUT_DIST     String @db.NVarChar(1)
+  QTR4_QUARTER          String @db.NVarChar(1)
+  QTR4_BLDG_LEVEL       String @db.NVarChar(1)
+  QTR4_SCHOOL           String @db.NVarChar(3)
+  QTR4_GRADE            String @db.NVarChar(2)
+  QTR4_DAYS_PRESENT     Int    @db.TinyInt
+  QTR4_DAYS_ABSENT      Int    @db.TinyInt
+  QTR4_DAYS_NON_MEMBER  Int    @db.TinyInt
+  QTR4_DAYS_TRANSPORTED Int    @db.TinyInt
+  QTR4_TRANSPORT_CODE   String @db.NVarChar(1)
+  QTR4_SPEC_ED_CODE     String @db.NVarChar(1)
+  QTR4_MEMBER_CODE      String @db.NVarChar(1)
+  QTR4_FED_EMP_CODE     String @db.NVarChar(1)
+  QTR4_SELF_CONTAIN     String @db.NVarChar(1)
+  QTR4_QTR_OUT_DIST     String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, ATTENDANCE_YEAR], map: "PK_ATTEND_CICSTST1")
+}
+
+model ATTEND_CUSTOM {
+  STUDENT_NUMBER   Int
+  ATTENDANCE_YEAR  String @db.NVarChar(4)
+  QUARTER          String @db.NVarChar(1)
+  BLDG_LEVEL       String @db.NVarChar(1)
+  SCHOOL           String @db.NVarChar(3)
+  GRADE            String @db.NVarChar(2)
+  DAYS_PRESENT     Int    @db.TinyInt
+  DAYS_ABSENT      Int    @db.TinyInt
+  DAYS_NON_MEMBER  Int    @db.TinyInt
+  DAYS_TRANSPORTED Int    @db.TinyInt
+  TRANSPORT_CODE   String @db.NVarChar(1)
+  SPEC_ED_CODE     String @db.NVarChar(1)
+  MEMBER_CODE      String @db.NVarChar(1)
+  FED_EMP_CODE     String @db.NVarChar(1)
+  SELF_CONTAIN     String @db.NVarChar(1)
+  QTR_OUT_DIST     String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, ATTENDANCE_YEAR, QUARTER], map: "PK_ATTEND_CUSTOM")
+}
+
+model BUILDING_MASTER {
+  BLDG_KEY           String @id(map: "PK_BUILDING_MASTER") @db.NVarChar(3)
+  BLDG_NAME          String @db.NVarChar(14)
+  BLDG_LUNCH_CODE    String @db.NVarChar(1)
+  BLDG_MAILING_NAME  String @db.NVarChar(34)
+  BLDG_ST_ADDRESS    String @db.NVarChar(34)
+  BLDG_CITY_STATE    String @db.NVarChar(20)
+  BLDG_ZIP_CODE      String @db.NVarChar(5)
+  BLDG_CODE          String @db.NVarChar(1)
+  BLDG_AREA_CODE     String @db.NVarChar(3)
+  BLDG_TELEPHONE     String @db.NVarChar(7)
+  BLDG_PRINCIPAL     String @db.NVarChar(25)
+  BLDG_ALPHA_CODE    String @db.NVarChar(5)
+  BLDG_STUDENT_LEVEL String @db.NVarChar(1)
+  BLDG_PERS_LEVEL    String @db.NVarChar(1)
+  BLDG_LEVEL_NO_3    String @db.NVarChar(1)
+  BLDG_LEVEL_NO_4    String @db.NVarChar(1)
+  BLDG_WH_DEL_DAY    String @db.NVarChar(1)
+  BLDG_WH_ROUTE_NO   String @db.NVarChar(1)
+  BLDG_WH_LOAD_SEQ   String @db.NVarChar(2)
+  BLDG_WH_FILLER     String @db.NVarChar(2)
+  BLDG_CF_DEL_DAY    String @db.NVarChar(1)
+  BLDG_CF_ROUTE_NO   String @db.NVarChar(1)
+  BLDG_CF_LOAD_SEQ   String @db.NVarChar(2)
+  BLDG_CF_FILLER     String @db.NVarChar(2)
+  BLDG_DIVISION      String @db.NVarChar(1)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY_04252012 {
+  HIST_STUDENT_NUM Int
+  HIST_FROM_YEAR   Decimal  @db.Decimal(4, 0)
+  HIST_TO_YEAR     Decimal  @db.Decimal(4, 0)
+  HIST_SEMESTER    String   @db.NVarChar(1)
+  HIST_COURSE_NUM  Decimal  @db.Decimal(4, 0)
+  HIST_COURSE_NAME String?  @db.NVarChar(15)
+  HIST_LOCATION    Decimal? @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL String?  @db.NVarChar(2)
+  HIST_CREDIT      Decimal? @db.Decimal(3, 2)
+  HIST_SEM_GRADE   String?  @db.NVarChar(2)
+  HIST_COUNTER     Int
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY_10262011 {
+  STUDENT_NUMBER   Int
+  HIST_FROM_YEAR   Decimal  @db.Decimal(4, 0)
+  HIST_TO_YEAR     Decimal  @db.Decimal(4, 0)
+  HIST_SEMESTER    String   @db.NVarChar(1)
+  HIST_COURSE_NUM  Decimal  @db.Decimal(4, 0)
+  HIST_COURSE_NAME String?  @db.NVarChar(15)
+  HIST_LOCATION    Decimal? @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL String?  @db.NVarChar(2)
+  HIST_CREDIT      Decimal? @db.Decimal(3, 2)
+  HIST_SEM_GRADE   String?  @db.NVarChar(2)
+  HIST_COUNTER     Int
+
+  @@index([STUDENT_NUMBER, HIST_FROM_YEAR, HIST_TO_YEAR, HIST_SEMESTER, HIST_COURSE_NUM, HIST_COUNTER], map: "idxClass_History ")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY_CUSTOM {
+  STUDENT_NUMBER              Int
+  HIST_FROM_YEAR              Decimal @db.Decimal(4, 0)
+  HIST_TO_YEAR                Decimal @db.Decimal(4, 0)
+  HIST_SEMESTER               String  @db.NVarChar(1)
+  HIST_COURSE_NUM             Decimal @db.Decimal(4, 0)
+  HIST_COURSE_NAME            String  @db.NVarChar(21)
+  HIST_LOCATION               Decimal @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL            String  @db.NVarChar(2)
+  HIST_CREDIT                 Decimal @db.Decimal(3, 2)
+  HIST_SEM_GRADE              String  @db.NVarChar(2)
+  HIST_COUNTER                Int
+  HIST_CREDIT_EARNED          Decimal @db.Decimal(3, 2)
+  HIST_ALTERNATE_LOCATION     String  @db.NVarChar(3)
+  HIST_TRANSCRIPT_CREDIT_FLAG String  @db.NVarChar(1)
+  HIST_SEMESTER_SORT_CODE     String  @db.NVarChar(1)
+  HIST_U_N_R_RPT_PLACEMENT    Int     @db.SmallInt
+
+  @@index([STUDENT_NUMBER, HIST_FROM_YEAR, HIST_TO_YEAR, HIST_GRADE_LEVEL, HIST_SEMESTER_SORT_CODE, HIST_COURSE_NUM, HIST_TRANSCRIPT_CREDIT_FLAG(sort: Desc), HIST_U_N_R_RPT_PLACEMENT, HIST_COUNTER], map: "idxClass_History ", clustered: true)
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY_CUSTOM_20120607 {
+  STUDENT_NUMBER              Int
+  HIST_FROM_YEAR              Decimal @db.Decimal(4, 0)
+  HIST_TO_YEAR                Decimal @db.Decimal(4, 0)
+  HIST_SEMESTER               String  @db.NVarChar(1)
+  HIST_COURSE_NUM             Decimal @db.Decimal(4, 0)
+  HIST_COURSE_NAME            String  @db.NVarChar(21)
+  HIST_LOCATION               Decimal @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL            String  @db.NVarChar(2)
+  HIST_CREDIT                 Decimal @db.Decimal(3, 2)
+  HIST_SEM_GRADE              String  @db.NVarChar(2)
+  HIST_COUNTER                Int
+  HIST_CREDIT_EARNED          Decimal @db.Decimal(3, 2)
+  HIST_ALTERNATE_LOCATION     String  @db.NVarChar(3)
+  HIST_TRANSCRIPT_CREDIT_FLAG String  @db.NVarChar(1)
+  HIST_SEMESTER_SORT_CODE     String  @db.NVarChar(1)
+  HIST_U_N_R_RPT_PLACEMENT    Int     @db.SmallInt
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model CLASS_HISTORY_CUSTOM_20120619 {
+  STUDENT_NUMBER              Int
+  HIST_FROM_YEAR              Decimal @db.Decimal(4, 0)
+  HIST_TO_YEAR                Decimal @db.Decimal(4, 0)
+  HIST_SEMESTER               String  @db.NVarChar(1)
+  HIST_COURSE_NUM             Decimal @db.Decimal(4, 0)
+  HIST_COURSE_NAME            String  @db.NVarChar(21)
+  HIST_LOCATION               Decimal @db.Decimal(3, 0)
+  HIST_GRADE_LEVEL            String  @db.NVarChar(2)
+  HIST_CREDIT                 Decimal @db.Decimal(3, 2)
+  HIST_SEM_GRADE              String  @db.NVarChar(2)
+  HIST_COUNTER                Int
+  HIST_CREDIT_EARNED          Decimal @db.Decimal(3, 2)
+  HIST_ALTERNATE_LOCATION     String  @db.NVarChar(3)
+  HIST_TRANSCRIPT_CREDIT_FLAG String  @db.NVarChar(1)
+  HIST_SEMESTER_SORT_CODE     String  @db.NVarChar(1)
+  HIST_U_N_R_RPT_PLACEMENT    Int     @db.SmallInt
+
+  @@ignore
+}
+
+model ELEMGRD_CICSTST1 {
+  STUDENT_NUMBER Int
+  SCHOOL_YEAR    String @db.NVarChar(4)
+  SCHOOL         String @db.NVarChar(3)
+  GRADE_LEVEL    String @db.NVarChar(2)
+  RD             String @db.NVarChar(1)
+  LA             String @db.NVarChar(1)
+  SP             String @db.NVarChar(1)
+  FL             String @db.NVarChar(1)
+  MT             String @db.NVarChar(1)
+  SS             String @db.NVarChar(1)
+  SC             String @db.NVarChar(1)
+  PE             String @db.NVarChar(1)
+  MU             String @db.NVarChar(1)
+  CP             String @db.NVarChar(1)
+  AR             String @db.NVarChar(1)
+  PLACE          String @db.NVarChar(2)
+  HW             String @db.NVarChar(1)
+  NOGRD          String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, SCHOOL_YEAR], map: "PK_ELEMGRD_CICSTST1")
+}
+
+model ELL_STUDENT_TABLE {
+  STUDENT_NUMBER     Int    @unique(map: "idx_Student_Number", clustered: true)
+  LANG_ELL_LEP       String @db.NVarChar(1)
+  LANG_IMMIGRANT     String @db.NVarChar(1)
+  LANG_LANGUAGE      String @db.NVarChar(3)
+  LANG_ELL_YEARS     String @db.NVarChar(2)
+  LANG_BIRTH_COUNTRY String @db.NVarChar(15)
+  LANG_ELL_US_ENTRY  String @db.NVarChar(4)
+}
+
+model MOBILITY {
+  STUDENT_NUMBER    Int
+  MOBILITY_COUNTER  Int       @db.SmallInt
+  ENTRY_DATE        DateTime? @db.SmallDateTime
+  EXIT_DATE         DateTime? @db.SmallDateTime
+  ENTRY_REASON_CODE String?   @db.NVarChar(2)
+  EXIT_REASON_CODE  String?   @db.NVarChar(2)
+  SCHOOL_CODE       Decimal?  @db.Decimal(3, 0)
+  BLDG_LEVEL        String?   @db.NVarChar(1)
+  TRANSFER_CODE     String?   @db.NVarChar(2)
+
+  @@id([STUDENT_NUMBER, MOBILITY_COUNTER], map: "PK_ECUM_MOBILITY")
+}
+
+model SCMISC_CICSTST1 {
+  STUDENT_NUMBER       Int    @id(map: "PK_SCMISC_CICSTST1")
+  CURR_TRANS_CD        String @db.NVarChar(2)
+  NEXT_TRANS_CD        String @db.NVarChar(2)
+  HOLD_TRANS_CD        String @db.NVarChar(2)
+  NEXT_SCHOOL          String @db.NVarChar(3)
+  HOLD_SCHOOL          String @db.NVarChar(3)
+  DEV_FIRST            String @db.NVarChar(2)
+  DEV_YEAR             String @db.NVarChar(4)
+  FREE_REDUCED         String @db.NVarChar(1)
+  FREE_REDUC_DT        String @db.NVarChar(6)
+  HEALTH_CD            String @db.NVarChar(2)
+  CERTIFIED_BY         String @db.NVarChar(50)
+  ENTRY_REASON         String @db.NVarChar(2)
+  DIRECTORY_CD         String @db.NVarChar(1)
+  LAST_TRANS_DT        String @db.NVarChar(6)
+  PA9_FLAG             String @db.NVarChar(1)
+  SCHED_FLAG           String @db.NVarChar(1)
+  RETENTION_CD         String @db.NVarChar(1)
+  INDIAN_ED_CODE       String @db.NVarChar(2)
+  INDIAN_ED_DATE       String @db.NVarChar(6)
+  GRADUATION_DATE      String @db.NVarChar(6)
+  ATHLETIC_ELIG_FLAG   String @db.NVarChar(1)
+  RANK_STUD            String @db.NVarChar(4)
+  RANK_CLASS           String @db.NVarChar(4)
+  OKLA_SCHOLARS        String @db.NVarChar(1)
+  OKLA_SCHOLARS_ENROLL String @db.NVarChar(1)
+  TRANSPORT_NEED       String @db.NVarChar(1)
+  CERT_OF_DIST         String @db.NVarChar(1)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SCMISC_CICSTST1_10242011 {
+  STUDENT_NUMBER       Int
+  CURR_TRANS_CD        String @db.NVarChar(2)
+  NEXT_TRANS_CD        String @db.NVarChar(2)
+  HOLD_TRANS_CD        String @db.NVarChar(2)
+  NEXT_SCHOOL          String @db.NVarChar(3)
+  HOLD_SCHOOL          String @db.NVarChar(3)
+  DEV_FIRST            String @db.NVarChar(2)
+  DEV_YEAR             String @db.NVarChar(4)
+  FREE_REDUCED         String @db.NVarChar(1)
+  FREE_REDUC_DT        String @db.NVarChar(6)
+  HEALTH_CD            String @db.NVarChar(2)
+  CERTIFIED_BY         String @db.NVarChar(50)
+  ENTRY_REASON         String @db.NVarChar(2)
+  DIRECTORY_CD         String @db.NVarChar(1)
+  LAST_TRANS_DT        String @db.NVarChar(6)
+  PA9_FLAG             String @db.NVarChar(1)
+  SCHED_FLAG           String @db.NVarChar(1)
+  RETENTION_CD         String @db.NVarChar(1)
+  INDIAN_ED_CODE       String @db.NVarChar(2)
+  INDIAN_ED_DATE       String @db.NVarChar(6)
+  GRADUATION_DATE      String @db.NVarChar(6)
+  ATHLETIC_ELIG_FLAG   String @db.NVarChar(1)
+  RANK_STUD            String @db.NVarChar(4)
+  RANK_CLASS           String @db.NVarChar(4)
+  OKLA_SCHOLARS        String @db.NVarChar(1)
+  OKLA_SCHOLARS_ENROLL String @db.NVarChar(1)
+  TRANSPORT_NEED       String @db.NVarChar(1)
+  CERT_OF_DIST         String @db.NVarChar(1)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model SPED_CICSTST1 {
+  STUDENT_NUMBER   Int
+  SPEC_PREFIX      String    @db.NVarChar(1)
+  SPEC_NUMBER      String    @db.NVarChar(2)
+  SPEC_ENTRY_DATE  DateTime  @db.SmallDateTime
+  SPEC_EXIT_DATE   DateTime? @db.SmallDateTime
+  SPEC_PROG_DESIGN String    @db.NVarChar(1)
+  SPEC_CLSS_ID     String    @db.NVarChar(5)
+
+  @@index([STUDENT_NUMBER], map: "idxSpEd_CICSTST1 ", clustered: true)
+  @@ignore
+}
+
+model SRECUM_CICSTST1 {
+  STUDENT_NUMBER Int    @id(map: "PK_SRECUM_CICSTST1")
+  BIRTHPLACE     String @db.NVarChar(35)
+  BIRTH_CERT_NO  String @db.NVarChar(20)
+  BIRTH_OTHER    String @db.NVarChar(28)
+  FATHER         String @db.NVarChar(30)
+  MOTHER         String @db.NVarChar(30)
+  CUSTODY_REL    String @db.NVarChar(28)
+  CUST_AFFIDAV   String @db.NVarChar(1)
+  COURT_ORDER    String @db.NVarChar(15)
+  CUST_DATE      String @db.NVarChar(6)
+  MOTHER_MAIDEN  String @db.NVarChar(30)
+}
+
+model SSMADR_CICSTST1 {
+  STUDENT_NUMBER Int    @id(map: "PK_SSMADR_CICSTST1")
+  MADR_ADDRESS   String @db.NVarChar(20)
+  MADR_ZIP       String @db.NVarChar(9)
+}
+
+model STUDENT {
+  STUDENT_NUMBER     Int       @id(map: "PK_ECUM_STUDENT")
+  STUDENT_SSN        Int?
+  STUDENT_LNAME      String    @db.NVarChar(24)
+  STUDENT_FNAME      String    @db.NVarChar(16)
+  STUDENT_MI         String?   @db.NVarChar(16)
+  STUDENT_BIRTHDATE  DateTime  @db.SmallDateTime
+  STUDENT_SEX        String?   @db.NVarChar(1)
+  STUDENT_PRILANG    String?   @db.NVarChar(1)
+  STUDENT_SECLANG    String?   @db.NVarChar(1)
+  STUDENT_HOUSE_NO   Decimal?  @db.Decimal(5, 0)
+  STUDENT_DIRECTION  String?   @db.NVarChar(1)
+  STUDENT_STREET     String?   @db.NVarChar(24)
+  STUDENT_APT_NO     String?   @db.NVarChar(5)
+  STUDENT_LOT_NO     String?   @db.NVarChar(6)
+  STUDENT_ZIP1       Decimal?  @db.Decimal(5, 0)
+  STUDENT_ZIP2       Decimal?  @db.Decimal(4, 0)
+  STUDENT_PHONE      Decimal?  @db.Decimal(10, 0)
+  STUDENT_ENTRY_DATE DateTime? @db.SmallDateTime
+  STUDENT_RACE       String?   @db.NVarChar(1)
+  STUDENT_GRADE      String?   @db.NVarChar(2)
+  IMMUN_STATUS       String?   @db.NVarChar(1)
+  STUDENT_STATUS     String    @db.NVarChar(1)
+  STUDENT_CURR_SCH   Decimal?  @db.Decimal(3, 0)
+  STUDENT_BLDG       Decimal?  @db.Decimal(3, 0)
+  GOESBYNAME         String?   @db.NVarChar(30)
+  GIFT_TALENT        String?   @db.NVarChar(1)
+  WEB_ACCESS         String?   @db.NVarChar(1)
+  STUDENT_DISABILITY String?   @db.NVarChar(1)
+  STUDENT_COUNSELOR  Decimal?  @db.Decimal(1, 0)
+  STUDENT_NUMBER_OK  Decimal   @db.Decimal(10, 0)
+  HOME_DISTRICT      String    @db.NVarChar(25)
+}
+
+model STUDENT_DEMO {
+  STUDENT_NUMBER    Int      @id(map: "PK_STUDENT_DEMO")
+  PARENT_LNAME      String?  @db.NVarChar(24)
+  PARENT_FNAME      String?  @db.NVarChar(16)
+  PARENT_MI         String?  @db.NVarChar(16)
+  STUDENT_MAIL_ADDR String?  @db.NVarChar(30)
+  STUDENT_MAIL_ZIP  Decimal? @db.Decimal(5, 0)
+  STUDENT_ZIP2      Decimal? @db.Decimal(4, 0)
+  PARENT_EMPLOYER   String?  @db.NVarChar(25)
+  PARENT_BUS_PHONE  Decimal? @db.Decimal(10, 0)
+  PARENT_BUS_EXT    Decimal? @db.Decimal(5, 0)
+  SPARENT_LNAME     String?  @db.NVarChar(24)
+  SPARENT_FNAME     String?  @db.NVarChar(16)
+  SPARENT_MNAME     String?  @db.NVarChar(16)
+  SPARENT_EMPLOYER  String?  @db.NVarChar(25)
+  SPARENT_BUSPHONE  Decimal? @db.Decimal(10, 0)
+  SPARENT_BUS_EXT   Decimal? @db.Decimal(5, 0)
+  STUDENT_LIVES     String?  @db.NVarChar(1)
+}
+
+model Student_List {
+  student_id String @unique(map: "idx_Student_List", clustered: true) @db.NVarChar(10)
+}
+
+model STUDENT_UNIV_PROMPT {
+  STUDENT_NAME_CONCAT String @db.NVarChar(75)
+  STUDENT_NUMBER      Int
+
+  @@id([STUDENT_NAME_CONCAT, STUDENT_NUMBER], map: "PK_STUDENT_UNIV_PROMPT")
+}
+
+model TESTS_ACTTEST {
+  STUDENT_NUMBER      Int
+  SEQ_NUM             String @db.NVarChar(2)
+  TYPE                String @db.NVarChar(2)
+  DATE                String @db.NVarChar(4)
+  GRADE               String @db.NVarChar(2)
+  SCHOOL_NAME         String @db.NVarChar(15)
+  SCHOOL_CODE         String @db.NVarChar(6)
+  SSN                 String @db.NVarChar(9)
+  GRAD_DATE           String @db.NVarChar(4)
+  ADMIN_DATE          String @db.NVarChar(4)
+  TEST_TYPE           String @db.NVarChar(1)
+  SCORE_ENGLISH       String @db.NVarChar(2)
+  SCORE_MATH          String @db.NVarChar(2)
+  SCORE_READING       String @db.NVarChar(2)
+  SCORE_SCIENCE       String @db.NVarChar(2)
+  SCORE_COMPOSITE     String @db.NVarChar(2)
+  SUM                 String @db.NVarChar(3)
+  SUBSCORE_UM         String @db.NVarChar(2)
+  SUBSCORE_RH         String @db.NVarChar(2)
+  SUBSCORE_EA         String @db.NVarChar(2)
+  SUBSCORE_AG         String @db.NVarChar(2)
+  SUBSCORE_GT         String @db.NVarChar(2)
+  SUBSCORE_SS         String @db.NVarChar(2)
+  SUBSCORE_AL         String @db.NVarChar(2)
+  NAT_SCORE_ENGLISH   String @db.NVarChar(2)
+  NAT_SCORE_MATH      String @db.NVarChar(2)
+  NAT_SCORE_READING   String @db.NVarChar(2)
+  NAT_SCORE_SCIENCE   String @db.NVarChar(2)
+  NAT_SCORE_COMPOSITE String @db.NVarChar(2)
+  NAT_SUBSCORE_UM     String @db.NVarChar(2)
+  NAT_SUBSCORE_RH     String @db.NVarChar(2)
+  NAT_SUBSCORE_EA     String @db.NVarChar(2)
+  NAT_SUBSCORE_AG     String @db.NVarChar(2)
+  NAT_SUBSCORE_GT     String @db.NVarChar(2)
+  NAT_SUBSCORE_SS     String @db.NVarChar(2)
+  NAT_SUBSCORE_AL     String @db.NVarChar(2)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_ECUM_ACTTEST")
+}
+
+model TESTS_ADMINISTERED {
+  STUDENT_NUMBER Int
+  TYPE           String   @db.NVarChar(2)
+  GRADE          String   @db.NVarChar(2)
+  DATE           String   @db.NVarChar(4)
+  SEQ_NUM        String   @db.NVarChar(2)
+  SORT_DATE      DateTime @db.DateTime
+  SORT_GRADE     Int      @db.SmallInt
+
+  @@id([STUDENT_NUMBER, TYPE, GRADE, DATE, SEQ_NUM], map: "PK_TESTS_ADMINISTERED")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TESTS_CICSTST1 {
+  TEST_STUDENT_ID String @db.NVarChar(7)
+  TEST_SEQ_NUM    String @db.NVarChar(2)
+  TEST_TYPE       String @db.NVarChar(2)
+  TEST_DATE       String @db.NVarChar(4)
+  TEST_GRADE      String @db.NVarChar(2)
+  TEST_SCHOOL     String @db.NVarChar(15)
+  VARIABLE_DATA   String @db.NVarChar(297)
+
+  @@ignore
+}
+
+model TESTS_EOI {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  ENGL_SCORE     String @db.NVarChar(3)
+  ENGL_PERF_LVL  String @db.NVarChar(1)
+  ENGL_PASS_FAIL String @db.NVarChar(1)
+  HIST_SCORE     String @db.NVarChar(3)
+  HIST_PERF_LVL  String @db.NVarChar(1)
+  HIST_PASS_FAIL String @db.NVarChar(1)
+  ALGE_SCORE     String @db.NVarChar(3)
+  ALGE_PERF_LVL  String @db.NVarChar(1)
+  ALGE_PASS_FAIL String @db.NVarChar(1)
+  BIOL_SCORE     String @db.NVarChar(3)
+  BIOL_PERF_LVL  String @db.NVarChar(1)
+  BIOL_PASS_FAIL String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_EOI")
+}
+
+model TESTS_EXPLTEST {
+  STUDENT_NUMBER     Int
+  SEQ_NUM            String @db.NVarChar(2)
+  TYPE               String @db.NVarChar(2)
+  DATE               String @db.NVarChar(4)
+  GRADE              String @db.NVarChar(2)
+  SCHOOL_NAME        String @db.NVarChar(15)
+  SCHOOL_CODE        String @db.NVarChar(6)
+  SSN                String @db.NVarChar(9)
+  GRAD_DATE          String @db.NVarChar(4)
+  ADMIN_DATE         String @db.NVarChar(4)
+  ENGLISH_SCR        String @db.NVarChar(2)
+  MATH_SCR           String @db.NVarChar(2)
+  READING_SCR        String @db.NVarChar(2)
+  SCIENCE_SCR        String @db.NVarChar(2)
+  COMPOSITE_SCR      String @db.NVarChar(2)
+  SUBSCORE_UM        String @db.NVarChar(2)
+  SUBSCORE_RH        String @db.NVarChar(2)
+  ENGLISH_NAT_PERC   String @db.NVarChar(3)
+  MATH_NAT_PERC      String @db.NVarChar(3)
+  READING_NAT_PERC   String @db.NVarChar(3)
+  SCIENCE_NAT_PERC   String @db.NVarChar(3)
+  COMPOSITE_NAT_PERC String @db.NVarChar(3)
+  NAT_PERC_UM        String @db.NVarChar(3)
+  NAT_PERC_RH        String @db.NVarChar(3)
+  ENGLISH_LOC_PERC   String @db.NVarChar(3)
+  MATH_LOC_PERC      String @db.NVarChar(3)
+  READING_LOC_PERC   String @db.NVarChar(3)
+  SCIENCE_LOC_PERC   String @db.NVarChar(3)
+  COMPOSITE_LOC_PERC String @db.NVarChar(3)
+  LOC_PERC_UM        String @db.NVarChar(3)
+  LOC_PERC_RH        String @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_EXPLTEST")
+}
+
+model TESTS_ITBS {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  RIV_RS1        String @db.NVarChar(2)
+  RIV_RS2        String @db.NVarChar(2)
+  RIV_RS3        String @db.NVarChar(2)
+  RIV_RS4        String @db.NVarChar(2)
+  RIV_RS5        String @db.NVarChar(2)
+  RIV_RS6        String @db.NVarChar(2)
+  RIV_RS7        String @db.NVarChar(2)
+  RIV_RS8        String @db.NVarChar(2)
+  RIV_RS9        String @db.NVarChar(2)
+  RIV_RS10       String @db.NVarChar(2)
+  RIV_RS11       String @db.NVarChar(2)
+  RIV_RS12       String @db.NVarChar(2)
+  RIV_RS13       String @db.NVarChar(2)
+  RIV_RS14       String @db.NVarChar(2)
+  RIV_RS15       String @db.NVarChar(2)
+  RIV_RS16       String @db.NVarChar(2)
+  RIV_RS17       String @db.NVarChar(2)
+  RIV_SS1        Int    @db.SmallInt
+  RIV_GE1        Int    @db.SmallInt
+  RIV_NCE1       String @db.NVarChar(2)
+  RIV_NPR1       String @db.NVarChar(2)
+  RIV_SS2        Int    @db.SmallInt
+  RIV_GE2        Int    @db.SmallInt
+  RIV_NCE2       String @db.NVarChar(2)
+  RIV_NPR2       String @db.NVarChar(2)
+  RIV_SS3        Int    @db.SmallInt
+  RIV_GE3        Int    @db.SmallInt
+  RIV_NCE3       String @db.NVarChar(2)
+  RIV_NPR3       String @db.NVarChar(2)
+  RIV_SS4        Int    @db.SmallInt
+  RIV_GE4        Int    @db.SmallInt
+  RIV_NCE4       String @db.NVarChar(2)
+  RIV_NPR4       String @db.NVarChar(2)
+  RIV_SS5        Int    @db.SmallInt
+  RIV_GE5        Int    @db.SmallInt
+  RIV_NCE5       String @db.NVarChar(2)
+  RIV_NPR5       String @db.NVarChar(2)
+  RIV_SS6        Int    @db.SmallInt
+  RIV_GE6        Int    @db.SmallInt
+  RIV_NCE6       String @db.NVarChar(2)
+  RIV_NPR6       String @db.NVarChar(2)
+  RIV_SS7        Int    @db.SmallInt
+  RIV_GE7        Int    @db.SmallInt
+  RIV_NCE7       String @db.NVarChar(2)
+  RIV_NPR7       String @db.NVarChar(2)
+  RIV_SS8        Int    @db.SmallInt
+  RIV_GE8        Int    @db.SmallInt
+  RIV_NCE8       String @db.NVarChar(2)
+  RIV_NPR8       String @db.NVarChar(2)
+  RIV_SS9        Int    @db.SmallInt
+  RIV_GE9        Int    @db.SmallInt
+  RIV_NCE9       String @db.NVarChar(2)
+  RIV_NPR9       String @db.NVarChar(2)
+  RIV_SS10       Int    @db.SmallInt
+  RIV_GE10       Int    @db.SmallInt
+  RIV_NCE10      String @db.NVarChar(2)
+  RIV_NPR10      String @db.NVarChar(2)
+  RIV_SS11       Int    @db.SmallInt
+  RIV_GE11       Int    @db.SmallInt
+  RIV_NCE11      String @db.NVarChar(2)
+  RIV_NPR11      String @db.NVarChar(2)
+  RIV_SS12       Int    @db.SmallInt
+  RIV_GE12       Int    @db.SmallInt
+  RIV_NCE12      String @db.NVarChar(2)
+  RIV_NPR12      String @db.NVarChar(2)
+  RIV_SS13       Int    @db.SmallInt
+  RIV_GE13       Int    @db.SmallInt
+  RIV_NCE13      String @db.NVarChar(2)
+  RIV_NPR13      String @db.NVarChar(2)
+  RIV_SS14       Int    @db.SmallInt
+  RIV_GE14       Int    @db.SmallInt
+  RIV_NCE14      String @db.NVarChar(2)
+  RIV_NPR14      String @db.NVarChar(2)
+  RIV_SS15       Int    @db.SmallInt
+  RIV_GE15       Int    @db.SmallInt
+  RIV_NCE15      String @db.NVarChar(2)
+  RIV_NPR15      String @db.NVarChar(2)
+  RIV_SS16       Int    @db.SmallInt
+  RIV_GE16       Int    @db.SmallInt
+  RIV_NCE16      String @db.NVarChar(2)
+  RIV_NPR16      String @db.NVarChar(2)
+  RIV_SS17       Int    @db.SmallInt
+  RIV_GE17       Int    @db.SmallInt
+  RIV_NCE17      String @db.NVarChar(2)
+  RIV_NPR17      String @db.NVarChar(2)
+  RIV_SS18       Int    @db.SmallInt
+  RIV_GE18       Int    @db.SmallInt
+  RIV_NCE18      String @db.NVarChar(2)
+  RIV_NPR18      String @db.NVarChar(2)
+  RIV_SS19       Int    @db.SmallInt
+  RIV_GE19       Int    @db.SmallInt
+  RIV_NCE19      String @db.NVarChar(2)
+  RIV_NPR19      String @db.NVarChar(2)
+  RIV_SS20       Int    @db.SmallInt
+  RIV_GE20       Int    @db.SmallInt
+  RIV_NCE20      String @db.NVarChar(2)
+  RIV_NPR20      String @db.NVarChar(2)
+  RIV_READ_SS    Int    @db.SmallInt
+  RIV_READ_NPR   String @db.NVarChar(2)
+  RIV_READ_NCE   String @db.NVarChar(2)
+  COGAT_VERB_RS  String @db.NVarChar(2)
+  COGAT_VERB_SAS String @db.NVarChar(3)
+  COGAT_VERB_APR String @db.NVarChar(2)
+  COGAT_VERB_GPR String @db.NVarChar(2)
+  COGAT_QUAN_RS  String @db.NVarChar(2)
+  COGAT_QUAN_SAS String @db.NVarChar(3)
+  COGAT_QUAN_APR String @db.NVarChar(2)
+  COGAT_QUAN_GPR String @db.NVarChar(2)
+  COGAT_NVER_RS  String @db.NVarChar(2)
+  COGAT_NVER_SAS String @db.NVarChar(3)
+  COGAT_NVER_APR String @db.NVarChar(2)
+  COGAT_NVER_GPR String @db.NVarChar(2)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_ITBS")
+}
+
+model TESTS_ITBS_CUSTOM {
+  STUDENT_NUMBER       Int
+  SEQ_NUM              String @db.NVarChar(2)
+  TYPE                 String @db.NVarChar(2)
+  DATE                 String @db.NVarChar(4)
+  GRADE                String @db.NVarChar(2)
+  MEASURE_RANK         String @db.NVarChar(3)
+  SCHOOL_NAME          String @db.NVarChar(15)
+  LISTENING            Int    @db.SmallInt
+  WORD_ANALYSIS        Int    @db.SmallInt
+  VOCABULARY           Int    @db.SmallInt
+  READING              Int    @db.SmallInt
+  SPELLING             Int    @db.SmallInt
+  CAPITALIZATION       Int    @db.SmallInt
+  PUNCTUATION          Int    @db.SmallInt
+  USAGE_AND_EXPRESSION Int    @db.SmallInt
+  LANGUAGE_TOTAL       Int    @db.SmallInt
+  VISUAL_MATERIALS     Int    @db.SmallInt
+  REFERENCE_MATERIALS  Int    @db.SmallInt
+  WORK_STUDY_TOTAL     Int    @db.SmallInt
+  MATH_CONCEPTS        Int    @db.SmallInt
+  MATH_PROBLEM_SOLVING Int    @db.SmallInt
+  MATH_COMPUTATION     Int    @db.SmallInt
+  MATH_TOTAL           Int    @db.SmallInt
+  COMPLETE_COMPOSITE   Int    @db.SmallInt
+  TOTAL_COMPOSITE      Int    @db.SmallInt
+  SOCIAL_STUDIES       Int    @db.SmallInt
+  SCIENCE              Int    @db.SmallInt
+  RIV_READ_SS_NPR_NCE  Int    @db.SmallInt
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_ITBS_CUSTOM")
+}
+
+model TESTS_NAGL {
+  STUDENT_NUMBER       Int
+  SEQ_NUM              String @db.NVarChar(2)
+  TYPE                 String @db.NVarChar(2)
+  DATE                 String @db.NVarChar(4)
+  GRADE                String @db.NVarChar(2)
+  SCHOOL_NAME          String @db.NVarChar(15)
+  NAGL_AGE_YEARS       String @db.NVarChar(2)
+  NAGL_AGE_MNTHS       String @db.NVarChar(2)
+  NAGL_RAW_SCORE       String @db.NVarChar(2)
+  NAGL_NAI_SCORE       String @db.NVarChar(3)
+  NAGL_NAI_PCT         String @db.NVarChar(2)
+  NAGL_NAI_STANINE     String @db.NVarChar(1)
+  NAGL_GRD_ABILITY     String @db.NVarChar(3)
+  NAGL_GRD_PCT         String @db.NVarChar(2)
+  NAGL_GRD_STANINE     String @db.NVarChar(1)
+  NAGL_SCALE_SCORE     String @db.NVarChar(3)
+  NAGL_ADJ_NAI_SCORE   String @db.NVarChar(3)
+  NAGL_ADJ_NAI_PCT     String @db.NVarChar(2)
+  NAGL_ADJ_NAI_STANINE String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_NAGL")
+}
+
+model TESTS_NEWITBS {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  NITBS_GE1      String @db.NVarChar(3)
+  NITBS_NCE1     String @db.NVarChar(2)
+  NITBS_LPR1     String @db.NVarChar(2)
+  NITBS_SPR1     String @db.NVarChar(2)
+  NITBS_NPR1     String @db.NVarChar(2)
+  NITBS_GE2      String @db.NVarChar(3)
+  NITBS_NCE2     String @db.NVarChar(2)
+  NITBS_LPR2     String @db.NVarChar(2)
+  NITBS_SPR2     String @db.NVarChar(2)
+  NITBS_NPR2     String @db.NVarChar(2)
+  NITBS_GE3      String @db.NVarChar(3)
+  NITBS_NCE3     String @db.NVarChar(2)
+  NITBS_LPR3     String @db.NVarChar(2)
+  NITBS_SPR3     String @db.NVarChar(2)
+  NITBS_NPR3     String @db.NVarChar(2)
+  NITBS_GE4      String @db.NVarChar(3)
+  NITBS_NCE4     String @db.NVarChar(2)
+  NITBS_LPR4     String @db.NVarChar(2)
+  NITBS_SPR4     String @db.NVarChar(2)
+  NITBS_NPR4     String @db.NVarChar(2)
+  NITBS_GE5      String @db.NVarChar(3)
+  NITBS_NCE5     String @db.NVarChar(2)
+  NITBS_LPR5     String @db.NVarChar(2)
+  NITBS_SPR5     String @db.NVarChar(2)
+  NITBS_NPR5     String @db.NVarChar(2)
+  NITBS_GE6      String @db.NVarChar(3)
+  NITBS_NCE6     String @db.NVarChar(2)
+  NITBS_LPR6     String @db.NVarChar(2)
+  NITBS_SPR6     String @db.NVarChar(2)
+  NITBS_NPR6     String @db.NVarChar(2)
+  NITBS_GE7      String @db.NVarChar(3)
+  NITBS_NCE7     String @db.NVarChar(2)
+  NITBS_LPR7     String @db.NVarChar(2)
+  NITBS_SPR7     String @db.NVarChar(2)
+  NITBS_NPR7     String @db.NVarChar(2)
+  NITBS_GE8      String @db.NVarChar(3)
+  NITBS_NCE8     String @db.NVarChar(2)
+  NITBS_LPR8     String @db.NVarChar(2)
+  NITBS_SPR8     String @db.NVarChar(2)
+  NITBS_NPR8     String @db.NVarChar(2)
+  NITBS_GE9      String @db.NVarChar(3)
+  NITBS_NCE9     String @db.NVarChar(2)
+  NITBS_LPR9     String @db.NVarChar(2)
+  NITBS_SPR9     String @db.NVarChar(2)
+  NITBS_NPR9     String @db.NVarChar(2)
+  NITBS_GE10     String @db.NVarChar(3)
+  NITBS_NCE10    String @db.NVarChar(2)
+  NITBS_LPR10    String @db.NVarChar(2)
+  NITBS_SPR10    String @db.NVarChar(2)
+  NITBS_NPR10    String @db.NVarChar(2)
+  NITBS_GE11     String @db.NVarChar(3)
+  NITBS_NCE11    String @db.NVarChar(2)
+  NITBS_LPR11    String @db.NVarChar(2)
+  NITBS_SPR11    String @db.NVarChar(2)
+  NITBS_NPR11    String @db.NVarChar(2)
+  NITBS_GE12     String @db.NVarChar(3)
+  NITBS_NCE12    String @db.NVarChar(2)
+  NITBS_LPR12    String @db.NVarChar(2)
+  NITBS_SPR12    String @db.NVarChar(2)
+  NITBS_NPR12    String @db.NVarChar(2)
+  NITBS_GE13     String @db.NVarChar(3)
+  NITBS_NCE13    String @db.NVarChar(2)
+  NITBS_LPR13    String @db.NVarChar(2)
+  NITBS_SPR13    String @db.NVarChar(2)
+  NITBS_NPR13    String @db.NVarChar(2)
+  NITBS_GE14     String @db.NVarChar(3)
+  NITBS_NCE14    String @db.NVarChar(2)
+  NITBS_LPR14    String @db.NVarChar(2)
+  NITBS_SPR14    String @db.NVarChar(2)
+  NITBS_NPR14    String @db.NVarChar(2)
+  NITBS_GE15     String @db.NVarChar(3)
+  NITBS_NCE15    String @db.NVarChar(2)
+  NITBS_LPR15    String @db.NVarChar(2)
+  NITBS_SPR15    String @db.NVarChar(2)
+  NITBS_NPR15    String @db.NVarChar(2)
+  NITBS_GE16     String @db.NVarChar(3)
+  NITBS_NCE16    String @db.NVarChar(2)
+  NITBS_LPR16    String @db.NVarChar(2)
+  NITBS_SPR16    String @db.NVarChar(2)
+  NITBS_NPR16    String @db.NVarChar(2)
+  NITBS_GE17     String @db.NVarChar(3)
+  NITBS_NCE17    String @db.NVarChar(2)
+  NITBS_LPR17    String @db.NVarChar(2)
+  NITBS_SPR17    String @db.NVarChar(2)
+  NITBS_NPR17    String @db.NVarChar(2)
+  NITBS_GE18     String @db.NVarChar(3)
+  NITBS_NCE18    String @db.NVarChar(2)
+  NITBS_LPR18    String @db.NVarChar(2)
+  NITBS_SPR18    String @db.NVarChar(2)
+  NITBS_NPR18    String @db.NVarChar(2)
+  NITBS_GE19     String @db.NVarChar(3)
+  NITBS_NCE19    String @db.NVarChar(2)
+  NITBS_LPR19    String @db.NVarChar(2)
+  NITBS_SPR19    String @db.NVarChar(2)
+  NITBS_NPR19    String @db.NVarChar(2)
+  NITBS_GE20     String @db.NVarChar(3)
+  NITBS_NCE20    String @db.NVarChar(2)
+  NITBS_LPR20    String @db.NVarChar(2)
+  NITBS_SPR20    String @db.NVarChar(2)
+  NITBS_NPR20    String @db.NVarChar(2)
+  NITBS_GE21     String @db.NVarChar(3)
+  NITBS_NCE21    String @db.NVarChar(2)
+  NITBS_LPR21    String @db.NVarChar(2)
+  NITBS_SPR21    String @db.NVarChar(2)
+  NITBS_NPR21    String @db.NVarChar(2)
+  NITBS_GE22     String @db.NVarChar(3)
+  NITBS_NCE22    String @db.NVarChar(2)
+  NITBS_LPR22    String @db.NVarChar(2)
+  NITBS_SPR22    String @db.NVarChar(2)
+  NITBS_NPR22    String @db.NVarChar(2)
+  NITBS_GE23     String @db.NVarChar(3)
+  NITBS_NCE23    String @db.NVarChar(2)
+  NITBS_LPR23    String @db.NVarChar(2)
+  NITBS_SPR23    String @db.NVarChar(2)
+  NITBS_NPR23    String @db.NVarChar(2)
+  NITBS_GE24     String @db.NVarChar(3)
+  NITBS_NCE24    String @db.NVarChar(2)
+  NITBS_LPR24    String @db.NVarChar(2)
+  NITBS_SPR24    String @db.NVarChar(2)
+  NITBS_NPR24    String @db.NVarChar(2)
+  NITBS_GE25     String @db.NVarChar(3)
+  NITBS_NCE25    String @db.NVarChar(2)
+  NITBS_LPR25    String @db.NVarChar(2)
+  NITBS_SPR25    String @db.NVarChar(2)
+  NITBS_NPR25    String @db.NVarChar(2)
+  NITBS_GE26     String @db.NVarChar(3)
+  NITBS_NCE26    String @db.NVarChar(2)
+  NITBS_LPR26    String @db.NVarChar(2)
+  NITBS_SPR26    String @db.NVarChar(2)
+  NITBS_NPR26    String @db.NVarChar(2)
+  NITBS_GE27     String @db.NVarChar(3)
+  NITBS_NCE27    String @db.NVarChar(2)
+  NITBS_LPR27    String @db.NVarChar(2)
+  NITBS_SPR27    String @db.NVarChar(2)
+  NITBS_NPR27    String @db.NVarChar(2)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_NEWITBS")
+}
+
+model TESTS_NEWITBS_CUSTOM {
+  STUDENT_NUMBER            Int
+  SEQ_NUM                   String @db.NVarChar(2)
+  TYPE                      String @db.NVarChar(2)
+  DATE                      String @db.NVarChar(4)
+  GRADE                     String @db.NVarChar(2)
+  MEASURE_RANK              String @db.NVarChar(3)
+  SCHOOL_NAME               String @db.NVarChar(15)
+  VOCABULARY                String @db.NVarChar(3)
+  READING_ADV_SK            String @map("READING ADV_SK") @db.NVarChar(3)
+  READING_TOTAL             String @db.NVarChar(3)
+  LISTENING                 String @db.NVarChar(3)
+  SPELLING                  String @db.NVarChar(3)
+  CAPITALIZATION            String @db.NVarChar(3)
+  PUNCTUATION               String @db.NVarChar(3)
+  LANGUAGE_USAGE_EXPRESSION String @db.NVarChar(3)
+  LANGUAGE_TOTAL            String @db.NVarChar(3)
+  MATH_CONCEPTS_ESTIMATION  String @db.NVarChar(3)
+  MATH_PROBLEM_SOLVING      String @db.NVarChar(3)
+  MATH_COMPUTATION          String @db.NVarChar(3)
+  MATH_TOTAL                String @db.NVarChar(3)
+  CORE_TOTAL                String @db.NVarChar(3)
+  WORD_ANALYSIS             String @db.NVarChar(3)
+  SOCIAL_STUDIES            String @db.NVarChar(3)
+  SCIENCE                   String @db.NVarChar(3)
+  MAPS_DIAGRAMS             String @db.NVarChar(3)
+  REFERENCE_MATERIALS       String @db.NVarChar(3)
+  SOURCE_INFO_TOTAL         String @db.NVarChar(3)
+  COMPOSITION               String @db.NVarChar(3)
+  MATH_TOTAL_COMPU          String @db.NVarChar(3)
+  CORE_TOTAL_COMPU          String @db.NVarChar(3)
+  COMPOSITE_COMPU           String @db.NVarChar(3)
+  X_25_NOT_USED             String @map("25_NOT USED") @db.NVarChar(3)
+  X_26_NOT_USED             String @map("26_NOT USED") @db.NVarChar(3)
+  X_27_NOT_USED             String @map("27_NOT USED") @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_NEWITBS_CUSTOM")
+}
+
+model TESTS_OCC {
+  STUDENT_NUMBER     Int
+  SEQ_NUM            String @db.NVarChar(2)
+  TYPE               String @db.NVarChar(2)
+  DATE               String @db.NVarChar(4)
+  GRADE              String @db.NVarChar(2)
+  SCHOOL_NAME        String @db.NVarChar(15)
+  TOT_POSS_1         String @db.NVarChar(3)
+  TOT_EARN_1         String @db.NVarChar(3)
+  PERCENTC_1         String @db.NVarChar(3)
+  MC_PASS_1          String @db.NVarChar(1)
+  TOT_POSS_2         String @db.NVarChar(3)
+  TOT_EARN_2         String @db.NVarChar(3)
+  PERCENTC_2         String @db.NVarChar(3)
+  MC_PASS_2          String @db.NVarChar(1)
+  TOT_POSS_3         String @db.NVarChar(3)
+  TOT_EARN_3         String @db.NVarChar(3)
+  PERCENTC_3         String @db.NVarChar(3)
+  MC_PASS_3          String @db.NVarChar(1)
+  TOT_POSS_4         String @db.NVarChar(3)
+  TOT_EARN_4         String @db.NVarChar(3)
+  PERCENTC_4         String @db.NVarChar(3)
+  MC_PASS_4          String @db.NVarChar(1)
+  TOT_POSS_5         String @db.NVarChar(3)
+  TOT_EARN_5         String @db.NVarChar(3)
+  PERCENTC_5         String @db.NVarChar(3)
+  MC_PASS_5          String @db.NVarChar(1)
+  WRI_EARN           String @db.NVarChar(2)
+  WRI_PASS           String @db.NVarChar(1)
+  OK_TOT_POSS        String @db.NVarChar(3)
+  OK_TOT_EARN        String @db.NVarChar(3)
+  OK_PERCENTC        String @db.NVarChar(3)
+  OK_MC_PASS         String @db.NVarChar(1)
+  ARTS_TOT_POSS      String @db.NVarChar(3)
+  ARTS_TOT_EARN      String @db.NVarChar(3)
+  ARTS_PERCENTC      String @db.NVarChar(3)
+  ARTS_MC_PASS       String @db.NVarChar(1)
+  OK_PERFORM_INDEX_1 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_2 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_3 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_4 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_5 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_6 String @db.NVarChar(3)
+  OK_PERFORM_INDEX_7 String @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OCC")
+}
+
+model TESTS_OCC_CUSTOM {
+  STUDENT_NUMBER     Int
+  SEQ_NUM            String @db.NVarChar(2)
+  TYPE               String @db.NVarChar(2)
+  DATE               String @db.NVarChar(4)
+  GRADE              String @db.NVarChar(2)
+  SCHOOL_NAME        String @db.NVarChar(15)
+  MATH_TOT_POSS      String @db.NVarChar(3)
+  MATH_TOT_EARN      String @db.NVarChar(3)
+  MATH_PERCENTC      String @db.NVarChar(3)
+  MATH_MC_PASS       String @db.NVarChar(1)
+  MATH_PL            String @db.NVarChar(1)
+  MATH_OPI           String @db.NVarChar(3)
+  SCIENCE_TOT_POSS   String @db.NVarChar(3)
+  SCIENCE_TOT_EARN   String @db.NVarChar(3)
+  SCIENCE_PERCENTC   String @db.NVarChar(3)
+  SCIENCE_MC_PASS    String @db.NVarChar(1)
+  SCIENCE_PL         String @db.NVarChar(1)
+  SCIENCE_OPI        String @db.NVarChar(3)
+  READ_TOT_POSS      String @db.NVarChar(3)
+  READ_TOT_EARN      String @db.NVarChar(3)
+  READ_PERCENTC      String @db.NVarChar(3)
+  READ_MC_PASS       String @db.NVarChar(1)
+  READ_PL            String @db.NVarChar(1)
+  READ_OPI           String @db.NVarChar(3)
+  USHIST_TOT_POSS    String @db.NVarChar(3)
+  USHIST_TOT_EARN    String @db.NVarChar(3)
+  USHIST_PERCENTC    String @db.NVarChar(3)
+  USHIST_MC_PASS     String @db.NVarChar(1)
+  USHIST_PL          String @db.NVarChar(1)
+  USHIST_OPI         String @db.NVarChar(3)
+  GEOGRAPHY_TOT_POSS String @db.NVarChar(3)
+  GEOGRAPHY_TOT_EARN String @db.NVarChar(3)
+  GEOGRAPHY_PERCENTC String @db.NVarChar(3)
+  GEOGRAPHY_MC_PASS  String @db.NVarChar(1)
+  GEOGRAPHY_PL       String @db.NVarChar(1)
+  GEOGRAPHY_OPI      String @db.NVarChar(3)
+  OKHIST_TOT_POSS    String @db.NVarChar(3)
+  OKHIST_TOT_EARN    String @db.NVarChar(3)
+  OKHIST_PERCENTC    String @db.NVarChar(3)
+  OKHIST_MC_PASS     String @db.NVarChar(1)
+  OKHIST_PL          String @db.NVarChar(1)
+  OKHIST_OPI         String @db.NVarChar(3)
+  ARTS_TOT_POSS      String @db.NVarChar(3)
+  ARTS_TOT_EARN      String @db.NVarChar(3)
+  ARTS_PERCENTC      String @db.NVarChar(3)
+  ARTS_MC_PASS       String @db.NVarChar(1)
+  ARTS_PL            String @db.NVarChar(1)
+  ARTS_OPI           String @db.NVarChar(3)
+  WRI_EARN           String @db.NVarChar(2)
+  WRI_PASS           String @db.NVarChar(1)
+  WRI_PL             String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OCC_CUSTOM")
+}
+
+model TESTS_OTIS {
+  STUDENT_NUMBER       Int
+  SEQ_NUM              String @db.NVarChar(2)
+  TYPE                 String @db.NVarChar(2)
+  DATE                 String @db.NVarChar(4)
+  GRADE                String @db.NVarChar(2)
+  SCHOOL_NAME          String @db.NVarChar(15)
+  OTIS_AGE_YEARS       String @db.NVarChar(2)
+  OTIS_AGE_MNTHS       String @db.NVarChar(2)
+  OTIS_RAW_SCORE       String @db.NVarChar(2)
+  OTIS_SAI_SCORE       String @db.NVarChar(3)
+  OTIS_SAI_PCT         String @db.NVarChar(2)
+  OTIS_SAI_STANINE     String @db.NVarChar(1)
+  OTIS_GRD_ABILITY     String @db.NVarChar(3)
+  OTIS_GRD_PCT         String @db.NVarChar(2)
+  OTIS_GRD_STANINE     String @db.NVarChar(1)
+  OTIS_SCALE_SCORE     String @db.NVarChar(3)
+  OTIS_ADJ_SAI_SCORE   String @db.NVarChar(3)
+  OTIS_ADJ_SAI_PCT     String @db.NVarChar(2)
+  OTIS_ADJ_SAI_STANINE String @db.NVarChar(1)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OTIS")
+}
+
+model TESTS_PBP {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  PBP_RS1        Int    @db.SmallInt
+  PBP_PCT1       Int    @db.SmallInt
+  PBP_RS2        Int    @db.SmallInt
+  PBP_PCT2       Int    @db.SmallInt
+  PBP_RS3        Int    @db.SmallInt
+  PBP_PCT3       Int    @db.SmallInt
+  PBP_RS4        Int    @db.SmallInt
+  PBP_PCT4       Int    @db.SmallInt
+  PBP_RS5        Int    @db.SmallInt
+  PBP_PCT5       Int    @db.SmallInt
+  PBP_RS6        Int    @db.SmallInt
+  PBP_PCT6       Int    @db.SmallInt
+  PBP_RS7        Int    @db.SmallInt
+  PBP_PCT7       Int    @db.SmallInt
+  PBP_RS8        Int    @db.SmallInt
+  PBP_PCT8       Int    @db.SmallInt
+  PBP_RS9        Int    @db.SmallInt
+  PBP_PCT9       Int    @db.SmallInt
+  PBP_RS10       Int    @db.SmallInt
+  PBP_PCT10      Int    @db.SmallInt
+  PBP_RS11       Int    @db.SmallInt
+  PBP_PCT11      Int    @db.SmallInt
+  PBP_RS12       Int    @db.SmallInt
+  PBP_PCT12      Int    @db.SmallInt
+  PBP_RS13       Int    @db.SmallInt
+  PBP_PCT13      Int    @db.SmallInt
+  PBP_RS14       Int    @db.SmallInt
+  PBP_PCT14      Int    @db.SmallInt
+  PBP_RS15       Int    @db.SmallInt
+  PBP_PCT15      Int    @db.SmallInt
+  PBP_RS16       Int    @db.SmallInt
+  PBP_PCT16      Int    @db.SmallInt
+  PBP_RS17       Int    @db.SmallInt
+  PBP_PCT17      Int    @db.SmallInt
+  PBP_RS18       Int    @db.SmallInt
+  PBP_PCT18      Int    @db.SmallInt
+  PBP_RS19       Int    @db.SmallInt
+  PBP_PCT19      Int    @db.SmallInt
+  PBP_RS20       Int    @db.SmallInt
+  PBP_PCT20      Int    @db.SmallInt
+  PBP_RS21       Int    @db.SmallInt
+  PBP_PCT21      Int    @db.SmallInt
+  PBP_RS22       Int    @db.SmallInt
+  PBP_PCT22      Int    @db.SmallInt
+  PBP_RS23       Int    @db.SmallInt
+  PBP_PCT23      Int    @db.SmallInt
+  PBP_RS24       Int    @db.SmallInt
+  PBP_PCT24      Int    @db.SmallInt
+  PBP_RS25       Int    @db.SmallInt
+  PBP_PCT25      Int    @db.SmallInt
+  PBP_RS26       Int    @db.SmallInt
+  PBP_PCT26      Int    @db.SmallInt
+  PBP_RS27       Int    @db.SmallInt
+  PBP_PCT27      Int    @db.SmallInt
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_PBP")
+}
+
+model TESTS_PLANTEST {
+  STUDENT_NUMBER     Int
+  SEQ_NUM            String @db.NVarChar(2)
+  TYPE               String @db.NVarChar(2)
+  DATE               String @db.NVarChar(4)
+  GRADE              String @db.NVarChar(2)
+  SCHOOL_NAME        String @db.NVarChar(15)
+  SCHOOL_CODE        String @db.NVarChar(6)
+  SSN                String @db.NVarChar(9)
+  GRAD_DATE          String @db.NVarChar(4)
+  ADMIN_DATE         String @db.NVarChar(4)
+  ENGLISH_SCR        String @db.NVarChar(2)
+  MATH_SCR           String @db.NVarChar(2)
+  READING_SCR        String @db.NVarChar(2)
+  SCIENCE_SCR        String @db.NVarChar(2)
+  COMPOSITE_SCR      String @db.NVarChar(2)
+  SUBSCORE_USE       String @db.NVarChar(2)
+  SUBSCORE_RHET      String @db.NVarChar(2)
+  SUBSCORE_ALG       String @db.NVarChar(2)
+  SUBSCORE_GEO       String @db.NVarChar(2)
+  ENGLISH_NAT_PERC   String @db.NVarChar(3)
+  MATH_NAT_PERC      String @db.NVarChar(3)
+  READING_NAT_PERC   String @db.NVarChar(3)
+  SCIENCE_NAT_PERC   String @db.NVarChar(3)
+  COMPOSITE_NAT_PERC String @db.NVarChar(3)
+  NAT_PERC_UM        String @db.NVarChar(3)
+  NAT_PERC_RS        String @db.NVarChar(3)
+  NAT_PERC_ALG       String @db.NVarChar(3)
+  NAT_PERC_GEO       String @db.NVarChar(3)
+  ENGLISH_LOC_PERC   String @db.NVarChar(3)
+  MATH_LOC_PERC      String @db.NVarChar(3)
+  READING_LOC_PERC   String @db.NVarChar(3)
+  SCIENCE_LOC_PERC   String @db.NVarChar(3)
+  COMPOSITE_LOC_PERC String @db.NVarChar(3)
+  LOC_PERC_UM        String @db.NVarChar(3)
+  LOC_PERC_RS        String @db.NVarChar(3)
+  LOC_PERC_ALG       String @db.NVarChar(3)
+  LOC_PERC_GEO       String @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_PLANTEST")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TESTS_READING_CICSTST1 {
+  STUDENT_NUMBER Int
+  YEAR           String @db.NVarChar(4)
+  SEMESTER       String @db.NVarChar(1)
+  SCHOOL         String @db.NVarChar(3)
+  GRADE          String @db.NVarChar(3)
+  RAW_SCORE_1    String @db.NVarChar(3)
+  PERCENTILE_1   String @db.NVarChar(3)
+  GE_1           String @db.NVarChar(3)
+  RAW_SCORE_2    String @db.NVarChar(3)
+  PERCENTILE_2   String @db.NVarChar(3)
+  GE_2           String @db.NVarChar(3)
+  RAW_SCORE_3    String @db.NVarChar(3)
+  PERCENTILE_3   String @db.NVarChar(3)
+  GE_3           String @db.NVarChar(3)
+  RAW_SCORE_4    String @db.NVarChar(3)
+  PERCENTILE_4   String @db.NVarChar(3)
+  GE_4           String @db.NVarChar(3)
+
+  @@ignore
+}
+
+model TESTS_READING_CUSTOM {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(3)
+  SCHOOL         String @db.NVarChar(3)
+  YEAR           String @db.NVarChar(4)
+  SEMESTER       String @db.NVarChar(1)
+  RAW_SCORE_1    String @db.NVarChar(3)
+  PERCENTILE_1   String @db.NVarChar(3)
+  GE_1           String @db.NVarChar(3)
+  RAW_SCORE_2    String @db.NVarChar(3)
+  PERCENTILE_2   String @db.NVarChar(3)
+  GE_2           String @db.NVarChar(3)
+  RAW_SCORE_3    String @db.NVarChar(3)
+  PERCENTILE_3   String @db.NVarChar(3)
+  GE_3           String @db.NVarChar(3)
+  RAW_SCORE_4    String @db.NVarChar(3)
+  PERCENTILE_4   String @db.NVarChar(3)
+  GE_4           String @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_READING_CUSTOM")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TESTS_SAT9 {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  SAT9_GE_1      String @db.NVarChar(3)
+  SAT9_PR_1      String @db.NVarChar(2)
+  SAT9_STA_1     String @db.NVarChar(1)
+  SAT9_NCE_1     String @db.NVarChar(3)
+  SAT9_GE_2      String @db.NVarChar(3)
+  SAT9_PR_2      String @db.NVarChar(2)
+  SAT9_STA_2     String @db.NVarChar(1)
+  SAT9_NCE_2     String @db.NVarChar(3)
+  SAT9_GE_3      String @db.NVarChar(3)
+  SAT9_PR_3      String @db.NVarChar(2)
+  SAT9_STA_3     String @db.NVarChar(1)
+  SAT9_NCE_3     String @db.NVarChar(3)
+  SAT9_GE_4      String @db.NVarChar(3)
+  SAT9_PR_4      String @db.NVarChar(2)
+  SAT9_STA_4     String @db.NVarChar(1)
+  SAT9_NCE_4     String @db.NVarChar(3)
+  SAT9_GE_5      String @db.NVarChar(3)
+  SAT9_PR_5      String @db.NVarChar(2)
+  SAT9_STA_5     String @db.NVarChar(1)
+  SAT9_NCE_5     String @db.NVarChar(3)
+  SAT9_GE_6      String @db.NVarChar(3)
+  SAT9_PR_6      String @db.NVarChar(2)
+  SAT9_STA_6     String @db.NVarChar(1)
+  SAT9_NCE_6     String @db.NVarChar(3)
+  SAT9_GE_7      String @db.NVarChar(3)
+  SAT9_PR_7      String @db.NVarChar(2)
+  SAT9_STA_7     String @db.NVarChar(1)
+  SAT9_NCE_7     String @db.NVarChar(3)
+  SAT9_GE_8      String @db.NVarChar(3)
+  SAT9_PR_8      String @db.NVarChar(2)
+  SAT9_STA_8     String @db.NVarChar(1)
+  SAT9_NCE_8     String @db.NVarChar(3)
+  SAT9_GE_9      String @db.NVarChar(3)
+  SAT9_PR_9      String @db.NVarChar(2)
+  SAT9_STA_9     String @db.NVarChar(1)
+  SAT9_NCE_9     String @db.NVarChar(3)
+  SAT9_GE_10     String @db.NVarChar(3)
+  SAT9_PR_10     String @db.NVarChar(2)
+  SAT9_STA_10    String @db.NVarChar(1)
+  SAT9_NCE_10    String @db.NVarChar(3)
+  SAT9_GE_11     String @db.NVarChar(3)
+  SAT9_PR_11     String @db.NVarChar(2)
+  SAT9_STA_11    String @db.NVarChar(1)
+  SAT9_NCE_11    String @db.NVarChar(3)
+  SAT9_GE_12     String @db.NVarChar(3)
+  SAT9_PR_12     String @db.NVarChar(2)
+  SAT9_STA_12    String @db.NVarChar(1)
+  SAT9_NCE_12    String @db.NVarChar(3)
+  SAT9_GE_13     String @db.NVarChar(3)
+  SAT9_PR_13     String @db.NVarChar(2)
+  SAT9_STA_13    String @db.NVarChar(1)
+  SAT9_NCE_13    String @db.NVarChar(3)
+  SAT9_GE_14     String @db.NVarChar(3)
+  SAT9_PR_14     String @db.NVarChar(2)
+  SAT9_STA_14    String @db.NVarChar(1)
+  SAT9_NCE_14    String @db.NVarChar(3)
+  SAT9_GE_15     String @db.NVarChar(3)
+  SAT9_PR_15     String @db.NVarChar(2)
+  SAT9_STA_15    String @db.NVarChar(1)
+  SAT9_NCE_15    String @db.NVarChar(3)
+  SAT9_GE_16     String @db.NVarChar(3)
+  SAT9_PR_16     String @db.NVarChar(2)
+  SAT9_STA_16    String @db.NVarChar(1)
+  SAT9_NCE_16    String @db.NVarChar(3)
+  SAT9_GE_17     String @db.NVarChar(3)
+  SAT9_PR_17     String @db.NVarChar(2)
+  SAT9_STA_17    String @db.NVarChar(1)
+  SAT9_NCE_17    String @db.NVarChar(3)
+  SAT9_GE_18     String @db.NVarChar(3)
+  SAT9_PR_18     String @db.NVarChar(2)
+  SAT9_STA_18    String @db.NVarChar(1)
+  SAT9_NCE_18    String @db.NVarChar(3)
+  SAT9_GE_19     String @db.NVarChar(3)
+  SAT9_PR_19     String @db.NVarChar(2)
+  SAT9_STA_19    String @db.NVarChar(1)
+  SAT9_NCE_19    String @db.NVarChar(3)
+  SAT9_GE_20     String @db.NVarChar(3)
+  SAT9_PR_20     String @db.NVarChar(2)
+  SAT9_STA_20    String @db.NVarChar(1)
+  SAT9_NCE_20    String @db.NVarChar(3)
+  SAT9_GE_21     String @db.NVarChar(3)
+  SAT9_PR_21     String @db.NVarChar(2)
+  SAT9_STA_21    String @db.NVarChar(1)
+  SAT9_NCE_21    String @db.NVarChar(3)
+  SAT9_GE_22     String @db.NVarChar(3)
+  SAT9_PR_22     String @db.NVarChar(2)
+  SAT9_STA_22    String @db.NVarChar(1)
+  SAT9_NCE_22    String @db.NVarChar(3)
+  SAT9_GE_23     String @db.NVarChar(3)
+  SAT9_PR_23     String @db.NVarChar(2)
+  SAT9_STA_23    String @db.NVarChar(1)
+  SAT9_NCE_23    String @db.NVarChar(3)
+  SAT9_GE_24     String @db.NVarChar(3)
+  SAT9_PR_24     String @db.NVarChar(2)
+  SAT9_STA_24    String @db.NVarChar(1)
+  SAT9_NCE_24    String @db.NVarChar(3)
+
+  @@ignore
+}
+
+model TESTS_SAT9_CUSTOM {
+  STUDENT_NUMBER     Int
+  SEQ_NUM            String @db.NVarChar(2)
+  TYPE               String @db.NVarChar(2)
+  DATE               String @db.NVarChar(4)
+  GRADE              String @db.NVarChar(2)
+  MEASURE_RANK       String @db.NVarChar(3)
+  SCHOOL_NAME        String @db.NVarChar(15)
+  READING_TOTAL      Int    @db.SmallInt
+  WORD_STUDY         Int    @db.SmallInt
+  READING_VOCABULARY Int    @db.SmallInt
+  READING_COMPREH    Int    @db.SmallInt
+  TOTAL_MATH         Int    @db.SmallInt
+  PROBLEM_SOLVING    Int    @db.SmallInt
+  PROCEDURES         Int    @db.SmallInt
+  NOT_ACTIVE         Int    @db.SmallInt
+  LANGUAGE_TOTAL     Int    @db.SmallInt
+  LANGUAGE_MECH      Int    @db.SmallInt
+  LANGUAGE_EXP       Int    @db.SmallInt
+  SPELLING           Int    @db.SmallInt
+  STUDY_SKILLS       Int    @db.SmallInt
+  ENVIRONMENT        Int    @db.SmallInt
+  SCIENCE            Int    @db.SmallInt
+  SOCIAL_SCIENCE     Int    @db.SmallInt
+  LISTENING          Int    @db.SmallInt
+  USING_INFO         Int    @db.SmallInt
+  THINKING_SKILLS    Int    @db.SmallInt
+  PARTIAL_BATTERY    Int    @db.SmallInt
+  COMPLETE_BATTERY   Int    @db.SmallInt
+  THREE_R_TOTAL      Int    @db.SmallInt
+  USING_INFO_BB      Int    @db.SmallInt
+  THINKING_SKILLS_BB Int    @db.SmallInt
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_SAT9_CUSTOM")
+}
+
+model TESTS_SATCOLL {
+  STUDENT_NUMBER Int
+  SEQ_NUM        String @db.NVarChar(2)
+  TYPE           String @db.NVarChar(2)
+  DATE           String @db.NVarChar(4)
+  GRADE          String @db.NVarChar(2)
+  SCHOOL_NAME    String @db.NVarChar(15)
+  SCHOOL_CODE    String @db.NVarChar(6)
+  SSN            String @db.NVarChar(9)
+  GRAD_DATE      String @db.NVarChar(4)
+  ADMIN_DATE     String @db.NVarChar(4)
+  VERBAL_SCORE   String @db.NVarChar(2)
+  MATH_SCORE     String @db.NVarChar(2)
+  VERBAL_PERCENT String @db.NVarChar(3)
+  MATH_PERCENT   String @db.NVarChar(3)
+
+  @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_SATCOLL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model TESTS_TEST {
+  TEST_TYPE String @db.NVarChar(2)
+  TEST_NAME String @db.NVarChar(30)
+  TEST_HDR1 String @db.NVarChar(130)
+  TEST_HDR2 String @db.NVarChar(130)
+  TEST_HDR3 String @db.NVarChar(130)
+  TEST_HDR4 String @db.NVarChar(130)
+  TEST_HDR5 String @db.NVarChar(130)
+
+  @@ignore
+}
+
+model ZIPFIL_CICSTST1 {
+  ZIP_CODE   String @id(map: "PK_ZIPFILE_CICSTST1") @db.NVarChar(5)
+  CITY_STATE String @db.NVarChar(25)
+}
