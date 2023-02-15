@@ -24,6 +24,7 @@ model CLASS_HISTORY {
   HIST_COUNTER     Int
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -50,6 +51,7 @@ model ELL_ACCESS_TEST {
   LITRCY_PROF_LEVEL  String @db.NVarChar(3)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -90,6 +92,7 @@ model ELL_ENTRY_TABLE {
   ELL_TEST_SCORE15 String    @db.NVarChar(2)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 model ELL_STUDENT_TABLE {
@@ -100,6 +103,8 @@ model ELL_STUDENT_TABLE {
   LANG_ELL_YEARS     String @db.NVarChar(2)
   LANG_BIRTH_COUNTRY String @db.NVarChar(15)
   LANG_ELL_US_ENTRY  String @db.NVarChar(4)
+
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -120,6 +125,7 @@ model ELL_WAPT_TEST {
   OUT_OF_DISTRICT_PROF_LEVEL String @db.NVarChar(4)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -140,6 +146,7 @@ model EMER_CONTACT {
   SCONTACT_PHONE_EXT String?  @db.NVarChar(4)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -155,6 +162,7 @@ model HEALTH {
   CERTIFIED_BY      String?   @db.NVarChar(50)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -170,6 +178,7 @@ model MOBILITY {
   TRANSFER_CODE     String?   @db.NVarChar(2)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -184,6 +193,7 @@ model ROOMS_TABLE {
   TOTALS_SEATS   Decimal? @db.Decimal(3, 0)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -200,6 +210,7 @@ model SCHEDULE_TABLE {
   CLASS_EXIT_DATE  DateTime? @db.SmallDateTime
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -233,6 +244,7 @@ model SCHOOL_TABLE {
   BLDG_FACIL_CODE   String   @db.NVarChar(3)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -270,6 +282,7 @@ model STUDENT {
   HOME_DISTRICT      String    @db.NVarChar(25)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -303,6 +316,7 @@ model STUDENT_CLASS {
   PERIODS6_ABSENT   Decimal?  @db.Decimal(2, 0)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -326,6 +340,7 @@ model STUDENT_DEMO {
   STUDENT_LIVES     String?  @db.NVarChar(1)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -345,6 +360,7 @@ model SUSPEND {
   COMMENT_LINE_4 String   @db.NVarChar(75)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -353,4 +369,5 @@ model SUSPEND_REASON_CODES {
   REASON_DESCRIPTION String @db.NVarChar(35)
 
   @@ignore
+  @@schema("TSTU_Yr0809")
 }

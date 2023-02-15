@@ -21,6 +21,7 @@ model ADDHIST_CICSTST1 {
   ZIP_SUFFIX       String @db.NVarChar(4)
 
   @@id([STUDENT_NUMBER, ADDR_DATE, HOUSE_NUMBER, DIRECTION, STREET_NAME, APARTMENT_LOT_NO, BLDG_LOT_NO], map: "PK_ADDHIST_CICSTST1")
+  @@schema("ECUM")
 }
 
 model ATTEND_CICSTST1 {
@@ -84,6 +85,7 @@ model ATTEND_CICSTST1 {
   QTR4_QTR_OUT_DIST     String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, ATTENDANCE_YEAR], map: "PK_ATTEND_CICSTST1")
+  @@schema("ECUM")
 }
 
 model ATTEND_CUSTOM {
@@ -105,6 +107,7 @@ model ATTEND_CUSTOM {
   QTR_OUT_DIST     String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, ATTENDANCE_YEAR, QUARTER], map: "PK_ATTEND_CUSTOM")
+  @@schema("ECUM")
 }
 
 model BUILDING_MASTER {
@@ -133,9 +136,10 @@ model BUILDING_MASTER {
   BLDG_CF_LOAD_SEQ   String @db.NVarChar(2)
   BLDG_CF_FILLER     String @db.NVarChar(2)
   BLDG_DIVISION      String @db.NVarChar(1)
+
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model CLASS_HISTORY_04252012 {
   HIST_STUDENT_NUM Int
@@ -151,9 +155,9 @@ model CLASS_HISTORY_04252012 {
   HIST_COUNTER     Int
 
   @@ignore
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model CLASS_HISTORY_10262011 {
   STUDENT_NUMBER   Int
@@ -170,9 +174,9 @@ model CLASS_HISTORY_10262011 {
 
   @@index([STUDENT_NUMBER, HIST_FROM_YEAR, HIST_TO_YEAR, HIST_SEMESTER, HIST_COURSE_NUM, HIST_COUNTER], map: "idxClass_History ")
   @@ignore
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model CLASS_HISTORY_CUSTOM {
   STUDENT_NUMBER              Int
@@ -194,9 +198,9 @@ model CLASS_HISTORY_CUSTOM {
 
   @@index([STUDENT_NUMBER, HIST_FROM_YEAR, HIST_TO_YEAR, HIST_GRADE_LEVEL, HIST_SEMESTER_SORT_CODE, HIST_COURSE_NUM, HIST_TRANSCRIPT_CREDIT_FLAG(sort: Desc), HIST_U_N_R_RPT_PLACEMENT, HIST_COUNTER], map: "idxClass_History ", clustered: true)
   @@ignore
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model CLASS_HISTORY_CUSTOM_20120607 {
   STUDENT_NUMBER              Int
@@ -217,9 +221,9 @@ model CLASS_HISTORY_CUSTOM_20120607 {
   HIST_U_N_R_RPT_PLACEMENT    Int     @db.SmallInt
 
   @@ignore
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model CLASS_HISTORY_CUSTOM_20120619 {
   STUDENT_NUMBER              Int
@@ -240,6 +244,7 @@ model CLASS_HISTORY_CUSTOM_20120619 {
   HIST_U_N_R_RPT_PLACEMENT    Int     @db.SmallInt
 
   @@ignore
+  @@schema("ECUM")
 }
 
 model ELEMGRD_CICSTST1 {
@@ -263,6 +268,7 @@ model ELEMGRD_CICSTST1 {
   NOGRD          String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, SCHOOL_YEAR], map: "PK_ELEMGRD_CICSTST1")
+  @@schema("ECUM")
 }
 
 model ELL_STUDENT_TABLE {
@@ -273,6 +279,8 @@ model ELL_STUDENT_TABLE {
   LANG_ELL_YEARS     String @db.NVarChar(2)
   LANG_BIRTH_COUNTRY String @db.NVarChar(15)
   LANG_ELL_US_ENTRY  String @db.NVarChar(4)
+
+  @@schema("ECUM")
 }
 
 model MOBILITY {
@@ -287,6 +295,7 @@ model MOBILITY {
   TRANSFER_CODE     String?   @db.NVarChar(2)
 
   @@id([STUDENT_NUMBER, MOBILITY_COUNTER], map: "PK_ECUM_MOBILITY")
+  @@schema("ECUM")
 }
 
 model SCMISC_CICSTST1 {
@@ -318,9 +327,10 @@ model SCMISC_CICSTST1 {
   OKLA_SCHOLARS_ENROLL String @db.NVarChar(1)
   TRANSPORT_NEED       String @db.NVarChar(1)
   CERT_OF_DIST         String @db.NVarChar(1)
+
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model SCMISC_CICSTST1_10242011 {
   STUDENT_NUMBER       Int
@@ -353,9 +363,9 @@ model SCMISC_CICSTST1_10242011 {
   CERT_OF_DIST         String @db.NVarChar(1)
 
   @@ignore
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model SPED_CICSTST1 {
   STUDENT_NUMBER   Int
@@ -368,6 +378,7 @@ model SPED_CICSTST1 {
 
   @@index([STUDENT_NUMBER], map: "idxSpEd_CICSTST1 ", clustered: true)
   @@ignore
+  @@schema("ECUM")
 }
 
 model SRECUM_CICSTST1 {
@@ -382,12 +393,16 @@ model SRECUM_CICSTST1 {
   COURT_ORDER    String @db.NVarChar(15)
   CUST_DATE      String @db.NVarChar(6)
   MOTHER_MAIDEN  String @db.NVarChar(30)
+
+  @@schema("ECUM")
 }
 
 model SSMADR_CICSTST1 {
   STUDENT_NUMBER Int    @id(map: "PK_SSMADR_CICSTST1")
   MADR_ADDRESS   String @db.NVarChar(20)
   MADR_ZIP       String @db.NVarChar(9)
+
+  @@schema("ECUM")
 }
 
 model STUDENT {
@@ -422,6 +437,8 @@ model STUDENT {
   STUDENT_COUNSELOR  Decimal?  @db.Decimal(1, 0)
   STUDENT_NUMBER_OK  Decimal   @db.Decimal(10, 0)
   HOME_DISTRICT      String    @db.NVarChar(25)
+
+  @@schema("ECUM")
 }
 
 model STUDENT_DEMO {
@@ -442,10 +459,14 @@ model STUDENT_DEMO {
   SPARENT_BUSPHONE  Decimal? @db.Decimal(10, 0)
   SPARENT_BUS_EXT   Decimal? @db.Decimal(5, 0)
   STUDENT_LIVES     String?  @db.NVarChar(1)
+
+  @@schema("ECUM")
 }
 
 model Student_List {
   student_id String @unique(map: "idx_Student_List", clustered: true) @db.NVarChar(10)
+
+  @@schema("ECUM")
 }
 
 model STUDENT_UNIV_PROMPT {
@@ -453,6 +474,7 @@ model STUDENT_UNIV_PROMPT {
   STUDENT_NUMBER      Int
 
   @@id([STUDENT_NAME_CONCAT, STUDENT_NUMBER], map: "PK_STUDENT_UNIV_PROMPT")
+  @@schema("ECUM")
 }
 
 model TESTS_ACTTEST {
@@ -494,6 +516,7 @@ model TESTS_ACTTEST {
   NAT_SUBSCORE_AL     String @db.NVarChar(2)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_ECUM_ACTTEST")
+  @@schema("ECUM")
 }
 
 model TESTS_ADMINISTERED {
@@ -506,9 +529,9 @@ model TESTS_ADMINISTERED {
   SORT_GRADE     Int      @db.SmallInt
 
   @@id([STUDENT_NUMBER, TYPE, GRADE, DATE, SEQ_NUM], map: "PK_TESTS_ADMINISTERED")
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model TESTS_CICSTST1 {
   TEST_STUDENT_ID String @db.NVarChar(7)
@@ -520,6 +543,7 @@ model TESTS_CICSTST1 {
   VARIABLE_DATA   String @db.NVarChar(297)
 
   @@ignore
+  @@schema("ECUM")
 }
 
 model TESTS_EOI {
@@ -543,6 +567,7 @@ model TESTS_EOI {
   BIOL_PASS_FAIL String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_EOI")
+  @@schema("ECUM")
 }
 
 model TESTS_EXPLTEST {
@@ -579,6 +604,7 @@ model TESTS_EXPLTEST {
   LOC_PERC_RH        String @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_EXPLTEST")
+  @@schema("ECUM")
 }
 
 model TESTS_ITBS {
@@ -702,6 +728,7 @@ model TESTS_ITBS {
   COGAT_NVER_GPR String @db.NVarChar(2)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_ITBS")
+  @@schema("ECUM")
 }
 
 model TESTS_ITBS_CUSTOM {
@@ -735,6 +762,7 @@ model TESTS_ITBS_CUSTOM {
   RIV_READ_SS_NPR_NCE  Int    @db.SmallInt
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_ITBS_CUSTOM")
+  @@schema("ECUM")
 }
 
 model TESTS_NAGL {
@@ -759,6 +787,7 @@ model TESTS_NAGL {
   NAGL_ADJ_NAI_STANINE String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_NAGL")
+  @@schema("ECUM")
 }
 
 model TESTS_NEWITBS {
@@ -905,6 +934,7 @@ model TESTS_NEWITBS {
   NITBS_NPR27    String @db.NVarChar(2)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_NEWITBS")
+  @@schema("ECUM")
 }
 
 model TESTS_NEWITBS_CUSTOM {
@@ -944,6 +974,7 @@ model TESTS_NEWITBS_CUSTOM {
   X_27_NOT_USED             String @map("27_NOT USED") @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_NEWITBS_CUSTOM")
+  @@schema("ECUM")
 }
 
 model TESTS_OCC {
@@ -992,6 +1023,7 @@ model TESTS_OCC {
   OK_PERFORM_INDEX_7 String @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OCC")
+  @@schema("ECUM")
 }
 
 model TESTS_OCC_CUSTOM {
@@ -1048,6 +1080,7 @@ model TESTS_OCC_CUSTOM {
   WRI_PL             String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OCC_CUSTOM")
+  @@schema("ECUM")
 }
 
 model TESTS_OTIS {
@@ -1072,6 +1105,7 @@ model TESTS_OTIS {
   OTIS_ADJ_SAI_STANINE String @db.NVarChar(1)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_OTIS")
+  @@schema("ECUM")
 }
 
 model TESTS_PBP {
@@ -1137,6 +1171,7 @@ model TESTS_PBP {
   PBP_PCT27      Int    @db.SmallInt
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_TESTS_PBP")
+  @@schema("ECUM")
 }
 
 model TESTS_PLANTEST {
@@ -1179,9 +1214,9 @@ model TESTS_PLANTEST {
   LOC_PERC_GEO       String @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_PLANTEST")
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model TESTS_READING_CICSTST1 {
   STUDENT_NUMBER Int
@@ -1203,6 +1238,7 @@ model TESTS_READING_CICSTST1 {
   GE_4           String @db.NVarChar(3)
 
   @@ignore
+  @@schema("ECUM")
 }
 
 model TESTS_READING_CUSTOM {
@@ -1228,9 +1264,9 @@ model TESTS_READING_CUSTOM {
   GE_4           String @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_READING_CUSTOM")
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model TESTS_SAT9 {
   STUDENT_NUMBER Int
@@ -1337,6 +1373,7 @@ model TESTS_SAT9 {
   SAT9_NCE_24    String @db.NVarChar(3)
 
   @@ignore
+  @@schema("ECUM")
 }
 
 model TESTS_SAT9_CUSTOM {
@@ -1373,6 +1410,7 @@ model TESTS_SAT9_CUSTOM {
   THINKING_SKILLS_BB Int    @db.SmallInt
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE, MEASURE_RANK], map: "PK_TESTS_SAT9_CUSTOM")
+  @@schema("ECUM")
 }
 
 model TESTS_SATCOLL {
@@ -1392,9 +1430,9 @@ model TESTS_SATCOLL {
   MATH_PERCENT   String @db.NVarChar(3)
 
   @@id([STUDENT_NUMBER, SEQ_NUM, TYPE, DATE, GRADE], map: "PK_SATCOLL")
+  @@schema("ECUM")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model TESTS_TEST {
   TEST_TYPE String @db.NVarChar(2)
@@ -1406,9 +1444,12 @@ model TESTS_TEST {
   TEST_HDR5 String @db.NVarChar(130)
 
   @@ignore
+  @@schema("ECUM")
 }
 
 model ZIPFIL_CICSTST1 {
   ZIP_CODE   String @id(map: "PK_ZIPFILE_CICSTST1") @db.NVarChar(5)
   CITY_STATE String @db.NVarChar(25)
+
+  @@schema("ECUM")
 }
