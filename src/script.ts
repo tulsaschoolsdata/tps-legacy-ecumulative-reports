@@ -19,6 +19,8 @@ type Task = {
   student_number: number,
 }
 
+type StudentNumberFilter = number[]
+
 const q: queueAsPromised<Task> = fastq.promise(asyncWorker, 20)
 
 async function asyncWorker({browser, student_number}: Task): Promise<void> {
@@ -132,8 +134,10 @@ async function runReport(browser: Browser, student_number: number) {
   }
 }
 
-async function runReports(browser: Browser) {
-  const student_numbers = (await queries.studentNumbers()).map(o => o.STUDENT_NUMBER)
+async function runReports(browser: Browser, student_number_filter?: StudentNumberFilter) {
+  const student_numbers = (await queries.studentNumbers())
+    .map(o => o.STUDENT_NUMBER)
+    .filter(number => !student_number_filter || student_number_filter.includes(number))
   console.info('Student Number Count:', student_numbers.length)
 
   progress.start(student_numbers.length, 0)
@@ -149,6 +153,14 @@ async function runReports(browser: Browser) {
   })
 
   await q.drained().then(() => progress.stop())
+}
+
+function studentNumbersFilter(): StudentNumberFilter|undefined {
+  const argv_integers = process.argv.map(Number).filter(n => n % 1 == 0 && n > 0)
+
+  if (argv_integers.length) {
+    return argv_integers
+  }
 }
 
 process.on('exit', () => {
@@ -172,7 +184,7 @@ process.on('exit', () => {
   try {
     await fs.mkdir(OUT_DIRECTORY, {recursive: true})
     const browser = await launchBrowser()
-    await runReports(browser)
+    await runReports(browser, studentNumbersFilter())
     process.exit(0)
   } catch (error) {
     console.error(error)
