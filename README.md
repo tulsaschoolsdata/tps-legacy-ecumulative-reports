@@ -15,8 +15,24 @@ MFLEGACY_STUDENT_DATABASE_URL=sqlserver://••••••••\ARCHIVE;datab
 
 ## Operation
 
+Generate the prisma client code.
+
 ```console
 $ npm ci && npx prisma generate
+```
+
+Run the script for specific student numbers.
+
+```console
+$ npx ts-node src/script.ts -- 1234005 1234006 1234007
+Launching Browser…
+Student Number Count: 3
+progress [----------------------------------------] 0% | ETA: 0s | 0/1
+```
+
+Run the script for all student numbers.
+
+```console
 $ npx ts-node src/script.ts
 Launching Browser…
 Student Number Count: 172012
