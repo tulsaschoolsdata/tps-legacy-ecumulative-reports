@@ -9,6 +9,7 @@ import type {
   MOBILITY,
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
+  TESTS_OTIS,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -218,6 +219,37 @@ export const admin = async (student_number: number): Promise<Admin[]> => {
   return admin
 }
 
+type Otis = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'  
+  > & Pick<TESTS_OTIS,
+  'STUDENT_NUMBER' |
+  'SCHOOL_NAME' |
+  'OTIS_AGE_YEARS' |
+  'OTIS_AGE_MNTHS' |
+  'OTIS_RAW_SCORE' |
+  'OTIS_SAI_SCORE' |
+  'OTIS_SAI_PCT' |
+  'OTIS_SAI_STANINE' |
+  'OTIS_GRD_ABILITY' |
+  'OTIS_GRD_PCT' |
+  'OTIS_GRD_STANINE' |
+  'OTIS_SCALE_SCORE' |
+  'OTIS_ADJ_SAI_SCORE' |
+  'OTIS_ADJ_SAI_PCT' |
+  'OTIS_SAI_STANINE'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const otis = async (student_number: number): Promise<Otis[]> => {
+  const otis = (await prisma.$queryRaw<Otis[]>`EXECUTE ECUM_Report_Student.ecum_queries.otis ${student_number}`)
+  return otis
+}
+
+
 export const queries = {
   studentNumbers,
   studentDataTranscript,
@@ -233,6 +265,7 @@ export const queries = {
   mobility,
   addressHistory,
   admin,
+  otis,
 }
 
 export default queries
