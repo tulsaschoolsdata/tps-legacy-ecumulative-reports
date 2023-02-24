@@ -62,6 +62,7 @@ async function runReport(browser: Browser, student_number: number) {
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
+    const occ = await queries.occ(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -86,6 +87,7 @@ async function runReport(browser: Browser, student_number: number) {
       student_data_transcript,
       admin,
       otis,
+      occ,
     }))
 
     // console.info('Generating Transcript PDF…')
