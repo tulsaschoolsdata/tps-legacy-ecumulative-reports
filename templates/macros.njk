@@ -518,9 +518,61 @@
 </table>
 {% endmacro %}
 
+{% macro personalInfoImmunizations(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>IMMUNIZATIONS:</th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1">Immun. Status: {{}}</th>
+    </tr>
+    <tr>
+      <th>Type and Date</th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1">Certified By:</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+
 {% macro personalInfoSuspensions(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
+    <tr>
+      <th>SUSPENSIONS:</th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+      <th width="1"></th>
+    </tr>
     <tr>
       <th>School</th>
       <th width="1">Notification</th>
@@ -551,6 +603,12 @@
 {% macro personalInfoSpecialEd(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
+    <tr>
+      <th>SPECIAL ED:</th>
+      <th width="1">{{Active or Inactive}}</th>
+      <th width="1"></th>
+      <th width="1"></th>
+    </tr>
     <tr>
       <th>Category</th>
       <th width="1">Program Design</th>
