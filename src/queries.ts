@@ -251,17 +251,7 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
-'STUDENT_LNAME' |
-'STUDENT_FNAME' |
-'STUDENT_MI' |
 'GOESBYNAME' |
-'STUDENT_HOUSE_NO' |
-'STUDENT_DIRECTION' |
-'STUDENT_STREET' |
-'STUDENT_APT_NO' |
-'STUDENT_LOT_NO' |
-'STUDENT_ZIP1' |
-'STUDENT_PHONE' |
 'STUDENT_STATUS' |
 'STUDENT_CURR_SCH' |
 'STUDENT_ENTRY_DATE' |
@@ -271,10 +261,15 @@ type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_RACE'
   > & Pick<SCMISC_CICSTST1,
   'CURR_TRANS_CD' |	
-  'ENTRY_REASON' |
   'CURR_TRANS_CD' |
   'HEALTH_CD' 
-  >
+  > & {
+  STUDENT_NAME: string,
+  STUDENT_ADDRESS: string,
+  STUDENT_PHONE: string,
+  STUDENT_STATUS: string,
+  MISC_REASON_CODE: string,
+  }
 
 
 export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
