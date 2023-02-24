@@ -196,7 +196,7 @@
 
 {% macro testTableHeader(testName, gradeLevel, testDate, schoolName) %}
   <div id="header">
-    {{`${testName.toUpperCase()}    Grade: ${String(Number(gradeLevel)).padStart(2, '0')}  Date: ${`${testDate.getMonth()}/${testDate.getFullYear()}`}  School: ${schoolName.toUpperCase()}`}}
+    {{ testName.toUpperCase() + "    Grade: " + String(Number(gradeLevel)).padStart(2, '0') + "  Date: " + testDate.getMonth() + "/" + testDate.getFullYear() + "  School: " + schoolName.toUpperCase() }}
   </div>
 {% endmacro %}
 
