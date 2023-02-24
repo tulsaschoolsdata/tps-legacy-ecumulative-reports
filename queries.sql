@@ -873,7 +873,6 @@ WHERE ECUM_Report_Student.ECUM.CLASS_HISTORY_CUSTOM.HIST_SEMESTER = 'S'
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  =  @student_number
 GO
--- Student Personal Data Report Queries
 
 
 -- Queries lifted from Web Intelligence Report: Student Personal Data Report
