@@ -250,25 +250,31 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
 
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
-  'STUDENT_NUMBER' |
-  'STUDENT_LNAME' |
-  'STUDENT_FNAME' |
-  'STUDENT_MI' |
-  'GOESBYNAME' |
-  'STUDENT_HOUSE_NO' |
-  'STUDENT_DIRECTION' |
-  'STUDENT_STREET' |
-  'STUDENT_APT_NO' |
-  'STUDENT_LOT_NO' |
-  'STUDENT_ZIP' |
-  'STUDENT_PHONE' |
-  'STUDENT_STATUS' |
-  'STUDENT_CURR_SCH' |
-  'STUDENT_ENTRY_DATE' |
-  'STUDENT_BIRTHDATE' | 
-  'STUDENT_GRADE' |
-  'STUDENT_SEX'
-  > & Pick<SCMISC_CICSTST1, 'CURR_TRAN_CD' | 'ENTRY_REASON'>
+'STUDENT_NUMBER' |
+'STUDENT_LNAME' |
+'STUDENT_FNAME' |
+'STUDENT_MI' |
+'GOESBYNAME' |
+'STUDENT_HOUSE_NO' |
+'STUDENT_DIRECTION' |
+'STUDENT_STREET' |
+'STUDENT_APT_NO' |
+'STUDENT_LOT_NO' |
+'STUDENT_ZIP1' |
+'STUDENT_PHONE' |
+'STUDENT_STATUS' |
+'STUDENT_CURR_SCH' |
+'STUDENT_ENTRY_DATE' |
+'STUDENT_BIRTHDATE' |
+'STUDENT_GRADE' |
+'STUDENT_SEX' |
+'STUDENT_RACE'
+  > & Pick<SCMISC_CICSTST1,
+  'CURR_TRANS_CD' |	
+  'ENTRY_REASON' |
+  'CURR_TRANS_CD' |
+  'HEALTH_CD' |	
+  >
 
 
 export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
@@ -368,11 +374,11 @@ export const queries = {
   admin,
   otis,
   studentPersonalDataReport,
-  spd_Mobility,
-  spd_Immunizations,
-  spd_SpecialEdActive,
-  spd_SpecialEdInactive,
-  spd_Suspensions,
-  spd_Demo,
+  // spd_Mobility,
+  // spd_Immunizations,
+  // spd_SpecialEdActive,
+  // spd_SpecialEdInactive,
+  // spd_Suspensions,
+  // spd_Demo,
 }
 export default queries

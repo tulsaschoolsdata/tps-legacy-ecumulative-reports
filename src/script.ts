@@ -64,7 +64,7 @@ async function runReport(browser: Browser, student_number: number) {
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
-    // const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
+    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
     // const spd_mobility = await queries.spd_Mobility(student_number)
     // const spd_immunizations = await queries.spd_Immunizations(student_number)
     // const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
@@ -101,8 +101,7 @@ async function runReport(browser: Browser, student_number: number) {
     // console.info('Rendering Personal Info HTML…')
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
-      student_data_transcript,
-      // student_personal_data_report,
+      student_personal_data_report,
       // spd_mobility,
       // spd_immunizations,
       // spd_special_ed_active,
