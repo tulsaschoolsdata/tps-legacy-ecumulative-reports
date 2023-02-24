@@ -90,6 +90,12 @@ async function runReport(browser: Browser, student_number: number) {
       otis
     }))
 
+    // console.info('Rendering Studet Personal Data Report')
+    fs.writeFile(spd_html_path, render('student.njk', {
+      date: REPORT_DATE,
+      student_personal_data_report,
+    }))
+
     // console.info('Generating Transcript PDF…')
     await report.pdf(browser, transcript_html_path, {
       path: transcript_pdf_path,
