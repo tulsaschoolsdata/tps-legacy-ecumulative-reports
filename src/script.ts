@@ -45,8 +45,8 @@ async function runReport(browser: Browser, student_number: number) {
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
   const testscores_html_path = outFilePath(`${student_number}-testscores.html`)
   const testscores_pdf_path = outFilePath(`${student_number}-testscores.pdf`)
-  const studentpersonal_html_path = outFilePath(`${student_number}-studentpersonal.html`)
-  const studentpersonal_pdf_path = outFilePath(`${student_number}-studentpersonal.pdf`)
+  const spd_html_path = outFilePath(`${student_number}-studentpersonal.html`)
+  const spd_pdf_path = outFilePath(`${student_number}-studentpersonal.pdf`)
   const merged_pdf_path = outFilePath(`${student_number}.pdf`)
 
   try {
@@ -64,6 +64,13 @@ async function runReport(browser: Browser, student_number: number) {
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
+    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
+    const spd_mobility = await queries.spd_Mobility(student_number)
+    const spd_immunizations = await queries.spd_Immunizations(student_number)
+    const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
+    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
+    const spd_suspensions = await queries.spd_Suspensions(student_number)
+    const spd_demo = await queries.spd_Demo(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -94,6 +101,12 @@ async function runReport(browser: Browser, student_number: number) {
     fs.writeFile(spd_html_path, render('student.njk', {
       date: REPORT_DATE,
       student_personal_data_report,
+      spd_mobility,
+      spd_immunizations,
+      spd_special_ed_active,
+      spd_special_ed_inactive,
+      spd_suspensions,
+      spd_demo,
     }))
 
     // console.info('Generating Transcript PDF…')
