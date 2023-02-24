@@ -223,22 +223,23 @@ type Otis = Pick<TESTS_ADMINISTERED,
   'GRADE' |
   'SORT_DATE' |
   'SORT_GRADE'  
+  > & Pick<TESTS_OTIS,
+  'STUDENT_NUMBER' |
+  'SCHOOL_NAME' |
+  'OTIS_AGE_YEARS' |
+  'OTIS_AGE_MNTHS' |
+  'OTIS_RAW_SCORE' |
+  'OTIS_SAI_SCORE' |
+  'OTIS_SAI_PCT' |
+  'OTIS_SAI_STANINE' |
+  'OTIS_GRD_ABILITY' |
+  'OTIS_GRD_PCT' |
+  'OTIS_GRD_STANINE' |
+  'OTIS_SCALE_SCORE' |
+  'OTIS_ADJ_SAI_SCORE' |
+  'OTIS_ADJ_SAI_PCT' |
+  'OTIS_SAI_STANINE'
   > & {
-  SCHOOL_NAME: string
-  OTIS_AGE_YEARS: number
-  OTIS_AGE_MONTHS: number
-  OTIS_RAW_SCORE: number
-  OTIS_SAI_SCORE: number
-  OTIS_SAI_PCT: number
-  OTIS_SAI_STANINE: number
-  OTIS_GRD_ABILITY: number
-  OTIS_GRD_PCT: number
-  OTIS_GRD_STANINE: number
-  OTIS_SCALE_SCORE: number
-  OTIS_ADJ_SAI_SCORE: number
-  OTIS_ADJ_SAI_PCT: number
-  OTIS_SAI_STAININE: number
-  } & {
   TEST_NAME: string // TESTS_TEST
 }
 
@@ -247,7 +248,7 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
   return otis
 }
 
-/* -------------- Student Personal Data Report Queries -------------------- 
+//-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
   'STUDENT_NUMBER' |
   'STUDENT_LNAME' |
@@ -348,7 +349,7 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
   return spd_demo
 }
 
-*/
+
 
 export const queries = {
   studentNumbers,
@@ -365,8 +366,7 @@ export const queries = {
   mobility,
   addressHistory,
   admin,
-  otis
-  /*,
+  otis,
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
@@ -374,6 +374,5 @@ export const queries = {
   spd_SpecialEdInactive,
   spd_Suspensions,
   spd_Demo,
-  */
 }
 export default queries
