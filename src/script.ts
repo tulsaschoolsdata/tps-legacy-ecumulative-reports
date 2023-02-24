@@ -45,8 +45,8 @@ async function runReport(browser: Browser, student_number: number) {
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
   const testscores_html_path = outFilePath(`${student_number}-testscores.html`)
   const testscores_pdf_path = outFilePath(`${student_number}-testscores.pdf`)
-  const spd_html_path = outFilePath(`${student_number}-studentpersonal.html`)
-  const spd_pdf_path = outFilePath(`${student_number}-studentpersonal.pdf`)
+  const personalinfo_html_path = outFilePath(`${student_number}-personalinfo.html`)
+  const personalinfo_pdf_path = outFilePath(`${student_number}-personalinfo.pdf`)
   const merged_pdf_path = outFilePath(`${student_number}.pdf`)
 
   try {
@@ -64,13 +64,13 @@ async function runReport(browser: Browser, student_number: number) {
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
-    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
-    const spd_mobility = await queries.spd_Mobility(student_number)
-    const spd_immunizations = await queries.spd_Immunizations(student_number)
-    const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
-    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
-    const spd_suspensions = await queries.spd_Suspensions(student_number)
-    const spd_demo = await queries.spd_Demo(student_number)
+    // const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
+    // const spd_mobility = await queries.spd_Mobility(student_number)
+    // const spd_immunizations = await queries.spd_Immunizations(student_number)
+    // const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
+    // const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
+    // const spd_suspensions = await queries.spd_Suspensions(student_number)
+    // const spd_demo = await queries.spd_Demo(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -88,7 +88,7 @@ async function runReport(browser: Browser, student_number: number) {
       mobility,
       address_history,
     }))
-    
+
     // console.info('Rendering Test Scores HTML…')
     fs.writeFile(testscores_html_path, render('testscores.njk', {
       date: REPORT_DATE,
@@ -97,16 +97,18 @@ async function runReport(browser: Browser, student_number: number) {
       otis
     }))
 
-    // console.info('Rendering Studet Personal Data Report HTML…')
-    fs.writeFile(spd_html_path, render('student.njk', {
+
+    // console.info('Rendering Personal Info HTML…')
+    fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
-      student_personal_data_report,
-      spd_mobility,
-      spd_immunizations,
-      spd_special_ed_active,
-      spd_special_ed_inactive,
-      spd_suspensions,
-      spd_demo,
+      student_data_transcript,
+      // student_personal_data_report,
+      // spd_mobility,
+      // spd_immunizations,
+      // spd_special_ed_active,
+      // spd_special_ed_inactive,
+      // spd_suspensions,
+      // spd_demo,
     }))
 
     // console.info('Generating Transcript PDF…')
@@ -137,16 +139,15 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Student Personal Data Report PDF…)
-    await report.pdf(browser, spd_pdf_path, {
-      path: spd_pdf_path,
+    // console.info('Generating Personal Info PDF…')
+    await report.pdf(browser, personalinfo_html_path, {
+      path: personalinfo_pdf_path,
       format: 'letter',
-      landscape: true,
       printBackground: true,
       margin: {
         bottom: '0.25in',
-        left: '1in',
-        right: '1in',
+        left: '0.25in',
+        right: '0.25in',
         top: '0.25in',
       }
     })
@@ -155,6 +156,7 @@ async function runReport(browser: Browser, student_number: number) {
     const merger = new PDFMerger()
     await merger.add(transcript_pdf_path)
     await merger.add(testscores_pdf_path)
+    await merger.add(personalinfo_pdf_path)
     await merger.save(merged_pdf_path)
   } catch (error) {
     await Promise.allSettled([
