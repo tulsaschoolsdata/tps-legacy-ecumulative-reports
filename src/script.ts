@@ -97,7 +97,7 @@ async function runReport(browser: Browser, student_number: number) {
       otis
     }))
 
-    // console.info('Rendering Studet Personal Data Report')
+    // console.info('Rendering Studet Personal Data Report HTML…')
     fs.writeFile(spd_html_path, render('student.njk', {
       date: REPORT_DATE,
       student_personal_data_report,
@@ -126,6 +126,20 @@ async function runReport(browser: Browser, student_number: number) {
     // console.info('Generating Test Scores PDF…')
     await report.pdf(browser, testscores_html_path, {
       path: testscores_pdf_path,
+      format: 'letter',
+      landscape: true,
+      printBackground: true,
+      margin: {
+        bottom: '0.25in',
+        left: '1in',
+        right: '1in',
+        top: '0.25in',
+      }
+    })
+
+    // console.info('Generating Student Personal Data Report PDF…)
+    await report.pdf(browser, spd_pdf_path, {
+      path: spd_pdf_path,
       format: 'letter',
       landscape: true,
       printBackground: true,
