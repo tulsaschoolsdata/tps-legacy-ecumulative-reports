@@ -11,6 +11,7 @@ import type {
   TESTS_ADMINISTERED,
   TESTS_OTIS,
   TESTS_OCC_CUSTOM,
+  TESTS_ITBS_CUSTOM,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -248,6 +249,49 @@ type Otis = Pick<TESTS_ADMINISTERED,
 export const otis = async (student_number: number): Promise<Otis[]> => {
   const otis = (await prisma.$queryRaw<Otis[]>`EXECUTE ECUM_Report_Student.ecum_queries.otis ${student_number}`)
   return otis
+}
+
+type Itbs = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_ITBS_CUSTOM,
+  'STUDENT_NUMBER' |
+  'SEQ_NUM' |
+  'TYPE' |
+  'DATE' |
+  'GRADE' |
+  'MEASURE_RANK' |
+  'SCHOOL_NAME' |
+  'LISTENING' |
+  'WORD_ANALYSIS' |
+  'VOCABULARY' |
+  'READING' |
+  'SPELLING' |
+  'CAPITALIZATION' |
+  'PUNCTUATION' |
+  'USAGE_AND_EXPRESSION' |
+  'LANGUAGE_TOTAL' |
+  'VISUAL_MATERIALS' |
+  'REFERENCE_MATERIALS' |
+  'WORK_STUDY_TOTAL' |
+  'MATH_CONCEPTS' |
+  'MATH_PROBLEM_SOLVING' |
+  'MATH_COMPUTATION' |
+  'MATH_TOTAL' |
+  'COMPLETE_COMPOSITE' |
+  'TOTAL_COMPOSITE' |
+  'SOCIAL_STUDIES' |
+  'SCIENCE' |
+  'RIV_READ_SS_NPR_NCE'
+  > &  {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const itbs = async (student_number: number): Promise<Itbs[]> => {
+  const itbs = (await prisma.$queryRaw<Itbs[]>`EXECUTE ECUM_Report_Student.ecum_queries.itbs ${student_number}`)
+  return itbs
 }
 
 type Occ = Pick<TESTS_ADMINISTERED,
