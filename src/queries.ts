@@ -9,6 +9,7 @@ import type {
   MOBILITY,
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
+  TESTS_OTIS
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -214,14 +215,145 @@ type Admin = Pick<TESTS_ADMINISTERED,
 
 export const admin = async (student_number: number): Promise<Admin[]> => {
   const admin = (await prisma.$queryRaw<Admin[]>`EXECUTE ECUM_Report_Student.ecum_queries.admin ${student_number}`)
-  admin.sort((a, b) => a.SORT_DATE == b.SORT_DATE ? 0 : a.SORT_DATE > b.SORT_DATE ? 1 : -1)
   return admin
 }
+
+type Otis = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'  
+  > & {
+  SCHOOL_NAME: string
+  OTIS_AGE_YEARS: number
+  OTIS_AGE_MONTHS: number
+  OTIS_RAW_SCORE: number
+  OTIS_SAI_SCORE: number
+  OTIS_SAI_PCT: number
+  OTIS_SAI_STANINE: number
+  OTIS_GRD_ABILITY: number
+  OTIS_GRD_PCT: number
+  OTIS_GRD_STANINE: number
+  OTIS_SCALE_SCORE: number
+  OTIS_ADJ_SAI_SCORE: number
+  OTIS_ADJ_SAI_PCT: number
+  OTIS_SAI_STAININE: number
+  } & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const otis = async (student_number: number): Promise<Otis[]> => {
+  const otis = (await prisma.$queryRaw<Otis[]>`EXECUTE ECUM_Report_Student.ecum_queries.otis ${student_number}`)
+  return otis
+}
+
+/* -------------- Student Personal Data Report Queries -------------------- 
+type StudentPersonalDataReport = Pick<STUDENT,
+  'STUDENT_NUMBER' |
+  'STUDENT_LNAME' |
+  'STUDENT_FNAME' |
+  'STUDENT_MI' |
+  'GOESBYNAME' |
+  'STUDENT_HOUSE_NO' |
+  'STUDENT_DIRECTION' |
+  'STUDENT_STREET' |
+  'STUDENT_APT_NO' |
+  'STUDENT_LOT_NO' |
+  'STUDENT_ZIP' |
+  'STUDENT_PHONE' |
+  'STUDENT_STATUS' |
+  'STUDENT_CURR_SCH' |
+  'STUDENT_ENTRY_DATE' |
+  'STUDENT_BIRTHDATE' | 
+  'STUDENT_GRADE' |
+  'STUDENT_SEX'
+  > & Pick<SCMISC_CICSTST1, 'CURR_TRAN_CD' | 'ENTRY_REASON'>
+
+
+export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
+  const student_personal_data_report = (await prisma.$queryRaw<StudentPersonalDataReport[]>`Execute ECUM_Report_Student.ecum_queries.studentpersonaldatareport ${student_number}`)
+  return student_personal_data_report
+}
+
+type Spd_Mobility = Pick<MOBILITY,
+  'STUDENT_NUMBER' | 
+  'SCHOOL_CODE' |
+  'ENTRY_DATE' |
+  'TRANSFER_CODE' |
+  'ENTRY_REASON_CODE' |
+  'EXIT_DATE' |
+  'EXIT_REASON_CODE'
+  > & Pick<BUILDING_MASTER, 'BLDG_NAME'>
+
+export const spd_Mobility = async (student_number: number): Promise<Spd_Mobility[]> => {
+  const spd_mobility = (await prisma.$queryRaw<Spd_Mobility[]>`Execute ECUM_Report_student.ecum_queries.spd_mobility ${student_number}`)
+  return spd_mobility
+}
+
+type Spd_Immunizations = {
+  IMMUNIZATION_TYPE: string // HEALTH
+  FIRST_DATE: Date      // HEALTH
+  SECOND_DATE: Date     // HEALTH
+  THIRD_DATE: Date      // HEALTH
+  FOURTH_DATE: Date     // HEALTH
+  FIFTH_DATE: Date      // HEALTH
+  SIXTH_DATE: Date      // HEALTH
+  CERTIFIED_BY: string  // HEALTH
+ } & Pick<STUDENT, 'IMMUN_STATUS'>
+
+export const spd_Immunizations = (student_number: number): Promise<Spd_Immunizations[]> => prisma.$queryRaw<Spd_Immunizations[]>`Execute MFLegacy_Student.TSTU_Yr0809.ecum_queries ${student_number}`
+
+type Spd_SpecialEdActive = {
+  SPEC_PREFIX: string
+  SPEC_NUMBER: number
+  SPEC_PROG_DESIGN: string
+  SPEC_ENTRY_DATE: Date
+}
+
+export const spd_SpecialEdActive = (student_number: number): Promise<Spd_SpecialEdActive[]> => prisma.$queryRaw<Spd_SpecialEdActive[]>`Execute ECUM_Report_Student.ECUM.ecum_queries ${student_number}`
+
+type Spd_SpecialEdInactive = {
+  SPEC_PREFIX: string
+  SPEC_NUMBER: number
+  SPEC_PROG_DESIGN: string
+  SPEC_ENTRY_DATE: Date
+}
+
+export const spd_SpecialEdInactive = (student_number: number): Promise<Spd_SpecialEdInactive[]> => prisma.$queryRaw<Spd_SpecialEdInactive[]>`Execute ECUM_Report_Student.ECUM.ecum_queries ${student_number}`
+
+type Spd_Suspensions = {
+  SCHOOL: string              // SUSPEND
+  NOTIFICATION: string        // SUSPEND
+  START_DATE: Date            // SUSPEND
+  END_DATE: Date              // SUSPEND
+  NUMBER_DAYS: number         // SUSPEND
+  COMMENT_LINE_1: string      // SUSPEND
+  LOCATION: string            // SUSPEND
+  REASON_DESCRIPTION: string  // SUSPEND_REASON_CODES
+}
+
+export const spd_Suspensions = (student_number: number): Promise<Spd_Suspensions[]> => prisma.$queryRaw<Spd_Suspensions[]>`Execute MFLegacy_Student.TSTU_Yr0809.ecum_queries ${student_number}`
+
+type Spd_Demo = Pick<STUDENT_DEMO,
+  'PARENT_LNAME' |
+  'PARENT_FNAME' |
+  'PARENT_MI' |
+  'SPARENT_LNAME' |
+  'SPARENT_FNAME' |
+  'SPARENT_MNAME'
+  >
+
+export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
+  const spd_demo = (await prisma.$queryRaw<Spd_Demo[]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)
+  return spd_demo
+}
+
+*/
 
 export const queries = {
   studentNumbers,
   studentDataTranscript,
-  studentDataTests,
+  studentDataTests, 
   ecum,
   demo,
   misc,
@@ -233,6 +365,15 @@ export const queries = {
   mobility,
   addressHistory,
   admin,
+  otis
+  /*,
+  studentPersonalDataReport,
+  spd_Mobility,
+  spd_Immunizations,
+  spd_SpecialEdActive,
+  spd_SpecialEdInactive,
+  spd_Suspensions,
+  spd_Demo,
+  */
 }
-
 export default queries

@@ -45,6 +45,8 @@ async function runReport(browser: Browser, student_number: number) {
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
   const testscores_html_path = outFilePath(`${student_number}-testscores.html`)
   const testscores_pdf_path = outFilePath(`${student_number}-testscores.pdf`)
+  const studentpersonal_html_path = outFilePath(`${student_number}-studentpersonal.html`)
+  const studentpersonal_pdf_path = outFilePath(`${student_number}-studentpersonal.pdf`)
   const merged_pdf_path = outFilePath(`${student_number}.pdf`)
 
   try {
@@ -61,6 +63,7 @@ async function runReport(browser: Browser, student_number: number) {
     const mobility = await queries.mobility(student_number)
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
+    const otis = await queries.otis(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -78,12 +81,13 @@ async function runReport(browser: Browser, student_number: number) {
       mobility,
       address_history,
     }))
-
+    
     // console.info('Rendering Test Scores HTML…')
     fs.writeFile(testscores_html_path, render('testscores.njk', {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
+      otis
     }))
 
     // console.info('Generating Transcript PDF…')
@@ -132,7 +136,7 @@ async function runReport(browser: Browser, student_number: number) {
       testscores_pdf_path,
     ].map(fs.unlink))
   }
-}
+} // end of async runReport student transcript
 
 async function runReports(browser: Browser, student_number_filter?: StudentNumberFilter) {
   const student_numbers = (await queries.studentNumbers())
@@ -191,3 +195,6 @@ process.on('exit', () => {
     process.exit(1)
   }
 })()
+
+/* ***********  Student Personal Data Report ********** */
+

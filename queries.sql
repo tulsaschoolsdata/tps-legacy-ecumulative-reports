@@ -875,6 +875,17 @@ WHERE
 GO
 -- Student Personal Data Report Queries
 
+
+-- Queries lifted from Web Intelligence Report: Student Personal Data Report
+--
+-- Public Folders / TPS Archive Reports / Accountability
+--
+-- Title:       Student Personal Data Report
+-- ID, CUID:
+-- File Name:
+-- Description:
+--
+
 -- Student Personal Data (spd)
 CREATE PROCEDURE ecum_queries.student_personal_data_report @student_number INT AS
 SELECT
@@ -882,9 +893,9 @@ SELECT
   rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LNAME)+', '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_FNAME)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_MI),
   ECUM_Report_Student.ECUM.STUDENT.GOESBYNAME,
   rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_HOUSE_NO as varchar))+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_DIRECTION)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_STREET)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_APT_NO)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LOT_NO)+' '+rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_ZIP1 as varchar)),
-  CASE WHEN substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,1) = '0' THEN 'Unknown' 
+  CASE WHEN substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,1) = '0' THEN 'Unknown'
 	WHEN  substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3) = '918' THEN '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),7,4)
-ELSE '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,4)  
+ELSE '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,4)
  END,
   CASE when ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'A' then 'Active'  when ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'I' then 'Inactive' else 'Unknown' END,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_CURR_SCH,
@@ -899,7 +910,7 @@ ELSE '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as v
   ECUM_Report_Student.ECUM.SCMISC_CICSTST1.HEALTH_CD
 FROM
   ECUM_Report_Student.ECUM.SCMISC_CICSTST1 RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER=ECUM_Report_Student.ECUM.SCMISC_CICSTST1.STUDENT_NUMBER)
-  
+
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
 GO
@@ -917,7 +928,7 @@ SELECT
 FROM
   ECUM_Report_Student.ECUM.BUILDING_MASTER RIGHT OUTER JOIN ECUM_Report_Student.ECUM.MOBILITY ON (ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY=ECUM_Report_Student.ECUM.MOBILITY.SCHOOL_CODE)
    RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER=ECUM_Report_Student.ECUM.MOBILITY.STUDENT_NUMBER)
-  
+
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
 GO
@@ -936,7 +947,7 @@ SELECT
   ECUM_Report_Student.ECUM.STUDENT.IMMUN_STATUS
 FROM
   MFLegacy_Student.TSTU_Yr0809.HEALTH RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (MFLegacy_Student.TSTU_Yr0809.HEALTH.STUDID=ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER)
-  
+
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
 GO
@@ -949,7 +960,7 @@ SELECT
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_ENTRY_DATE
 FROM
   ECUM_Report_Student.ECUM.SPED_CICSTST1 RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER=ECUM_Report_Student.ECUM.SPED_CICSTST1.STUDENT_NUMBER)
-  
+
 WHERE
   (
    ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
@@ -967,7 +978,7 @@ SELECT
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_EXIT_DATE
 FROM
   ECUM_Report_Student.ECUM.SPED_CICSTST1 RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER=ECUM_Report_Student.ECUM.SPED_CICSTST1.STUDENT_NUMBER)
-  
+
 WHERE
   (
    ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
@@ -1001,19 +1012,19 @@ SELECT
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '08' then 'Off Campus'
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '09' then 'Gym'
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '10' then 'Auditorium'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '11' then 'Other'			 
+	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '11' then 'Other'
 ELSE null
 END
 FROM
   ECUM_Report_Student.ECUM.STUDENT LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.STUDID=ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER)
    LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.REASON=MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES.REASON)
-   LEFT OUTER JOIN ( 
-  select DISTINCT ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY as 'BLDG_KEY', ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_NAME as 'Suspended School' 
+   LEFT OUTER JOIN (
+  select DISTINCT ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY as 'BLDG_KEY', ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_NAME as 'Suspended School'
 from ECUM_Report_Student.ECUM.BUILDING_MASTER
-inner join MFLegacy_Student.TSTU_Yr0809.SUSPEND 
+inner join MFLegacy_Student.TSTU_Yr0809.SUSPEND
 on ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY=MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL
   )  Table__12 ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL=Table__12.BLDG_KEY)
-  
+
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
 GO
@@ -1029,7 +1040,7 @@ SELECT
   ECUM_Report_Student.ECUM.STUDENT_DEMO.SPARENT_MNAME
 FROM
   ECUM_Report_Student.ECUM.STUDENT_DEMO RIGHT OUTER JOIN ECUM_Report_Student.ECUM.STUDENT ON (ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER=ECUM_Report_Student.ECUM.STUDENT_DEMO.STUDENT_NUMBER)
-  
+
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
 GO
