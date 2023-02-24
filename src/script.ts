@@ -72,6 +72,7 @@ async function runReport(browser: Browser, student_number: number) {
     const mobility = await queries.mobility(student_number)
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
+    const otis = await queries.otis(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -95,6 +96,7 @@ async function runReport(browser: Browser, student_number: number) {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
+      otis,
     }))
 
     // console.info('Rendering Personal Info HTML…')
