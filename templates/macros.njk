@@ -198,7 +198,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>Raw Score</th>
+      <th width="1">Raw Score</th>
       <th width="1">Ability Index by Age</th>
       <th width="1">Percentile Rank by Age</th>
       <th width="1">Stanine by Age</th>
@@ -212,9 +212,9 @@
     {% for row in rows %}
     <tr class="{{ className.next() }}">
       <td>{{ row.OTIS_RAW_SCORE }}</td>
-      <td>{{ row.OTIS_AGE_YEARS }}</td>
+      <td>{{ row.OTIS_SAI_SCORE }}</td>
       <td>{{ row.OTIS_SAI_PCT }}</td>
-      <td>{{ row.OTIS_GRD_STANINE }}</td>
+      <td>{{ row.OTIS_SAI_STANINE }}</td>
       <td>{{ row.OTIS_GRD_ABILITY }}</td>
       <td>{{ row.OTIS_GRD_PCT }}</td>
       <td>{{ row.OTIS_GRD_STANINE }}</td>
