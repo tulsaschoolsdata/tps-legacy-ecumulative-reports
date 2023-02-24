@@ -517,3 +517,35 @@
   </tbody>
 </table>
 {% endmacro %}
+
+
+
+{% macro personalInfoSuspensions(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>School</th>
+      <th width="1">Notification</th>
+      <th width="1">Begin Date</th>
+      <th width="1">Ending Date</th>
+      <th width="1">Days</th>
+      <th width="1">Incident Description</th>
+      <th width="1">Incident Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
