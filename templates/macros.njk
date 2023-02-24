@@ -406,8 +406,37 @@
   </thead>
   <tbody>
       {{ testTableExploreRow("Standard Score", rowStandard, "odd") }}
-      {{ testTableExploreRow("Local Percentile", rowLocalPercentile, "odd") }}
+      {{ testTableExploreRow("Local Percentile", rowLocalPercentile, "even") }}
       {{ testTableExploreRow("National Percentile", rowNationalPercentile, "odd") }}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro testTableEndOfInstructionRow(rowName, row, className) %}
+    <tr class="{{ className }}">
+      <td>{{ rowName }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro testTableEndOfInstruction(rowOpiScore, rowPerformanceLevel, rowPassFail) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>English II</th>
+      <th>U.S. History</th>
+      <th>Algebra I</th>
+      <th>Biology I</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{ testTableEndOfInstructionRow("OPI Score", rowOpiScore, "odd") }}
+      {{ testTableEndOfInstructionRow("Performance Level", rowPerformanceLevel, "even") }}
+      {{ testTableEndOfInstructionRow("Pass/Fail", rowPassFail, "odd") }}
   </tbody>
 </table>
 {% endmacro %}
