@@ -287,8 +287,6 @@
 </table>
 {% endmacro %}
 
-
-
 {% macro testTableOklaCore(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
@@ -377,7 +375,6 @@
 </table>
 {% endmacro %}
 
-
 {% macro testTableExploreRow(rowName, row, className) %}
     <tr class="{{ className }}">
       <td>{{ rowName }}</td>
@@ -441,7 +438,6 @@
 </table>
 {% endmacro %}
 
-
 {% macro testTablePlanRow(rowName, row, className) %}
     <tr class="{{ className }}">
       <td>{{ rowName }}</td>
@@ -477,6 +473,47 @@
       {{ testTablePlanRow("Standard Score", rowStandard, "odd") }}
       {{ testTablePlanRow("Local Percentile", rowLocalPercentile, "even") }}
       {{ testTablePlanRow("National Percentile", rowNationalPercentile, "odd") }}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro testTableActRow(rowName, row, className) %}
+    <tr class="{{ className }}">
+      <td>{{ rowName }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+      <td>{{ row. }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro testTableAct(row) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>English</th>
+      <th>Eng Subscore:<br />Usage/Mechanical</th>
+      <th>Eng Subscore:<br />Rhetorical Skills</th>
+      <th>Math</th>
+      <th>Math Subscore:<br />Elem. Algebra</th>
+      <th>Math Subscore:<br />Algebra/Geom.</th>
+      <th>Math Subscore:<br />Geometry/Trig.</th>
+      <th>Reading</th>
+      <th>Reading Subscore:<br />Social Science</th>
+      <th>Read Subscore:<br />Arts/Literature</th>
+      <th>Science</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{ testTableActRow("Score", row, "odd") }}
   </tbody>
 </table>
 {% endmacro %}
