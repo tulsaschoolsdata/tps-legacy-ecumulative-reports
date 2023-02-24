@@ -65,12 +65,12 @@ async function runReport(browser: Browser, student_number: number) {
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
     const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
-    // const spd_mobility = await queries.spd_Mobility(student_number)
-    // const spd_immunizations = await queries.spd_Immunizations(student_number)
-    // const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
-    // const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
-    // const spd_suspensions = await queries.spd_Suspensions(student_number)
-    // const spd_demo = await queries.spd_Demo(student_number)
+    const spd_mobility = await queries.spd_Mobility(student_number)
+    const spd_immunizations = await queries.spd_Immunizations(student_number)
+    const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
+    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
+    const spd_suspensions = await queries.spd_Suspensions(student_number)
+    const spd_demo = await queries.spd_Demo(student_number)
 
     // console.info('Rendering Transcript HTML…')
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -102,12 +102,12 @@ async function runReport(browser: Browser, student_number: number) {
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_personal_data_report,
-      // spd_mobility,
-      // spd_immunizations,
-      // spd_special_ed_active,
-      // spd_special_ed_inactive,
-      // spd_suspensions,
-      // spd_demo,
+      spd_mobility,
+      spd_immunizations,
+      spd_special_ed_active,
+      spd_special_ed_inactive,
+      spd_suspensions,
+      spd_demo,
     }))
 
     // console.info('Generating Transcript PDF…')
@@ -229,6 +229,3 @@ process.on('exit', () => {
     process.exit(1)
   }
 })()
-
-/* ***********  Student Personal Data Report ********** */
-
