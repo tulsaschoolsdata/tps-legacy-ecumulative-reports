@@ -217,13 +217,13 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ ROW.OTIS_RAW_SCORE }}</td>
+      <td>{{ ROW.OTIS_SAI_SCORE }}</td>
+      <td>{{ ROW.OTIS_SAI_PCT }}</td>
+      <td>{{ ROW.OTIS_ADJ_SAI_STANINE }}</td>
+      <td>{{ ROW.OTIS_GRD_ABILITY }}</td>
+      <td>{{ ROW.OTIS_GRD_PCT }}</td>
+      <td>{{ ROW.OTIS_GRD_STANINE }}</td>
     </tr>
     {% endfor %}
   </tbody>
