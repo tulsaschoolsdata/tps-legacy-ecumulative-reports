@@ -291,7 +291,7 @@ export const itbs = async (student_number: number): Promise<Itbs[]> => {
   const itbs = (await prisma.$queryRaw<Itbs[]>`EXECUTE ECUM_Report_Student.ecum_queries.itbs ${student_number}`)
   return itbs
 }
-
+// checkout discrepancies or typos on READING ADV_SK
 type NewItbs = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
@@ -301,7 +301,7 @@ type NewItbs = Pick<TESTS_ADMINISTERED,
   'SCHOOL_NAME' |
   'MEASURE_RANK' |
   'VOCABULARY' |
-  'READING ADV_SK' |
+  'READING_ADV_SK' |
   'READING_TOTAL' |
   'LISTENING' |
   'SPELLING' |
