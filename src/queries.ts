@@ -560,7 +560,7 @@ export const sat = async (student_number: number): Promise<Sat[]> => {
   return sat
 }
 
-type sat9 = Pick<TESTS_ADMINISTERED,
+type Sat9 = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
   'SORT_DATE' |
@@ -593,6 +593,11 @@ type sat9 = Pick<TESTS_ADMINISTERED,
   'THINKING_SKILLS_BB'
   > & {
   TEST_NAME: string // TESTS_TEST
+}
+
+export const sat9 = async (student_number: number): Promise<Sat9[]> => {
+  const sat9 = (await prisma.$queryRaw<Sat9[]>`EXECUTE ECUM_Report_Student.ecum_queries.sat9 ${student_number}`)
+  return sat9
 }
 
 type Explore = Pick<TESTS_ADMINISTERED,
