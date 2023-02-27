@@ -10,6 +10,7 @@ import type {
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
   TESTS_OTIS,
+  TESTS_PBP,
   TESTS_ITBS_CUSTOM,
   TESTS_NEWITBS_CUSTOM,
   TESTS_OCC_CUSTOM,
@@ -252,6 +253,76 @@ type Otis = Pick<TESTS_ADMINISTERED,
 export const otis = async (student_number: number): Promise<Otis[]> => {
   const otis = (await prisma.$queryRaw<Otis[]>`EXECUTE ECUM_Report_Student.ecum_queries.otis ${student_number}`)
   return otis
+}
+
+type Pbp = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_PBP,
+  'SCHOOL_NAME' |
+  'PBP_RS1' |
+  'PBP_PCT1' |
+  'PBP_RS2' |
+  'PBP_PCT2' |
+  'PBP_RS3' |
+  'PBP_PCT3' |
+  'PBP_RS4' |
+  'PBP_PCT4' |
+  'PBP_RS5' |
+  'PBP_PCT5' |
+  'PBP_RS6' |
+  'PBP_PCT6' |
+  'PBP_RS7' |
+  'PBP_PCT7' |
+  'PBP_RS8' |
+  'PBP_PCT8' |
+  'PBP_RS9' |
+  'PBP_PCT9' |
+  'PBP_RS10' |
+  'PBP_PCT10' |
+  'PBP_RS11' |
+  'PBP_PCT11' |
+  'PBP_RS12' |
+  'PBP_PCT12' |
+  'PBP_RS13' |
+  'PBP_PCT13' |
+  'PBP_RS14' |
+  'PBP_PCT14' |
+  'PBP_RS15' |
+  'PBP_PCT15' |
+  'PBP_RS16' |
+  'PBP_PCT16' |
+  'PBP_RS17' |
+  'PBP_PCT17' |
+  'PBP_RS18' |
+  'PBP_PCT18' |
+  'PBP_RS19' |
+  'PBP_PCT19' |
+  'PBP_RS20' |
+  'PBP_PCT20' |
+  'PBP_RS21' |
+  'PBP_PCT21' |
+  'PBP_RS22' |
+  'PBP_PCT22' |
+  'PBP_RS23' |
+  'PBP_PCT23' |
+  'PBP_RS24' |
+  'PBP_PCT24' |
+  'PBP_RS25' |
+  'PBP_PCT25' |
+  'PBP_RS26' |
+  'PBP_PCT26' |
+  'PBP_RS27' |
+  'PBP_PCT27'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const pbp = async (student_number: number): Promise<Pbp[]> => {
+  const pbp = (await prisma.$queryRaw<Pbp[]>`EXECUTE ECUM_Report_Student.ecum_queries.pbp ${student_number}`)
+  return pbp
 }
 
 type Itbs = Pick<TESTS_ADMINISTERED,
@@ -606,6 +677,7 @@ export const queries = {
   addressHistory,
   admin,
   otis,
+  pbp,
   itbs,
   newitbs,
   occ,
