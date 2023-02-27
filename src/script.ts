@@ -38,6 +38,15 @@ const classHistReducer = (prev: any, curr: any): any => {
   return prev
 }
 
+const testTableHeader = (testName: string, gradeLevel: number, testDateStr: string, schoolName: string): string => {
+  const date = new Date(testDateStr)
+  const formattedDate = date.getMonth() + "/" + date.getFullYear()
+  const name = testName.toUpperCase()
+  const grade = String(gradeLevel).padStart(2, '0')
+  const school = schoolName.toUpperCase()
+  return `${name}    Grade: ${grade}  Date: ${formattedDate}  School: ${school}`
+}
+
 async function runReport(browser: Browser, student_number: number) {
   // console.info(`Student Number: ${student_number}`)
 
