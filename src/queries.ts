@@ -12,6 +12,7 @@ import type {
   TESTS_OTIS,
   TESTS_READING_CUSTOM,
   TESTS_EXPLTEST,
+  TESTS_EOI,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -409,11 +410,41 @@ type Explore = Pick<TESTS_ADMINISTERED,
   'COMPOSITE_LOC_PERC' |
   'LOC_PERC_UM' |
   'LOC_PERC_RH'
->
+> & {
+  TEST_NAME: string // TESTS_TEST
+}
 
 export const explore = async (student_number: number): Promise<Explore[]> => {
   const explore = (await prisma.$queryRaw<Explore[]>`EXECUTE ECUM_Report_Student.ecum_queries.explore ${student_number}`)
   return explore
+}
+
+type Eoi = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_EOI,
+  'SCHOOL_NAME' |
+  'ENGL_SCORE' |
+  'ENGL_PERF_LVL' |
+  'ENGL_PASS_FAIL' |
+  'HIST_SCORE' |
+  'HIST_PERF_LVL' |
+  'HIST_PASS_FAIL' |
+  'ALGE_SCORE' |
+  'ALGE_PERF_LVL' |
+  'ALGE_PASS_FAIL' |
+  'BIOL_SCORE' |
+  'BIOL_PERF_LVL' |
+  'BIOL_PASS_FAIL'
+> & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const eoi = async (student_number: number): Promise<Eoi[]> => {
+  const eoi = (await prisma.$queryRaw<Eoi[]>`EXECUTE ECUM_Report_Student.ecum_queries.eoi ${student_number}`)
+  return eoi
 }
 
 
@@ -436,6 +467,7 @@ export const queries = {
   otis,
   reading,
   explore,
+  eoi,
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
