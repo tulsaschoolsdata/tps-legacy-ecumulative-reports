@@ -107,9 +107,18 @@
       </div>
     </div>
 
-    <div class="page">
-      <hr />
-      <pre>info…</pre>
+    <div class="page" data-pageNum="1">
+      <div class="no-break">
+        {{macros.mobility([])}}
+        {{macros.personalInfoImmunizations([])}}
+      </div>
+    </div>
+
+    <div class="page" data-pageNum="2">
+      <div class="no-break">
+        {{macros.personalInfoSuspensions([])}}
+        {{macros.personalInfoSpecialEd([])}}
+      </div>
     </div>
 
     <div id="footer">
