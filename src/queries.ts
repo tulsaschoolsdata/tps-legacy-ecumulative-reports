@@ -16,6 +16,7 @@ import type {
   TESTS_NEWITBS_CUSTOM,
   TESTS_OCC_CUSTOM,
   TESTS_READING_CUSTOM,
+  TESTS_SATCOLL,
   TESTS_EXPLTEST,
   TESTS_EOI,
   // CLASS_HISTORY_CUSTOM, // … no primary key
@@ -538,6 +539,26 @@ export const reading = async (student_number: number): Promise<Reading[]> => {
   return reading
 }
 
+type Sat = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_SATCOLL,
+  'SCHOOL_NAME' |
+  'VERBAL_SCORE' |
+  'MATH_SCORE' |
+  'VERBAL_PERCENT' |
+  'MATH_PERCENT'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const sat = async (student_number: number): Promise<Sat[]> => {
+  const Sat = (await prisma.$queryRaw<Sat[]>`EXECUTE ECUM_Report_Student.ecum_queries.sat ${student_number}`)
+  return sat
+}
+
 type Explore = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
@@ -727,6 +748,7 @@ export const queries = {
   newitbs,
   occ,
   reading,
+  sat,
   explore,
   eoi,
   studentPersonalDataReport,
