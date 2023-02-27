@@ -10,8 +10,7 @@ import type {
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
   TESTS_OTIS,
-  TESTS_OCC_CUSTOM,
-  TESTS_ITBS_CUSTOM,
+  TESTS_READING_CUSTOM
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -217,7 +216,6 @@ type Admin = Pick<TESTS_ADMINISTERED,
 
 export const admin = async (student_number: number): Promise<Admin[]> => {
   const admin = (await prisma.$queryRaw<Admin[]>`EXECUTE ECUM_Report_Student.ecum_queries.admin ${student_number}`)
-  admin.sort((a, b) => a.SORT_DATE == b.SORT_DATE ? 0 : a.SORT_DATE > b.SORT_DATE ? 1 : -1)
   return admin
 }
 
@@ -251,114 +249,143 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
   return otis
 }
 
-type Itbs = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-  > & Pick<TESTS_ITBS_CUSTOM,
-  'STUDENT_NUMBER' |
-  'SEQ_NUM' |
-  'TYPE' |
-  'DATE' |
-  'GRADE' |
-  'MEASURE_RANK' |
-  'SCHOOL_NAME' |
-  'LISTENING' |
-  'WORD_ANALYSIS' |
-  'VOCABULARY' |
-  'READING' |
-  'SPELLING' |
-  'CAPITALIZATION' |
-  'PUNCTUATION' |
-  'USAGE_AND_EXPRESSION' |
-  'LANGUAGE_TOTAL' |
-  'VISUAL_MATERIALS' |
-  'REFERENCE_MATERIALS' |
-  'WORK_STUDY_TOTAL' |
-  'MATH_CONCEPTS' |
-  'MATH_PROBLEM_SOLVING' |
-  'MATH_COMPUTATION' |
-  'MATH_TOTAL' |
-  'COMPLETE_COMPOSITE' |
-  'TOTAL_COMPOSITE' |
-  'SOCIAL_STUDIES' |
-  'SCIENCE' |
-  'RIV_READ_SS_NPR_NCE'
-  > &  {
-  TEST_NAME: string // TESTS_TEST
-}
-
-export const itbs = async (student_number: number): Promise<Itbs[]> => {
-  const itbs = (await prisma.$queryRaw<Itbs[]>`EXECUTE ECUM_Report_Student.ecum_queries.itbs ${student_number}`)
-  return itbs
-}
-
-type Occ = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-  > & Pick<TESTS_OCC_CUSTOM,
-  'SCHOOL_NAME' |
-  'MATH_TOT_POSS' |
-  'MATH_TOT_EARN' |
-  'MATH_PERCENTC' |
-  'MATH_MC_PASS' |
-  'MATH_PL' |
-  'MATH_OPI' |
-  'SCIENCE_TOT_POSS' |
-  'SCIENCE_TOT_EARN' |
-  'SCIENCE_PERCENTC' |
-  'SCIENCE_MC_PASS' |
-  'SCIENCE_PL' |
-  'SCIENCE_OPI' |
-  'READ_TOT_POSS' |
-  'READ_TOT_EARN' |
-  'READ_PERCENTC' |
-  'READ_MC_PASS' |
-  'READ_PL' |
-  'READ_OPI' |
-  'USHIST_TOT_POSS' |
-  'USHIST_TOT_EARN' |
-  'USHIST_PERCENTC' |
-  'USHIST_MC_PASS' |
-  'USHIST_PL' |
-  'USHIST_OPI' |
-  'GEOGRAPHY_TOT_POSS' |
-  'GEOGRAPHY_TOT_EARN' |
-  'GEOGRAPHY_PERCENTC' |
-  'GEOGRAPHY_MC_PASS' |
-  'GEOGRAPHY_PL' |
-  'OKHIST_TOT_POSS' |
-  'OKHIST_TOT_EARN' |
-  'OKHIST_PERCENTC' |
-  'OKHIST_MC_PASS' |
-  'OKHIST_PL' |
-  'OKHIST_OPI' |
-  'ARTS_TOT_POSS' |
-  'ARTS_TOT_EARN' |
-  'ARTS_PERCENTC' |
-  'ARTS_MC_PASS' |
-  'ARTS_PL' |
-  'ARTS_OPI' |
-  'WRI_EARN' |
-  'WRI_PASS' |
-  'WRI_PL'
+//-------------- Student Personal Data Report Queries -------------------- 
+type StudentPersonalDataReport = Pick<STUDENT,
+'STUDENT_NUMBER' |
+'GOESBYNAME' |
+'STUDENT_STATUS' |
+'STUDENT_CURR_SCH' |
+'STUDENT_ENTRY_DATE' |
+'STUDENT_BIRTHDATE' |
+'STUDENT_GRADE' |
+'STUDENT_SEX' |
+'STUDENT_RACE'
+  > & Pick<SCMISC_CICSTST1,
+  'CURR_TRANS_CD' |	
+  'CURR_TRANS_CD' |
+  'HEALTH_CD' 
   > & {
+  STUDENT_NAME: string,
+  STUDENT_ADDRESS: string,
+  STUDENT_PHONE: string,
+  STUDENT_STATUS: string,
+  MISC_REASON_CODE: string,
+  }
+
+
+export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
+  const student_personal_data_report = (await prisma.$queryRaw<StudentPersonalDataReport[]>`Execute ECUM_Report_Student.ecum_queries.student_personal_data_report ${student_number}`)
+  return student_personal_data_report
+}
+
+type Spd_Mobility = Pick<MOBILITY,
+  'STUDENT_NUMBER' | 
+  'SCHOOL_CODE' |
+  'ENTRY_DATE' |
+  'TRANSFER_CODE' |
+  'ENTRY_REASON_CODE' |
+  'EXIT_DATE' |
+  'EXIT_REASON_CODE'
+  > & Pick<BUILDING_MASTER, 'BLDG_NAME'>
+
+export const spd_Mobility = async (student_number: number): Promise<Spd_Mobility[]> => {
+  const spd_mobility = (await prisma.$queryRaw<Spd_Mobility[]>`Execute ECUM_Report_student.ecum_queries.spd_mobility ${student_number}`)
+  return spd_mobility
+}
+
+type Spd_Immunizations = {
+  IMMUNIZATION_TYPE: string // HEALTH
+  FIRST_DATE: Date      // HEALTH
+  SECOND_DATE: Date     // HEALTH
+  THIRD_DATE: Date      // HEALTH
+  FOURTH_DATE: Date     // HEALTH
+  FIFTH_DATE: Date      // HEALTH
+  SIXTH_DATE: Date      // HEALTH
+  CERTIFIED_BY: string  // HEALTH
+ } & Pick<STUDENT, 'IMMUN_STATUS'>
+
+export const spd_Immunizations = (student_number: number): Promise<Spd_Immunizations[]> => prisma.$queryRaw<Spd_Immunizations[]>`Execute ECUM_Report_student.ecum_queries.spd_immunizations ${student_number}`
+
+type Spd_SpecialEdActive = {
+  SPEC_PREFIX: string
+  SPEC_NUMBER: number
+  SPEC_PROG_DESIGN: string
+  SPEC_ENTRY_DATE: Date
+}
+
+export const spd_SpecialEdActive = (student_number: number): Promise<Spd_SpecialEdActive[]> => prisma.$queryRaw<Spd_SpecialEdActive[]>`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_special_ed_active ${student_number}`
+
+type Spd_SpecialEdInactive = {
+  SPEC_PREFIX: string
+  SPEC_NUMBER: number
+  SPEC_PROG_DESIGN: string
+  SPEC_ENTRY_DATE: Date
+}
+
+export const spd_SpecialEdInactive = (student_number: number): Promise<Spd_SpecialEdInactive[]> => prisma.$queryRaw<Spd_SpecialEdInactive[]>`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_special_ed_inactive ${student_number}`
+
+type Spd_Suspensions = {
+  SCHOOL: string              // SUSPEND
+  NOTIFICATION: string        // SUSPEND
+  START_DATE: Date            // SUSPEND
+  END_DATE: Date              // SUSPEND
+  NUMBER_DAYS: number         // SUSPEND
+  COMMENT_LINE_1: string      // SUSPEND
+  LOCATION: string            // SUSPEND
+  REASON_DESCRIPTION: string  // SUSPEND_REASON_CODES
+}
+
+export const spd_Suspensions = (student_number: number): Promise<Spd_Suspensions[]> => prisma.$queryRaw<Spd_Suspensions[]>`Execute ECUM_ReportStudent.Ecum.ecum_queries.spd_suspensions ${student_number}`
+
+type Spd_Demo = Pick<STUDENT_DEMO,
+  'PARENT_LNAME' |
+  'PARENT_FNAME' |
+  'PARENT_MI' |
+  'SPARENT_LNAME' |
+  'SPARENT_FNAME' |
+  'SPARENT_MNAME'
+  >
+
+export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
+  const spd_demo = (await prisma.$queryRaw<Spd_Demo[]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)
+  return spd_demo
+}
+
+type Reading = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE' |
+    >
+& Pick<TESTS_READING_CUSTOM,
+  'BLDG_NAME' |
+  'RAW_SCORE_1' |
+  'PERCENTILE_1' |
+  'GE_1' |
+  'RAW_SCORE_2' |
+  'PERCENTILE_2' |
+  'GE_2' |
+  'RAW_SCORE_3' |
+  'PERCENTILE_3' |
+  'GE_3' |
+  'RAW_SCORE_4' |
+  'PERCENTILE_4' |
+  'GE_4' |
+    > & {
   TEST_NAME: string // TESTS_TEST
 }
 
-export const occ = async (student_number: number): Promise<Occ[]> => {
-  const occ = (await prisma.$queryRaw<Occ[]>`EXECUTE ECUM_Report_Student.ecum_queries.occ ${student_number}`)
-  return occ
+export const reading = async (student_number: number): Promise<Reading[]> => {
+  const reading = (await prisma.$queryRaw<Reading[]]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)
+  return reading
 }
+
 
 
 export const queries = {
   studentNumbers,
   studentDataTranscript,
-  studentDataTests,
+  studentDataTests, 
   ecum,
   demo,
   misc,
@@ -371,7 +398,13 @@ export const queries = {
   addressHistory,
   admin,
   otis,
-  occ,
+  reading,
+  studentPersonalDataReport,
+  spd_Mobility,
+  spd_Immunizations,
+  spd_SpecialEdActive,
+  spd_SpecialEdInactive,
+  spd_Suspensions,
+  spd_Demo,
 }
-
 export default queries
