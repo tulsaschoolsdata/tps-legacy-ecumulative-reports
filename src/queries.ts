@@ -10,7 +10,7 @@ import type {
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
   TESTS_OTIS,
-  TESTS_READING_CUSTOM
+  TESTS_READING_CUSTOM,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -355,10 +355,9 @@ type Reading = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
   'SORT_DATE' |
-  'SORT_GRADE' |
+  'SORT_GRADE'
     >
 & Pick<TESTS_READING_CUSTOM,
-  'BLDG_NAME' |
   'RAW_SCORE_1' |
   'PERCENTILE_1' |
   'GE_1' |
@@ -370,13 +369,14 @@ type Reading = Pick<TESTS_ADMINISTERED,
   'GE_3' |
   'RAW_SCORE_4' |
   'PERCENTILE_4' |
-  'GE_4' |
+  'GE_4'
     > & {
-  TEST_NAME: string // TESTS_TEST
+  TEST_NAME: string, // TESTS_TEST
+  BLDG_NAME: string, // ECUM_BULIDING_MASTER
 }
 
 export const reading = async (student_number: number): Promise<Reading[]> => {
-  const reading = (await prisma.$queryRaw<Reading[]]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)
+  const reading = (await prisma.$queryRaw<Reading[]>`EXECUTE ECUM_Report_Student.ecum_queries.reading ${student_number}`)
   return reading
 }
 
