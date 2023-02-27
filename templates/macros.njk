@@ -196,7 +196,7 @@
 
 {% macro testTableHeader(testName, gradeLevel, testDate, schoolName) %}
   <div id="header">
-    {{ testName.toUpperCase() + "    Grade: " + String(Number(gradeLevel)).padStart(2, '0') + "  Date: " + testDate.getMonth() + "/" + testDate.getFullYear() + "  School: " + schoolName.toUpperCase() }}
+    {{ testName | upper }} {{gradeLevel}}
   </div>
 {% endmacro %}
 
@@ -204,7 +204,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>Raw Score</th>
+      <th width="1">Raw Score</th>
       <th width="1">Ability Index by Age</th>
       <th width="1">Percentile Rank by Age</th>
       <th width="1">Stanine by Age</th>
@@ -347,7 +347,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>Raw Score 1</th>
+      <th width="1">Raw Score 1</th>
       <th width="1">Percentile 1</th>
       <th width="1">GE 1</th>
       <th width="1">Raw Score 2</th>
@@ -399,7 +399,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th></th>
+      <th width="1"></th>
       <th width="1">English</th>
       <th width="1">English Subscore:<br />Usage/Mechanical</th>
       <th width="1">English Subscore:<br />Rhetorical</th>
@@ -431,7 +431,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th></th>
+      <th width="1"></th>
       <th width="1">English II</th>
       <th width="1">U.S. History</th>
       <th width="1">Algebra I</th>
@@ -450,7 +450,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>SUSPENSIONS:</th>
+      <th width="1">SUSPENSIONS:</th>
       <th width="1"></th>
       <th width="1"></th>
       <th width="1"></th>
@@ -459,7 +459,7 @@
       <th width="1"></th>
     </tr>
     <tr>
-      <th>School</th>
+      <th width="1">School</th>
       <th width="1">Notification</th>
       <th width="1">Begin Date</th>
       <th width="1">Ending Date</th>
@@ -489,13 +489,13 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>SPECIAL ED:</th>
+      <th width="1">SPECIAL ED:</th>
       <th width="1">{{Active or Inactive}}</th>
       <th width="1"></th>
       <th width="1"></th>
     </tr>
     <tr>
-      <th>Category</th>
+      <th width="1">Category</th>
       <th width="1">Program Design</th>
       <th width="1">Entry Date</th>
       <th width="1">Exit Date</th>
@@ -534,7 +534,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th></th>
+      <th width="1"></th>
       <th width="1">English</th>
       <th width="1">English Subscore:<br />Usage/Mechanical</th>
       <th width="1">English Subscore:<br />Rhetorical</th>
@@ -575,7 +575,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th></th>
+      <th width="1"></th>
       <th width="1">English</th>
       <th width="1">Eng Subscore:<br />Usage/Mechanical</th>
       <th width="1">Eng Subscore:<br />Rhetorical Skills</th>
@@ -599,7 +599,7 @@
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>IMMUNIZATIONS:</th>
+      <th width="1">IMMUNIZATIONS:</th>
       <th width="1"></th>
       <th width="1"></th>
       <th width="1"></th>
