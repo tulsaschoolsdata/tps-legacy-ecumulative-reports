@@ -10,6 +10,8 @@ import type {
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
   TESTS_OTIS,
+  TESTS_ITBS_CUSTOM,
+  TESTS_OCC_CUSTOM,
   TESTS_READING_CUSTOM,
   TESTS_EXPLTEST,
   TESTS_EOI,
@@ -251,6 +253,199 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
   return otis
 }
 
+type Itbs = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_ITBS_CUSTOM,
+  'SCHOOL_NAME' |
+  'MEASURE_RANK' |
+  'LISTENING' |
+  'WORD_ANALYSIS' |
+  'VOCABULARY' |
+  'READING' |
+  'SPELLING' |
+  'CAPITALIZATION' |
+  'PUNCTUATION' |
+  'USAGE_AND_EXPRESSION' |
+  'LANGUAGE_TOTAL' |
+  'VISUAL_MATERIALS' |
+  'REFERENCE_MATERIALS' |
+  'WORK_STUDY_TOTAL' |
+  'MATH_CONCEPTS' |
+  'MATH_PROBLEM_SOLVING' |
+  'MATH_COMPUTATION' |
+  'MATH_TOTAL' |
+  'COMPLETE_COMPOSITE' |
+  'TOTAL_COMPOSITE' |
+  'SOCIAL_STUDIES' |
+  'SCIENCE' |
+  'RIV_READ_SS_NPR_NCE'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const itbs = async (student_number: number): Promise<Itbs[]> => {
+  const itbs = (await prisma.$queryRaw<Itbs[]>`EXECUTE ECUM_Report_Student.ecum_queries.itbs ${student_number}`)
+  return itbs
+}
+
+type Occ = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_OCC_CUSTOM,
+  'SCHOOL_NAME' |
+  'MATH_TOT_POSS' |
+  'MATH_TOT_EARN' |
+  'MATH_PERCENTC' |
+  'MATH_MC_PASS' |
+  'MATH_PL' |
+  'MATH_OPI' |
+  'SCIENCE_TOT_POSS' |
+  'SCIENCE_TOT_EARN' |
+  'SCIENCE_PERCENTC' |
+  'SCIENCE_MC_PASS' |
+  'SCIENCE_PL' |
+  'SCIENCE_OPI' |
+  'READ_TOT_POSS' |
+  'READ_TOT_EARN' |
+  'READ_PERCENTC' |
+  'READ_MC_PASS' |
+  'READ_PL' |
+  'READ_OPI' |
+  'USHIST_TOT_POSS' |
+  'USHIST_TOT_EARN' |
+  'USHIST_PERCENTC' |
+  'USHIST_MC_PASS' |
+  'USHIST_PL' |
+  'USHIST_OPI' |
+  'GEOGRAPHY_TOT_POSS' |
+  'GEOGRAPHY_TOT_EARN' |
+  'GEOGRAPHY_PERCENTC' |
+  'GEOGRAPHY_MC_PASS' |
+  'GEOGRAPHY_PL' |
+  'GEOGRAPHY_OPI' |
+  'OKHIST_TOT_POSS' |
+  'OKHIST_TOT_EARN' |
+  'OKHIST_PERCENTC' |
+  'OKHIST_MC_PASS' |
+  'OKHIST_PL' |
+  'OKHIST_OPI' |
+  'ARTS_TOT_POSS' |
+  'ARTS_TOT_EARN' |
+  'ARTS_PERCENTC' |
+  'ARTS_MC_PASS' |
+  'ARTS_PL' |
+  'ARTS_OPI' |
+  'WRI_EARN' |
+  'WRI_PASS' |
+  'WRI_PL'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const occ = async (student_number: number): Promise<Occ[]> => {
+  const occ = (await prisma.$queryRaw<Occ[]>`EXECUTE ECUM_Report_Student.ecum_queries.occ ${student_number}`)
+  return occ
+}
+
+type Reading = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+    >
+& Pick<TESTS_READING_CUSTOM,
+  'RAW_SCORE_1' |
+  'PERCENTILE_1' |
+  'GE_1' |
+  'RAW_SCORE_2' |
+  'PERCENTILE_2' |
+  'GE_2' |
+  'RAW_SCORE_3' |
+  'PERCENTILE_3' |
+  'GE_3' |
+  'RAW_SCORE_4' |
+  'PERCENTILE_4' |
+  'GE_4'
+    > & {
+  TEST_NAME: string, // TESTS_TEST
+  BLDG_NAME: string, // ECUM_BULIDING_MASTER
+}
+
+export const reading = async (student_number: number): Promise<Reading[]> => {
+  const reading = (await prisma.$queryRaw<Reading[]>`EXECUTE ECUM_Report_Student.ecum_queries.reading ${student_number}`)
+  return reading
+}
+
+type Explore = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_EXPLTEST,
+  'SCHOOL_NAME' |
+  'ENGLISH_SCR' |
+  'MATH_SCR' |
+  'READING_SCR' |
+  'SCIENCE_SCR' |
+  'COMPOSITE_SCR' |
+  'SUBSCORE_UM' |
+  'SUBSCORE_RH' |
+  'ENGLISH_NAT_PERC' |
+  'MATH_NAT_PERC' |
+  'READING_NAT_PERC' |
+  'SCIENCE_NAT_PERC' |
+  'COMPOSITE_NAT_PERC' |
+  'NAT_PERC_UM' |
+  'NAT_PERC_RH' |
+  'ENGLISH_LOC_PERC' |
+  'MATH_LOC_PERC' |
+  'READING_LOC_PERC' |
+  'SCIENCE_LOC_PERC' |
+  'COMPOSITE_LOC_PERC' |
+  'LOC_PERC_UM' |
+  'LOC_PERC_RH'
+> & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const explore = async (student_number: number): Promise<Explore[]> => {
+  const explore = (await prisma.$queryRaw<Explore[]>`EXECUTE ECUM_Report_Student.ecum_queries.explore ${student_number}`)
+  return explore
+}
+
+type Eoi = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_EOI,
+  'SCHOOL_NAME' |
+  'ENGL_SCORE' |
+  'ENGL_PERF_LVL' |
+  'ENGL_PASS_FAIL' |
+  'HIST_SCORE' |
+  'HIST_PERF_LVL' |
+  'HIST_PASS_FAIL' |
+  'ALGE_SCORE' |
+  'ALGE_PERF_LVL' |
+  'ALGE_PASS_FAIL' |
+  'BIOL_SCORE' |
+  'BIOL_PERF_LVL' |
+  'BIOL_PASS_FAIL'
+> & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const eoi = async (student_number: number): Promise<Eoi[]> => {
+  const eoi = (await prisma.$queryRaw<Eoi[]>`EXECUTE ECUM_Report_Student.ecum_queries.eoi ${student_number}`)
+  return eoi
+}
+
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
@@ -353,156 +548,6 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
   return spd_demo
 }
 
-type Occ = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-  > & Pick<TESTS_OCC_CUSTOM,
-  'SCHOOL_NAME' |
-  'MATH_TOT_POSS' |
-  'MATH_TOT_EARN' |
-  'MATH_PERCENTC' |
-  'MATH_MC_PASS' |
-  'MATH_PL' |
-  'MATH_OPI' |
-  'SCIENCE_TOT_POSS' |
-  'SCIENCE_TOT_EARN' |
-  'SCIENCE_PERCENTC' |
-  'SCIENCE_MC_PASS' |
-  'SCIENCE_PL' |
-  'SCIENCE_OPI' |
-  'READ_TOT_POSS' |
-  'READ_TOT_EARN' |
-  'READ_PERCENTC' |
-  'READ_MC_PASS' |
-  'READ_PL' |
-  'READ_OPI' |
-  'USHIST_TOT_POSS' |
-  'USHIST_TOT_EARN' |
-  'USHIST_PERCENTC' |
-  'USHIST_MC_PASS' |
-  'USHIST_PL' |
-  'USHIST_OPI' |
-  'GEOGRAPHY_TOT_POSS' |
-  'GEOGRAPHY_TOT_EARN' |
-  'GEOGRAPHY_PERCENTC' |
-  'GEOGRAPHY_MC_PASS' |
-  'GEOGRAPHY_PL' |
-  'GEOGRAPHY_OPI' |
-  'OKHIST_TOT_POSS' |
-  'OKHIST_TOT_EARN' |
-  'OKHIST_PERCENTC' |
-  'OKHIST_MC_PASS' |
-  'OKHIST_PL' |
-  'OKHIST_OPI' |
-  'ARTS_TOT_POSS' |
-  'ARTS_TOT_EARN' |
-  'ARTS_PERCENTC' |
-  'ARTS_MC_PASS' |
-  'ARTS_PL' |
-  'ARTS_OPI' |
-  'WRI_EARN' |
-  'WRI_PASS' |
-  'WRI_PL'
-  > & {
-  TEST_NAME: string // TESTS_TEST
-}
-
-type Reading = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-    >
-& Pick<TESTS_READING_CUSTOM,
-  'RAW_SCORE_1' |
-  'PERCENTILE_1' |
-  'GE_1' |
-  'RAW_SCORE_2' |
-  'PERCENTILE_2' |
-  'GE_2' |
-  'RAW_SCORE_3' |
-  'PERCENTILE_3' |
-  'GE_3' |
-  'RAW_SCORE_4' |
-  'PERCENTILE_4' |
-  'GE_4'
-    > & {
-  TEST_NAME: string, // TESTS_TEST
-  BLDG_NAME: string, // ECUM_BULIDING_MASTER
-}
-
-export const reading = async (student_number: number): Promise<Reading[]> => {
-  const reading = (await prisma.$queryRaw<Reading[]>`EXECUTE ECUM_Report_Student.ecum_queries.reading ${student_number}`)
-  return reading
-}
-
-type Explore = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-  > & Pick<TESTS_EXPLTEST,
-  'SCHOOL_NAME' |
-  'ENGLISH_SCR' |
-  'MATH_SCR' |
-  'READING_SCR' |
-  'SCIENCE_SCR' |
-  'COMPOSITE_SCR' |
-  'SUBSCORE_UM' |
-  'SUBSCORE_RH' |
-  'ENGLISH_NAT_PERC' |
-  'MATH_NAT_PERC' |
-  'READING_NAT_PERC' |
-  'SCIENCE_NAT_PERC' |
-  'COMPOSITE_NAT_PERC' |
-  'NAT_PERC_UM' |
-  'NAT_PERC_RH' |
-  'ENGLISH_LOC_PERC' |
-  'MATH_LOC_PERC' |
-  'READING_LOC_PERC' |
-  'SCIENCE_LOC_PERC' |
-  'COMPOSITE_LOC_PERC' |
-  'LOC_PERC_UM' |
-  'LOC_PERC_RH'
-> & {
-  TEST_NAME: string // TESTS_TEST
-}
-
-export const explore = async (student_number: number): Promise<Explore[]> => {
-  const explore = (await prisma.$queryRaw<Explore[]>`EXECUTE ECUM_Report_Student.ecum_queries.explore ${student_number}`)
-  return explore
-}
-
-type Eoi = Pick<TESTS_ADMINISTERED,
-  'STUDENT_NUMBER' |
-  'GRADE' |
-  'SORT_DATE' |
-  'SORT_GRADE'
-  > & Pick<TESTS_EOI,
-  'SCHOOL_NAME' |
-  'ENGL_SCORE' |
-  'ENGL_PERF_LVL' |
-  'ENGL_PASS_FAIL' |
-  'HIST_SCORE' |
-  'HIST_PERF_LVL' |
-  'HIST_PASS_FAIL' |
-  'ALGE_SCORE' |
-  'ALGE_PERF_LVL' |
-  'ALGE_PASS_FAIL' |
-  'BIOL_SCORE' |
-  'BIOL_PERF_LVL' |
-  'BIOL_PASS_FAIL'
-> & {
-  TEST_NAME: string // TESTS_TEST
-}
-
-export const eoi = async (student_number: number): Promise<Eoi[]> => {
-  const eoi = (await prisma.$queryRaw<Eoi[]>`EXECUTE ECUM_Report_Student.ecum_queries.eoi ${student_number}`)
-  return eoi
-}
-
 export const queries = {
   studentNumbers,
   studentDataTranscript,
@@ -519,6 +564,7 @@ export const queries = {
   addressHistory,
   admin,
   otis,
+  itbs,
   occ,
   reading,
   explore,
