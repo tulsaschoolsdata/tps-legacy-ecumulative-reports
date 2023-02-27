@@ -17,6 +17,7 @@ import type {
   TESTS_OCC_CUSTOM,
   TESTS_READING_CUSTOM,
   TESTS_SATCOLL,
+  TESTS_SAT9_CUSTOM,
   TESTS_EXPLTEST,
   TESTS_EOI,
   // CLASS_HISTORY_CUSTOM, // … no primary key
@@ -555,8 +556,43 @@ type Sat = Pick<TESTS_ADMINISTERED,
 }
 
 export const sat = async (student_number: number): Promise<Sat[]> => {
-  const Sat = (await prisma.$queryRaw<Sat[]>`EXECUTE ECUM_Report_Student.ecum_queries.sat ${student_number}`)
+  const sat = (await prisma.$queryRaw<Sat[]>`EXECUTE ECUM_Report_Student.ecum_queries.sat ${student_number}`)
   return sat
+}
+
+type sat9 = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'> & Pick<TESTS_SAT9_CUSTOM,
+  'SCHOOL_NAME' |
+  'MEASURE_RANK' |
+  'READING_TOTAL' |
+  'WORD_STUDY' |
+  'READING_VOCABULARY' |
+  'READING_COMPREH' |
+  'TOTAL_MATH' |
+  'PROBLEM_SOLVING' |
+  'PROCEDURES' |
+  'NOT_ACTIVE' |
+  'LANGUAGE_TOTAL' |
+  'LANGUAGE_MECH' |
+  'LANGUAGE_EXP' |
+  'SPELLING' |
+  'STUDY_SKILLS' |
+  'ENVIRONMENT' |
+  'SCIENCE' |
+  'SOCIAL_SCIENCE' |
+  'LISTENING' |
+  'USING_INFO' |
+  'THINKING_SKILLS' |
+  'PARTIAL_BATTERY' |
+  'COMPLETE_BATTERY' |
+  'THREE_R_TOTAL' |
+  'USING_INFO_BB' |
+  'THINKING_SKILLS_BB'
+  > & {
+  TEST_NAME: string // TESTS_TEST
 }
 
 type Explore = Pick<TESTS_ADMINISTERED,
@@ -749,6 +785,7 @@ export const queries = {
   occ,
   reading,
   sat,
+  sat9,
   explore,
   eoi,
   studentPersonalDataReport,
