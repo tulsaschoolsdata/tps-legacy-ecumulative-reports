@@ -194,24 +194,17 @@
 </table>
 {% endmacro %}
 
-<<<<<<< HEAD
 {% macro testTableHeader(testName, gradeLevel, testDate, schoolName) %}
   <div id="header">
     {{ testName | upper }} {{gradeLevel}}
   </div>
 {% endmacro %}
 
-=======
->>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
 {% macro testTableOtis(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
-<<<<<<< HEAD
-      <th width="1" width="1">Raw Score</th>
-=======
       <th width="1">Raw Score</th>
->>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
       <th width="1">Ability Index by Age</th>
       <th width="1">Percentile Rank by Age</th>
       <th width="1">Stanine by Age</th>
@@ -224,26 +217,131 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ row.OTIS_RAW_SCORE }}</td>
-<<<<<<< HEAD
-      <td>{{ row.OTIS_AGE_YEARS }}</td>
-      <td>{{ row.OTIS_SAI_PCT }}</td>
-      <td>{{ row.OTIS_GRD_STANINE }}</td>
-=======
-      <td>{{ row.OTIS_SAI_SCORE }}</td>
-      <td>{{ row.OTIS_SAI_PCT }}</td>
-      <td>{{ row.OTIS_SAI_STANINE }}</td>
->>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
-      <td>{{ row.OTIS_GRD_ABILITY }}</td>
-      <td>{{ row.OTIS_GRD_PCT }}</td>
-      <td>{{ row.OTIS_GRD_STANINE }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endmacro %}
 
-<<<<<<< HEAD
+{% macro testTableIowaRow(rowName, row, className) %}
+    <tr class="{{ className }}">
+      <td>{{ rowName }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro testTableIowa(rowGE, rowLPR, rowNCE, rowNPR, rowSPR) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th width="1">Vocabulary</th>
+      <th width="1">Composition</th>
+      <th width="1">ReadAdv.Skills</th>
+      <th width="1">ReadingTotal</th>
+      <th width="1">Spelling</th>
+      <th width="1">Capitalization</th>
+      <th width="1">Punctuation</th>
+      <th width="1">Usage/Expression</th>
+      <th width="1">LanguageTotal</th>
+      <th width="1">MathConcept</th>
+      <th width="1">MathProb.Solve</th>
+      <th width="1">MathTotal</th>
+      <th width="1">MathTotalComp</th>
+      <th width="1">Soc.Studies</th>
+      <th width="1">Science</th>
+      <th width="1">MapsDiagrams</th>
+      <th width="1">ReferenceMat.</th>
+      <th width="1">SrceInfoTotal</th>
+      <th width="1">CoreTotal</th>
+      <th width="1">CoreTotalComp</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{ testTableIowaRow("GE", rowGE, "odd") }}
+      {{ testTableIowaRow("LPR", rowLPR, "even") }}
+      {{ testTableIowaRow("NCE", rowNCE, "odd") }}
+      {{ testTableIowaRow("NPR", rowNPR, "even") }}
+      {{ testTableIowaRow("SPR", rowSPR, "odd") }}
+  </tbody>
+</table>
+{% endmacro %}
+
+
+{% macro testTableOklaCore(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th width="1">Math<br />PL</th>
+      <th width="1">Math<br />OPI</th>
+      <th width="1">Science<br />PL</th>
+      <th width="1">Science<br />OPI</th>
+      <th width="1">Reading<br />PL</th>
+      <th width="1">Reading<br />OPI</th>
+      <th width="1">U.S. History<br />PL</th>
+      <th width="1">U.S. History<br />OPI</th>
+      <th width="1">Geography<br />PL</th>
+      <th width="1">Geography<br />OPI</th>
+      <th width="1">Arts<br />PL</th>
+      <th width="1">Arts<br />OPI</th>
+      <th width="1">Okla Hist<br />PL</th>
+      <th width="1">Okla Hist<br />OPI</th>
+      <th width="1">Writing<br />PL</th>
+      <th width="1">Writing Earned</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
 
 {% macro testTableGates(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -538,5 +636,3 @@
   </tbody>
 </table>
 {% endmacro %}
-=======
->>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
