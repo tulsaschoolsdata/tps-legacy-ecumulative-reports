@@ -11,6 +11,7 @@ import type {
   TESTS_ADMINISTERED,
   TESTS_OTIS,
   TESTS_PBP,
+  TESTS_PLANTEST,
   TESTS_ITBS_CUSTOM,
   TESTS_NEWITBS_CUSTOM,
   TESTS_OCC_CUSTOM,
@@ -323,6 +324,49 @@ type Pbp = Pick<TESTS_ADMINISTERED,
 export const pbp = async (student_number: number): Promise<Pbp[]> => {
   const pbp = (await prisma.$queryRaw<Pbp[]>`EXECUTE ECUM_Report_Student.ecum_queries.pbp ${student_number}`)
   return pbp
+}
+
+type Plan_Test = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_PLANTEST,
+  'SCHOOL_NAME' |
+  'ENGLISH_SCR' |
+  'MATH_SCR' |
+  'READING_SCR' |
+  'SCIENCE_SCR' |
+  'COMPOSITE_SCR' |
+  'SUBSCORE_USE' |
+  'SUBSCORE_RHET' |
+  'SUBSCORE_ALG' |
+  'SUBSCORE_GEO' |
+  'ENGLISH_NAT_PERC' |
+  'MATH_NAT_PERC' |
+  'READING_NAT_PERC' |
+  'SCIENCE_NAT_PERC' |
+  'COMPOSITE_NAT_PERC' |
+  'NAT_PERC_UM' |
+  'NAT_PERC_RS' |
+  'NAT_PERC_ALG' |
+  'NAT_PERC_GEO' |
+  'ENGLISH_LOC_PERC' |
+  'MATH_LOC_PERC' |
+  'READING_LOC_PERC' |
+  'SCIENCE_LOC_PERC' |
+  'COMPOSITE_LOC_PERC' |
+  'LOC_PERC_UM' |
+  'LOC_PERC_RS' |
+  'LOC_PERC_ALG' |
+  'LOC_PERC_GEO'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const plan_test = async (student_number: number): Promise<Plan_Test[]> => {
+  const plan_test = (await prisma.$queryRaw<Plan_Test[]>`EXECUTE ECUM_Report_Student.ecum_queries.plan_test ${student_number}`)
+  return plan_test
 }
 
 type Itbs = Pick<TESTS_ADMINISTERED,
@@ -678,6 +722,7 @@ export const queries = {
   admin,
   otis,
   pbp,
+  plan_test,
   itbs,
   newitbs,
   occ,
