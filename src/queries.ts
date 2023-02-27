@@ -353,6 +353,62 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
   return spd_demo
 }
 
+type Occ = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_OCC_CUSTOM,
+  'SCHOOL_NAME' |
+  'MATH_TOT_POSS' |
+  'MATH_TOT_EARN' |
+  'MATH_PERCENTC' |
+  'MATH_MC_PASS' |
+  'MATH_PL' |
+  'MATH_OPI' |
+  'SCIENCE_TOT_POSS' |
+  'SCIENCE_TOT_EARN' |
+  'SCIENCE_PERCENTC' |
+  'SCIENCE_MC_PASS' |
+  'SCIENCE_PL' |
+  'SCIENCE_OPI' |
+  'READ_TOT_POSS' |
+  'READ_TOT_EARN' |
+  'READ_PERCENTC' |
+  'READ_MC_PASS' |
+  'READ_PL' |
+  'READ_OPI' |
+  'USHIST_TOT_POSS' |
+  'USHIST_TOT_EARN' |
+  'USHIST_PERCENTC' |
+  'USHIST_MC_PASS' |
+  'USHIST_PL' |
+  'USHIST_OPI' |
+  'GEOGRAPHY_TOT_POSS' |
+  'GEOGRAPHY_TOT_EARN' |
+  'GEOGRAPHY_PERCENTC' |
+  'GEOGRAPHY_MC_PASS' |
+  'GEOGRAPHY_PL' |
+  'GEOGRAPHY_OPI' |
+  'OKHIST_TOT_POSS' |
+  'OKHIST_TOT_EARN' |
+  'OKHIST_PERCENTC' |
+  'OKHIST_MC_PASS' |
+  'OKHIST_PL' |
+  'OKHIST_OPI' |
+  'ARTS_TOT_POSS' |
+  'ARTS_TOT_EARN' |
+  'ARTS_PERCENTC' |
+  'ARTS_MC_PASS' |
+  'ARTS_PL' |
+  'ARTS_OPI' |
+  'WRI_EARN' |
+  'WRI_PASS' |
+  'WRI_PL'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
 type Reading = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
@@ -447,8 +503,6 @@ export const eoi = async (student_number: number): Promise<Eoi[]> => {
   return eoi
 }
 
-
-
 export const queries = {
   studentNumbers,
   studentDataTranscript,
@@ -465,6 +519,7 @@ export const queries = {
   addressHistory,
   admin,
   otis,
+  occ,
   reading,
   explore,
   eoi,
