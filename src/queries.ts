@@ -20,6 +20,7 @@ import type {
   TESTS_SAT9_CUSTOM,
   TESTS_EXPLTEST,
   TESTS_EOI,
+  TESTS_ACTTEST
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -690,6 +691,11 @@ type Act = Pick<TESTS_ADMINISTERED,
   TEST_NAME: string // TESTS_TEST
 }
 
+export const act = async (student_number: number): Promise<Act[]> => {
+  const act = (await prisma.$queryRaw<Act[]>`EXECUTE ECUM_Report_Student.ecum_queries.act ${student_number}`)
+  return act
+}
+
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
@@ -818,6 +824,7 @@ export const queries = {
   sat9,
   explore,
   eoi,
+  act,
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
