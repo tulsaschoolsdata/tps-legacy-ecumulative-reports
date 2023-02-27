@@ -665,6 +665,31 @@ export const eoi = async (student_number: number): Promise<Eoi[]> => {
   return eoi
 }
 
+type Act = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'> & Pick<TESTS_ACTTEST,
+  'SCHOOL_NAME' |
+  'SSN' |
+  'SCORE_ENGLISH' |
+  'SCORE_MATH' |
+  'SCORE_READING' |
+  'SCORE_SCIENCE' |
+  'SCORE_COMPOSITE' |
+  'TEST_TYPE' |
+  'SUBSCORE_UM' |
+  'SUBSCORE_RH' |
+  'SUBSCORE_EA' |
+  'SUBSCORE_AG' |
+  'SUBSCORE_GT' |
+  'SUBSCORE_SS' |
+  'SUBSCORE_AL' |
+  'NAT_SCORE_COMPOSITE'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
