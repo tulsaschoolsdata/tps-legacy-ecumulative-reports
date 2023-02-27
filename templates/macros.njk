@@ -194,17 +194,24 @@
 </table>
 {% endmacro %}
 
+<<<<<<< HEAD
 {% macro testTableHeader(testName, gradeLevel, testDate, schoolName) %}
   <div id="header">
     {{ testName | upper }} {{gradeLevel}}
   </div>
 {% endmacro %}
 
+=======
+>>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
 {% macro testTableOtis(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
+<<<<<<< HEAD
       <th width="1" width="1">Raw Score</th>
+=======
+      <th width="1">Raw Score</th>
+>>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
       <th width="1">Ability Index by Age</th>
       <th width="1">Percentile Rank by Age</th>
       <th width="1">Stanine by Age</th>
@@ -218,9 +225,15 @@
     {% for row in rows %}
     <tr class="{{ className.next() }}">
       <td>{{ row.OTIS_RAW_SCORE }}</td>
+<<<<<<< HEAD
       <td>{{ row.OTIS_AGE_YEARS }}</td>
       <td>{{ row.OTIS_SAI_PCT }}</td>
       <td>{{ row.OTIS_GRD_STANINE }}</td>
+=======
+      <td>{{ row.OTIS_SAI_SCORE }}</td>
+      <td>{{ row.OTIS_SAI_PCT }}</td>
+      <td>{{ row.OTIS_SAI_STANINE }}</td>
+>>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
       <td>{{ row.OTIS_GRD_ABILITY }}</td>
       <td>{{ row.OTIS_GRD_PCT }}</td>
       <td>{{ row.OTIS_GRD_STANINE }}</td>
@@ -230,6 +243,7 @@
 </table>
 {% endmacro %}
 
+<<<<<<< HEAD
 
 {% macro testTableGates(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -524,3 +538,5 @@
   </tbody>
 </table>
 {% endmacro %}
+=======
+>>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254

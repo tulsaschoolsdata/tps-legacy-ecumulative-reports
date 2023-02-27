@@ -99,12 +99,15 @@ async function runReport(browser: Browser, student_number: number) {
       admin,
       otis,
       occ,
+<<<<<<< HEAD
     }))
 
     // console.info('Rendering Personal Info HTML…')
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_data_transcript,
+=======
+>>>>>>> 9c5736fe2ff0bb680839429fd15a6c11e5472254
     }))
 
     // console.info('Generating Transcript PDF…')
