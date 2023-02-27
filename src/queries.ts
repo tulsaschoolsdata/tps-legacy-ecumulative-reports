@@ -11,6 +11,7 @@ import type {
   TESTS_ADMINISTERED,
   TESTS_OTIS,
   TESTS_READING_CUSTOM,
+  TESTS_EXPLTEST,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -380,6 +381,41 @@ export const reading = async (student_number: number): Promise<Reading[]> => {
   return reading
 }
 
+type Explore = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_EXPLTEST,
+  'SCHOOL_NAME' |
+  'ENGLISH_SCR' |
+  'MATH_SCR' |
+  'READING_SCR' |
+  'SCIENCE_SCR' |
+  'COMPOSITE_SCR' |
+  'SUBSCORE_UM' |
+  'SUBSCORE_RH' |
+  'ENGLISH_NAT_PERC' |
+  'MATH_NAT_PERC' |
+  'READING_NAT_PERC' |
+  'SCIENCE_NAT_PERC' |
+  'COMPOSITE_NAT_PERC' |
+  'NAT_PERC_UM' |
+  'NAT_PERC_RH' |
+  'ENGLISH_LOC_PERC' |
+  'MATH_LOC_PERC' |
+  'READING_LOC_PERC' |
+  'SCIENCE_LOC_PERC' |
+  'COMPOSITE_LOC_PERC' |
+  'LOC_PERC_UM' |
+  'LOC_PERC_RH'
+>
+
+export const explore = async (student_number: number): Promise<Explore[]> => {
+  const explore = (await prisma.$queryRaw<Explore[]>`EXECUTE ECUM_Report_Student.ecum_queries.explore ${student_number}`)
+  return explore
+}
+
 
 
 export const queries = {
@@ -399,6 +435,7 @@ export const queries = {
   admin,
   otis,
   reading,
+  explore,
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
