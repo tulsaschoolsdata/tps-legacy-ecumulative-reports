@@ -11,6 +11,7 @@ import type {
   TESTS_ADMINISTERED,
   TESTS_OTIS,
   TESTS_ITBS_CUSTOM,
+  TESTS_NEWITBS_CUSTOM,
   TESTS_OCC_CUSTOM,
   TESTS_READING_CUSTOM,
   TESTS_EXPLTEST,
@@ -291,6 +292,47 @@ export const itbs = async (student_number: number): Promise<Itbs[]> => {
   return itbs
 }
 
+type NewItbs = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+  > & Pick<TESTS_NEWITBS_CUSTOM,
+  'SCHOOL_NAME' |
+  'MEASURE_RANK' |
+  'VOCABULARY' |
+  'READING ADV_SK' |
+  'READING_TOTAL' |
+  'LISTENING' |
+  'SPELLING' |
+  'CAPITALIZATION' |
+  'PUNCTUATION' |
+  'LANGUAGE_USAGE_EXPRESSION' |
+  'LANGUAGE_TOTAL' |
+  'MATH_CONCEPTS_ESTIMATION' |
+  'MATH_PROBLEM_SOLVING' |
+  'MATH_COMPUTATION' |
+  'MATH_TOTAL' |
+  'CORE_TOTAL' |
+  'WORD_ANALYSIS' |
+  'SOCIAL_STUDIES' |
+  'SCIENCE' |
+  'MAPS_DIAGRAMS' |
+  'REFERENCE_MATERIALS' |
+  'SOURCE_INFO_TOTAL' |
+  'COMPOSITION' |
+  'MATH_TOTAL_COMPU' |
+  'CORE_TOTAL_COMPU' |
+  'COMPOSITE_COMPU'
+  > & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const newitbs = async (student_number: number): Promise<NewItbs[]> => {
+  const newitbs = (await prisma.$queryRaw<NewItbs[]>`EXECUTE ECUM_Report_Student.ecum_queries.newitbs ${student_number}`)
+  return newitbs
+}
+
 type Occ = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
@@ -565,6 +607,7 @@ export const queries = {
   admin,
   otis,
   itbs,
+  newitbs,
   occ,
   reading,
   explore,
