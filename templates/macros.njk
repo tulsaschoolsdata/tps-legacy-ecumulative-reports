@@ -233,26 +233,26 @@
 {% macro testTableIowaRow(rowName, row, className) %}
     <tr class="{{ className }}">
       <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.VOCABULARY }}</td>
+      <td>{{ row.COMPOSITION }}</td>
+      <td>{{ row.READING_ADV_SK }}</td>
+      <td>{{ row.READING_TOTAL }}</td>
+      <td>{{ row.SPELLING }}</td>
+      <td>{{ row.CAPITALIZATION }}</td>
+      <td>{{ row.PUNCTUATION }}</td>
+      <td>{{ row.USAGE_AND_EXPRESSION }}</td>
+      <td>{{ row.LANGUAGE_TOTAL }}</td>
+      <td>{{ row.MATH_CONCEPTS }}</td>
+      <td>{{ row.MATH_PROBLEM_SOLVING }}</td>
+      <td>{{ row.MATH_TOTAL }}</td>
+      <td>{{ row.MATH_COMPUTATION }}</td>
+      <td>{{ row.SOCIAL_STUDIES }}</td>
+      <td>{{ row.SCIENCE }}</td>
+      <td>{{ row.MAPS_DIAGRAMS }}</td>
+      <td>{{ row.REFERENCE_MATERIALS }}</td>
+      <td>{{ row.SOURCE_INFO_TOTAL }}</td>
+      <td>{{ row.CORE_TOTAL }}</td>
+      <td>{{ row.CORE_TOTAL_COMPU }}</td>
     </tr>
 {% endmacro %}
 
