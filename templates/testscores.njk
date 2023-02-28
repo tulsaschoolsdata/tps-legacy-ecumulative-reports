@@ -80,9 +80,9 @@
     <div class="page" data-pageNum="2">
       <div class="no-break">
         {{ macros.testTableHeader("IOWA TEST/TAP", 3, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(new_iowa3_obj.GE, new_iowa3_obj.LPR, new_iowa3_obj.NCE, new_iowa3_obj.NPR, new_iowa3_obj.SPR) }}
+        {{ macros.testTableIowa(new_iowa3_obj.GE[0], new_iowa3_obj.LPR[0], new_iowa3_obj.NCE[0], new_iowa3_obj.NPR[0], new_iowa3_obj.SPR[0]) }}
         {{ macros.testTableHeader("IOWA TEST/TAP", 4, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(new_iowa4_obj.GE, new_iowa4_obj.LPR, new_iowa4_obj.NCE, new_iowa4_obj.NPR, new_iowa4_obj.SPRING_BLDG_NAME) }}
+        {{ macros.testTableIowa(new_iowa4_obj.GE[0], new_iowa4_obj.LPR[0], new_iowa4_obj.NCE[0], new_iowa4_obj.NPR[0], new_iowa4_obj.SPR[0]) }}
         {{ macros.testTableHeader("OKLAHOMA CORE CURRICULUM TEST", 5, "Date", "SchoolName") }}
         {{ macros.testTableOklaCore(occ) }}
       </div>
