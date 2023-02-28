@@ -73,24 +73,24 @@
 
         {{ macros.student_test_list(admin) }}
         {{ macros.testTableHeader("OTIS-LENNON", 2, "Date", "SchoolName") }}
-        {{ macros.testTableOtis([]) }}
+        {{ macros.testTableOtis(otis) }}
 
       </div>
     </div>
     <div class="page" data-pageNum="2">
       <div class="no-break">
         {{ macros.testTableHeader("IOWA TEST/TAP", 3, "Date", "SchoolName") }}
-        {{ macros.testTableIowa([]) }}
+        {{ macros.testTableIowa(new_iowa3_obj.GE[0], new_iowa3_obj.LPR[0], new_iowa3_obj.NCE[0], new_iowa3_obj.NPR[0], new_iowa3_obj.SPR[0]) }}
         {{ macros.testTableHeader("IOWA TEST/TAP", 4, "Date", "SchoolName") }}
-        {{ macros.testTableIowa([]) }}
+        {{ macros.testTableIowa(new_iowa4_obj.GE[0], new_iowa4_obj.LPR[0], new_iowa4_obj.NCE[0], new_iowa4_obj.NPR[0], new_iowa4_obj.SPR[0]) }}
         {{ macros.testTableHeader("OKLAHOMA CORE CURRICULUM TEST", 5, "Date", "SchoolName") }}
-        {{ macros.testTableOklaCore([]) }}
+        {{ macros.testTableOklaCore(occ) }}
       </div>
     </div>
     <div class="page" data-pageNum="3">
       <div class="no-break">
         {{ macros.testTableHeader("OKLAHOMA CORE CURRICULUM TEST", 8, "Date", "SchoolName") }}
-        {{ macros.testTableOklaCore([]) }}
+        {{ macros.testTableOklaCore(occ) }}
         {{ macros.testTableHeader("GATES READING TEST", 5, "2001", "SchoolName") }}
         {{ macros.testTableGates([]) }}
         {{ macros.testTableHeader("GATES READING TEST", 5, "2002", "SchoolName") }}

@@ -217,13 +217,13 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.OTIS_RAW_SCORE }}</td>
+      <td>{{ row.OTIS_SAI_SCORE }}</td>
+      <td>{{ row.OTIS_SAI_PCT }}</td>
+      <td>{{ row.OTIS_SAI_STANINE }}</td>
+      <td>{{ row.OTIS_GRD_ABILITY }}</td>
+      <td>{{ row.OTIS_GRD_PCT }}</td>
+      <td>{{ row.OTIS_GRD_STANINE }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -233,26 +233,26 @@
 {% macro testTableIowaRow(rowName, row, className) %}
     <tr class="{{ className }}">
       <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.VOCABULARY }}</td>
+      <td>{{ row.COMPOSITION }}</td>
+      <td>{{ row.READING_ADV_SK }}</td>
+      <td>{{ row.READING_TOTAL }}</td>
+      <td>{{ row.SPELLING }}</td>
+      <td>{{ row.CAPITALIZATION }}</td>
+      <td>{{ row.PUNCTUATION }}</td>
+      <td>{{ row.LANGUAGE_USAGE_EXPRESSION }}</td>
+      <td>{{ row.LANGUAGE_TOTAL }}</td>
+      <td>{{ row.MATH_CONCEPTS_ESTIMATION }}</td>
+      <td>{{ row.MATH_PROBLEM_SOLVING }}</td>
+      <td>{{ row.MATH_TOTAL }}</td>
+      <td>{{ row.MATH_COMPUTATION }}</td>
+      <td>{{ row.SOCIAL_STUDIES }}</td>
+      <td>{{ row.SCIENCE }}</td>
+      <td>{{ row.MAPS_DIAGRAMS }}</td>
+      <td>{{ row.REFERENCE_MATERIALS }}</td>
+      <td>{{ row.SOURCE_INFO_TOTAL }}</td>
+      <td>{{ row.CORE_TOTAL }}</td>
+      <td>{{ row.CORE_TOTAL_COMPU }}</td>
     </tr>
 {% endmacro %}
 
@@ -292,7 +292,6 @@
   </tbody>
 </table>
 {% endmacro %}
-
 
 {% macro testTableOklaCore(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">

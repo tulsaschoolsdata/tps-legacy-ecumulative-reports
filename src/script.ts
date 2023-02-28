@@ -72,8 +72,61 @@ async function runReport(browser: Browser, student_number: number) {
     const mobility = await queries.mobility(student_number)
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
+    const otis = await queries.otis(student_number)
+    const newitbs = await queries.newitbs(student_number)
+    const new_iowa3 = newitbs.filter((row => {
+       return row.GRADE == "03"
+    }))
+    const new_iowa4 = newitbs.filter((row => {
+       return row.GRADE == "04"
+    }))
+    const new_iowa3_ge = new_iowa3.filter((row => {
+       return row.MEASURE_RANK.trim() == 'GE'
+    }))
+    const new_iowa4_ge = new_iowa4.filter((row => {
+       return row.MEASURE_RANK.trim() == 'GE'
+    }))
+    const new_iowa3_lpr = new_iowa3.filter((row => {
+       return row.MEASURE_RANK == 'LPR'
+    }))
+    const new_iowa4_lpr = new_iowa4.filter((row => {
+       return row.MEASURE_RANK == 'LPR'
+    }))
+    const new_iowa3_nce = new_iowa3.filter((row => {
+       return row.MEASURE_RANK == 'NCE'
+    }))
+    const new_iowa4_nce = new_iowa4.filter((row => {
+       return row.MEASURE_RANK == 'NCE'
+    }))
+    const new_iowa3_npr = new_iowa3.filter((row => {
+       return row.MEASURE_RANK == 'NPR'
+    }))
+    const new_iowa4_npr = new_iowa4.filter((row => {
+       return row.MEASURE_RANK == 'NPR'
+    }))
+    const new_iowa3_spr = new_iowa3.filter((row => {
+       return row.MEASURE_RANK == 'SPR'
+    }))
+    const new_iowa4_spr = new_iowa4.filter((row => {
+       return row.MEASURE_RANK == 'SPR'
+    }))
 
-    // console.info('Rendering Transcript HTML…')
+    const new_iowa3_obj = {
+      "GE": new_iowa3_ge,
+      "LPR": new_iowa3_lpr,
+      "NCE": new_iowa3_nce,
+      "NPR": new_iowa3_npr,
+      "SPR": new_iowa3_spr,
+    }
+
+    const new_iowa4_obj = {
+      "GE": new_iowa4_ge,
+      "LPR": new_iowa4_lpr,
+      "NCE": new_iowa4_nce,
+      "NPR": new_iowa4_npr,
+      "SPR": new_iowa4_spr,
+    }
+
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
       student_data_transcript,
@@ -95,6 +148,10 @@ async function runReport(browser: Browser, student_number: number) {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
+      otis,
+      newitbs,
+      new_iowa3_obj,
+      new_iowa4_obj,
     }))
 
     // console.info('Rendering Personal Info HTML…')
