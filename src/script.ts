@@ -54,6 +54,8 @@ async function runReport(browser: Browser, student_number: number) {
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
   const testscores_html_path = outFilePath(`${student_number}-testscores.html`)
   const testscores_pdf_path = outFilePath(`${student_number}-testscores.pdf`)
+  const personalinfo_html_path = outFilePath(`${student_number}-personalinfo.html`)
+  const personalinfo_pdf_path = outFilePath(`${student_number}-personalinfo.pdf`)
   const merged_pdf_path = outFilePath(`${student_number}.pdf`)
 
   try {
@@ -124,7 +126,7 @@ async function runReport(browser: Browser, student_number: number) {
       "NPR": new_iowa4_npr,
       "SPR": new_iowa4_spr,
     }
-    
+
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
       student_data_transcript,
@@ -150,6 +152,12 @@ async function runReport(browser: Browser, student_number: number) {
       newitbs,
       new_iowa3_obj,
       new_iowa4_obj,
+    }))
+
+    // console.info('Rendering Personal Info HTML…')
+    fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
+      date: REPORT_DATE,
+      student_data_transcript,
     }))
 
     // console.info('Generating Transcript PDF…')
@@ -180,24 +188,24 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Personal Info PDF…')
-    // await report.pdf(browser, personalinfo_html_path, {
-    //   path: personalinfo_pdf_path,
-    //   format: 'letter',
-    //   printBackground: true,
-    //   margin: {
-    //     bottom: '0.25in',
-    //     left: '0.25in',
-    //     right: '0.25in',
-    //     top: '0.25in',
-    //   }
-    // })
+    console.info('Generating Personal Info PDF…')
+    await report.pdf(browser, personalinfo_html_path, {
+      path: personalinfo_pdf_path,
+      format: 'letter',
+      printBackground: true,
+      margin: {
+        bottom: '0.25in',
+        left: '0.25in',
+        right: '0.25in',
+        top: '0.25in',
+      }
+    })
 
     // console.info('Merging PDFs…')
     const merger = new PDFMerger()
     await merger.add(transcript_pdf_path)
     await merger.add(testscores_pdf_path)
-    //await merger.add(personalinfo_pdf_path)
+    await merger.add(personalinfo_pdf_path)
     await merger.save(merged_pdf_path)
   } catch (error) {
     await Promise.allSettled([
