@@ -188,7 +188,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    console.info('Generating Personal Info PDF…')
+    // console.info('Generating Personal Info PDF…')
     await report.pdf(browser, personalinfo_html_path, {
       path: personalinfo_pdf_path,
       format: 'letter',
