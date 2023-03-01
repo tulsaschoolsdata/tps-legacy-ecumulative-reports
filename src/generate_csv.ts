@@ -23,7 +23,7 @@ async function generateCSV(): Promise<void> {
   const queryResults = await studentsData()
 
   await fs.writeFile(
-    'index.csv',
+    'out/index.csv',
     csvStringify(queryResults, {
       header: true,
       columns: [
