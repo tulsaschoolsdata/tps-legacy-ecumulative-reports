@@ -23,6 +23,7 @@
     "@jikji/react": "^0.2.3",
     "@prisma/client": "^4.7.1",
     "cli-progress": "^3.11.2",
+    "csv-stringify": "^6.2.4",
     "fastq": "^1.14.0",
     "nunjucks": "^3.2.3",
     "pdf-merger-js": "^4.2.0",
