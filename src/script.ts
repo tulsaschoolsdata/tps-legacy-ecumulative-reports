@@ -61,6 +61,7 @@ async function runReport(browser: Browser, student_number: number) {
   try {
     const student_data_transcript = await queries.studentDataTranscript(student_number)
     const student_data_tests = await queries.studentDataTests(student_number)
+    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
     const ecum = await queries.ecum(student_number)
     const demo = await queries.demo(student_number)
     const misc = await queries.misc(student_number)
@@ -74,6 +75,10 @@ async function runReport(browser: Browser, student_number: number) {
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
     const newitbs = await queries.newitbs(student_number)
+    const spd_mobility = await queries.spd_Mobility(student_number)
+    const spd_immunizations = await queries.spd_Immunizations(student_number)
+    const spd_demo = await queries.spd_Demo(student_number)
+    console.info(spd_demo)
     const new_iowa3 = newitbs.filter((row => {
        return row.GRADE == "03"
     }))
@@ -127,9 +132,6 @@ async function runReport(browser: Browser, student_number: number) {
       "SPR": new_iowa4_spr,
     }
 
-    const spd_mobility = await queries.spd_Mobility(student_number)
-    const spd_immunizations = await queries.spd_Immunizations(student_number)
-
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
       student_data_transcript,
@@ -151,20 +153,24 @@ async function runReport(browser: Browser, student_number: number) {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
-      otis
+      otis,
+      newitbs,
+      new_iowa3_obj,
+      new_iowa4_obj,
     }))
 
 
     // console.info('Rendering Personal Info HTML…')
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
+      student_personal_data_report,
       student_data_transcript,
       spd_mobility,
       spd_immunizations,
       // spd_special_ed_active,
       // spd_special_ed_inactive,
       // spd_suspensions,
-      // spd_demo,
+      spd_demo,
     }))
 
     // console.info('Generating Transcript PDF…')

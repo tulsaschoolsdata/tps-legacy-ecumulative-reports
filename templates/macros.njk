@@ -658,11 +658,11 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ "row.SCHOOL_CODE" }}</td>
+      <td>{{ "row.ENTRY_DATE" }}</td>
+      <td>{{ "row.ENTRY_REASON_CODE" }}</td>
+      <td>{{ "row.EXIT_DATE" }}</td>
+      <td>{{ "row.EXIT_REASON_CODE" }}</td>
     </tr>
     {% endfor %}
   </tbody>

@@ -9,9 +9,6 @@ import type {
   MOBILITY,
   ADDHIST_CICSTST1,
   TESTS_ADMINISTERED,
-<<<<<<< HEAD
-  TESTS_OTIS
-=======
   TESTS_OTIS,
   TESTS_PBP,
   TESTS_PLANTEST,
@@ -24,7 +21,6 @@ import type {
   TESTS_EXPLTEST,
   TESTS_EOI,
   TESTS_ACTTEST
->>>>>>> main
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'

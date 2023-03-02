@@ -79,17 +79,25 @@
           <div>…phone…</div>
           <div style="display: flex; column-gap: 1rem;">
             <div>…gender…</div>
-            <div>…race…</div>
+            <div>{{ student_personal_data_report.STUDENT_RACE }}</div>
           </div>
           <div style="display: flex; column-gap: 1rem;">
-            <div>Birthday: ?</div>
-            <div>Health Code: ?</div>
+            <div>Birthday: {{ student_personal_data_report.STUDENT_BIRTHDATE }}</div>
+            <div>Health Code:{{ student_personal_data_report.HEALTH_CD }}</div>
           </div>
           <div style="display: flex; column-gap: 1rem;">
             <div>Parent/Guardian:</div>
             <div>
-              <div>…father…</div>
-              <div>…mother…</div>
+              <div>
+                {{ demo.PARENT_FNAME }}
+                {{ demo.PARENT_MI }}
+                {{ demo.PARENT_LNAME }}
+              </div>
+              <div>
+                {{ demo.SPARENT_FNAME }}
+                {{ demo.SPARENT_MI }}
+                {{ demo.SPARENT_LNAME }}
+              </div>
             </div>
           </div>
         </div>
@@ -110,9 +118,9 @@
     <div class="page" data-pageNum="1">
       <div class="no-break">
         <br />
-        {{macros.personalInfoMobility([])}}
+        {{macros.personalInfoMobility(spd_mobility)}}
         <br />
-        {{macros.personalInfoImmunizations([])}}
+        {{macros.personalInfoImmunizations(spd_immunizations)}}
       </div>
     </div>
 
