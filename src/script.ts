@@ -78,7 +78,10 @@ async function runReport(browser: Browser, student_number: number) {
     const spd_mobility = await queries.spd_Mobility(student_number)
     const spd_immunizations = await queries.spd_Immunizations(student_number)
     const spd_demo = await queries.spd_Demo(student_number)
-    console.info(spd_demo)
+    console.info("student personal data report")
+    console.info(student_personal_data_report)
+    console.info("DEMO")
+    console.info(demo)
     const new_iowa3 = newitbs.filter((row => {
        return row.GRADE == "03"
     }))
@@ -208,8 +211,8 @@ async function runReport(browser: Browser, student_number: number) {
       printBackground: true,
       margin: {
         bottom: '0.25in',
-        left: '0.25in',
-        right: '0.25in',
+        left: '1in',
+        right: '1in',
         top: '0.25in',
       }
     })
@@ -231,6 +234,8 @@ async function runReport(browser: Browser, student_number: number) {
       transcript_pdf_path,
       testscores_html_path,
       testscores_pdf_path,
+      personalinfo_html_path,
+      personalinfo_pdf_path,
     ].map(fs.unlink))
   }
 } // end of async runReport student transcript
