@@ -79,16 +79,20 @@ async function runReport(browser: Browser, student_number: number) {
 
     // queries testscores - IOWA
     const newitbs = await queries.newitbs(student_number)
-    const newitbs_iowa3 = newitbs.filter(row => row.GRADE == "03")
-    const newitbs_iowa4 = newitbs.filter(row => row.GRADE == "04")
+    const iowa3 = newitbs.filter(row => row.GRADE == "03")
+    const iowa4 = newitbs.filter(row => row.GRADE == "04")
 
-    // queries testscores - OKLAHOMA CORE - 5,8
+    // queries testscores - OKLAHOMA CORE
+    const oklacore = await queries.occ(student_number)
+    const oklacore5 = oklacore.filter(row => row.GRADE == "05")
+    const oklacore8 = oklacore.filter(row => row.GRADE == "08")
     // queries testscores - GATES - N+
     // queries testscores - EXPLORE - 8
     // queries testscores - END OF INSTRUCTION - 9,10
     // queries testscores - PLAN - 9
     // queries testscores - ACT - 12
 
+    // html transcript
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
       student_data_transcript,
@@ -105,24 +109,25 @@ async function runReport(browser: Browser, student_number: number) {
       address_history,
     }))
 
-    // console.info('Rendering Test Scores HTML…')
+    // html testscores
     fs.writeFile(testscores_html_path, render('testscores.njk', {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
       otis,
-      newitbs,
-      newitbs_iowa3,
-      newitbs_iowa4,
+      iowa3,
+      iowa4,
+      oklacore5,
+      oklacore8,
     }))
 
-    // console.info('Rendering Personal Info HTML…')
+    // html personalinfo
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_data_transcript,
     }))
 
-    // console.info('Generating Transcript PDF…')
+    // pdf transcript
     await report.pdf(browser, transcript_html_path, {
       path: transcript_pdf_path,
       format: 'letter',
@@ -136,7 +141,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Test Scores PDF…')
+    // pdf testscores
     await report.pdf(browser, testscores_html_path, {
       path: testscores_pdf_path,
       format: 'letter',
@@ -150,7 +155,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Personal Info PDF…')
+    // pdf personalinfo
     await report.pdf(browser, personalinfo_html_path, {
       path: personalinfo_pdf_path,
       format: 'letter',
@@ -163,7 +168,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Merging PDFs…')
+    // merge all of the pdf files
     const merger = new PDFMerger()
     await merger.add(transcript_pdf_path)
     await merger.add(testscores_pdf_path)

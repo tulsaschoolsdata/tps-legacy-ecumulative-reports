@@ -318,22 +318,22 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.MATH_PL }}</td>
+      <td>{{ row.MATH_OPI }}</td>
+      <td>{{ row.SCIENCE_PL }}</td>
+      <td>{{ row.SCIENCE_OPI }}</td>
+      <td>{{ row.READ_PL }}</td>
+      <td>{{ row.READ_OPI }}</td>
+      <td>{{ row.USHIST_PL }}</td>
+      <td>{{ row.USHIST_OPI }}</td>
+      <td>{{ row.GEOGRAPHY_PL }}</td>
+      <td>{{ row.GEOGRAPHY_OPI }}</td>
+      <td>{{ row.ARTS_PL }}</td>
+      <td>{{ row.ARTS_OPI }}</td>
+      <td>{{ row.OKHIST_PL }}</td>
+      <td>{{ row.OKHIST_OPI }}</td>
+      <td>{{ row.WRI_PL }}</td>
+      <td>{{ row.WRI_EARN }}</td>
     </tr>
     {% endfor %}
   </tbody>
