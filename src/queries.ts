@@ -515,6 +515,7 @@ export const occ = async (student_number: number): Promise<Occ[]> => {
 type Reading = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
+  'DATE' |
   'SORT_DATE' |
   'SORT_GRADE'
     >
