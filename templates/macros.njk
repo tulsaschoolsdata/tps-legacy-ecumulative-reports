@@ -230,9 +230,9 @@
 </table>
 {% endmacro %}
 
-{% macro testTableIowaRow(rowName, row, className) %}
+{% macro testTableIowaRow(row, className) %}
     <tr class="{{ className }}">
-      <td class="blueBG">{{ rowName }}</td>
+      <td class="blueBG">{{ row.MEASURE_RANK}}</td>
       <td>{{ row.VOCABULARY }}</td>
       <td>{{ row.COMPOSITION }}</td>
       <td>{{ row.READING_ADV_SK }}</td>
@@ -256,7 +256,7 @@
     </tr>
 {% endmacro %}
 
-{% macro testTableIowa(rowGE, rowLPR, rowNCE, rowNPR, rowSPR) %}
+{% macro testTableIowa(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
@@ -284,11 +284,10 @@
     </tr>
   </thead>
   <tbody>
-      {{ testTableIowaRow("GE", rowGE, "odd") }}
-      {{ testTableIowaRow("LPR", rowLPR, "even") }}
-      {{ testTableIowaRow("NCE", rowNCE, "odd") }}
-      {{ testTableIowaRow("NPR", rowNPR, "even") }}
-      {{ testTableIowaRow("SPR", rowSPR, "odd") }}
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+      {{ testTableIowaRow(row, className) }}
+    {% endfor %}
   </tbody>
 </table>
 {% endmacro %}
