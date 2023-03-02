@@ -258,39 +258,45 @@
 {% endmacro %}
 
 {% macro testTableIowa(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th></th>
-      <th width="1">Voca<br />bula<br />ry</th>
-      <th width="1">Comp<br />osit<br />ion</th>
-      <th width="1">Read<br />Adv.<br />Skills</th>
-      <th width="1">Read<br />ing<br />Total</th>
-      <th width="1">Spel<br />ling<br /></th>
-      <th width="1">Capi<br />tali<br />zation</th>
-      <th width="1">Punc<br />tuat<br />ion</th>
-      <th width="1">Usag<br />e/Ex<br />pression</th>
-      <th width="1">Lang<br />uage<br />Total</th>
-      <th width="1">Math<br />Conc<br />ept</th>
-      <th width="1">Math<br />Prob.<br />Solve</th>
-      <th width="1">Math<br />Total<br /></th>
-      <th width="1">Math<br />Total<br />Comp</th>
-      <th width="1">Soc.<br />Stud<br />ies</th>
-      <th width="1">Scie<br />nce</th>
-      <th width="1">Maps<br />Diag<br />rams</th>
-      <th width="1">Refe<br />renc<br />eMat.</th>
-      <th width="1">Srce<br />Info<br />Total</th>
-      <th width="1">Core<br />Total<br /></th>
-      <th width="1">Core<br />Total<br />Comp</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-      {{ testTableIowaRow(row, className) }}
-    {% endfor %}
-  </tbody>
-</table>
+  {% for date, rows in rows | groupby("SORT_DATE") %}
+
+    {% set header = rows[0] %}
+    {{ testTableHeader(header) }}
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th></th>
+          <th width="1">Voca<br />bula<br />ry</th>
+          <th width="1">Comp<br />osit<br />ion</th>
+          <th width="1">Read<br />Adv.<br />Skills</th>
+          <th width="1">Read<br />ing<br />Total</th>
+          <th width="1">Spel<br />ling<br /></th>
+          <th width="1">Capi<br />tali<br />zation</th>
+          <th width="1">Punc<br />tuat<br />ion</th>
+          <th width="1">Usag<br />e/Ex<br />pression</th>
+          <th width="1">Lang<br />uage<br />Total</th>
+          <th width="1">Math<br />Conc<br />ept</th>
+          <th width="1">Math<br />Prob.<br />Solve</th>
+          <th width="1">Math<br />Total<br /></th>
+          <th width="1">Math<br />Total<br />Comp</th>
+          <th width="1">Soc.<br />Stud<br />ies</th>
+          <th width="1">Scie<br />nce</th>
+          <th width="1">Maps<br />Diag<br />rams</th>
+          <th width="1">Refe<br />renc<br />eMat.</th>
+          <th width="1">Srce<br />Info<br />Total</th>
+          <th width="1">Core<br />Total<br /></th>
+          <th width="1">Core<br />Total<br />Comp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+          {{ testTableIowaRow(row, className) }}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor%}
 {% endmacro %}
 
 {% macro testTableOklaCore(rows) %}
