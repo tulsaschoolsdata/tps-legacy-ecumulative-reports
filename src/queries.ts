@@ -263,8 +263,6 @@ export const otis = async (student_number: number): Promise<Otis[]> => {
   return otis
 }
 
-<<<<<<< HEAD
-=======
 type Pbp = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
@@ -702,7 +700,6 @@ export const act = async (student_number: number): Promise<Act[]> => {
   return act
 }
 
->>>>>>> main
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
@@ -805,11 +802,6 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
   return spd_demo
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> main
 export const queries = {
   studentNumbers,
   studentDataTranscript,
@@ -826,8 +818,6 @@ export const queries = {
   addressHistory,
   admin,
   otis,
-<<<<<<< HEAD
-=======
   pbp,
   plan_test,
   itbs,
@@ -839,7 +829,6 @@ export const queries = {
   explore,
   eoi,
   act,
->>>>>>> main
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,

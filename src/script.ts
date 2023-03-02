@@ -73,15 +73,6 @@ async function runReport(browser: Browser, student_number: number) {
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
-<<<<<<< HEAD
-    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
-    // const spd_mobility = await queries.spd_Mobility(student_number)
-    // const spd_immunizations = await queries.spd_Immunizations(student_number)
-    // const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
-    // const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
-    // const spd_suspensions = await queries.spd_Suspensions(student_number)
-    // const spd_demo = await queries.spd_Demo(student_number)
-=======
     const newitbs = await queries.newitbs(student_number)
     const new_iowa3 = newitbs.filter((row => {
        return row.GRADE == "03"
@@ -135,7 +126,9 @@ async function runReport(browser: Browser, student_number: number) {
       "NPR": new_iowa4_npr,
       "SPR": new_iowa4_spr,
     }
->>>>>>> main
+
+    const spd_mobility = await queries.spd_Mobility(student_number)
+    const spd_immunizations = await queries.spd_Immunizations(student_number)
 
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
@@ -158,14 +151,7 @@ async function runReport(browser: Browser, student_number: number) {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
-<<<<<<< HEAD
       otis
-=======
-      otis,
-      newitbs,
-      new_iowa3_obj,
-      new_iowa4_obj,
->>>>>>> main
     }))
 
 
@@ -173,8 +159,8 @@ async function runReport(browser: Browser, student_number: number) {
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_data_transcript,
-      // spd_mobility,
-      // spd_immunizations,
+      spd_mobility,
+      spd_immunizations,
       // spd_special_ed_active,
       // spd_special_ed_inactive,
       // spd_suspensions,
