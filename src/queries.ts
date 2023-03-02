@@ -233,7 +233,7 @@ type Otis = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
   'SORT_DATE' |
-  'SORT_GRADE'  
+  'SORT_GRADE'
   > & Pick<TESTS_OTIS,
   'STUDENT_NUMBER' |
   'SCHOOL_NAME' |
@@ -696,7 +696,7 @@ export const act = async (student_number: number): Promise<Act[]> => {
   return act
 }
 
-//-------------- Student Personal Data Report Queries -------------------- 
+//-------------- Student Personal Data Report Queries --------------------
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
 'GOESBYNAME' |
@@ -708,9 +708,9 @@ type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_SEX' |
 'STUDENT_RACE'
   > & Pick<SCMISC_CICSTST1,
-  'CURR_TRANS_CD' |	
   'CURR_TRANS_CD' |
-  'HEALTH_CD' 
+  'CURR_TRANS_CD' |
+  'HEALTH_CD'
   > & {
   STUDENT_NAME: string,
   STUDENT_ADDRESS: string,
@@ -726,7 +726,7 @@ export const studentPersonalDataReport = async (student_number: number): Promise
 }
 
 type Spd_Mobility = Pick<MOBILITY,
-  'STUDENT_NUMBER' | 
+  'STUDENT_NUMBER' |
   'SCHOOL_CODE' |
   'ENTRY_DATE' |
   'TRANSFER_CODE' |
@@ -801,7 +801,7 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
 export const queries = {
   studentNumbers,
   studentDataTranscript,
-  studentDataTests, 
+  studentDataTests,
   ecum,
   demo,
   misc,

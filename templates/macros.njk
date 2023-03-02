@@ -363,18 +363,18 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.RAW_SCORE_1 }}</td>
+      <td>{{ row.PERCENTILE_1 }}</td>
+      <td>{{ row.GE_1 }}</td>
+      <td>{{ row.RAW_SCORE_2 }}</td>
+      <td>{{ row.PERCENTILE_2 }}</td>
+      <td>{{ row.GE_2 }}</td>
+      <td>{{ row.RAW_SCORE_3 }}</td>
+      <td>{{ row.PERCENTILE_3 }}</td>
+      <td>{{ row.GE_3 }}</td>
+      <td>{{ row.RAW_SCORE_4 }}</td>
+      <td>{{ row.PERCENTILE_4 }}</td>
+      <td>{{ row.GE_4 }}</td>
     </tr>
     {% endfor %}
   </tbody>

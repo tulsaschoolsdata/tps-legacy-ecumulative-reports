@@ -48,7 +48,6 @@ const testTableHeader = (testName: string, gradeLevel: number, testDateStr: stri
 }
 
 async function runReport(browser: Browser, student_number: number) {
-  // console.info(`Student Number: ${student_number}`)
 
   const transcript_html_path = outFilePath(`${student_number}-transcript.html`)
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
@@ -86,7 +85,9 @@ async function runReport(browser: Browser, student_number: number) {
     const oklacore = await queries.occ(student_number)
     const oklacore5 = oklacore.filter(row => row.GRADE == "05")
     const oklacore8 = oklacore.filter(row => row.GRADE == "08")
-    // queries testscores - GATES - N+
+    // TODO queries testscores - GATES - N+
+    const gates = await queries.reading(student_number)
+
     // queries testscores - EXPLORE - 8
     // queries testscores - END OF INSTRUCTION - 9,10
     // queries testscores - PLAN - 9
@@ -119,6 +120,7 @@ async function runReport(browser: Browser, student_number: number) {
       iowa4,
       oklacore5,
       oklacore8,
+      gates
     }))
 
     // html personalinfo
