@@ -38,15 +38,6 @@ const classHistReducer = (prev: any, curr: any): any => {
   return prev
 }
 
-const testTableHeader = (testName: string, gradeLevel: number, testDateStr: string, schoolName: string): string => {
-  const date = new Date(testDateStr)
-  const formattedDate = date.getMonth() + "/" + date.getFullYear()
-  const name = testName.toUpperCase()
-  const grade = String(gradeLevel).padStart(2, '0')
-  const school = schoolName.toUpperCase()
-  return `${name}    Grade: ${grade}  Date: ${formattedDate}  School: ${school}`
-}
-
 async function runReport(browser: Browser, student_number: number) {
 
   const transcript_html_path = outFilePath(`${student_number}-transcript.html`)
@@ -86,9 +77,16 @@ async function runReport(browser: Browser, student_number: number) {
     const gates = await queries.reading(student_number)
 
     // queries testscores - EXPLORE - 8
+    // TODO needs iteration - currently uses explore[0]
+    const explore = await queries.explore(student_number)
+
     // queries testscores - END OF INSTRUCTION - 9,10
+    const eoi = await queries.eoi(student_number)
+
     // queries testscores - PLAN - 9
+
     // queries testscores - ACT - 12
+    const act = await queries.act(student_number)
 
     // html transcript
     fs.writeFile(transcript_html_path, render('transcript.njk', {
@@ -115,7 +113,10 @@ async function runReport(browser: Browser, student_number: number) {
       otis,
       iowa_new,
       oklacore,
-      gates
+      gates,
+      explore,
+      eoi,
+      act
     }))
 
     // html personalinfo
