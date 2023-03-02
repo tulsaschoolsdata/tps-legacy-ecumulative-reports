@@ -83,7 +83,9 @@
             <div>Parent/Guardian:</div>
             <div>
               <div>
-              {{ spd_demo.PARENT_LNAME}}
+                {{ student_data_transcript.PARENT_FNAME }}
+                {{ student_data_transcript.PARENT_MI }}
+                {{ student_data_transcript.PARENT_LNAME }}
               </div>
               <div>
               </div>
@@ -91,14 +93,14 @@
           </div>
         </div>
         <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 0.5rem;">
-          <div>Student Number: ?</div>
-          <div>Current School: /div>
-          <div>Entry Date: ?</div>
-          <div>Status: ?</div>
+          <div>Student Number: student_data_transcript.STUDENT_NUMBER</div>
+          <div>Current School: student_data_transcript.STUDENT_CURR_SCH/div>
+          <div>Entry Date: student_data_transcript.STUDENT_ENTRY_DATE</div>
+          <div>Status: student_data_transcript.STUDENT_STATUS</div>
         </div>
         <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 0.5rem;">
           <div>Goes By: ?</div>
-          <div>Grade:</div>
+          <div>Grade: student_data_transcript.STUDENT_GRADE</div>
           <div>Reason Code: ?</div>
         </div>
       </div>
@@ -109,7 +111,7 @@
         <br />
         {{macros.personalInfoMobility(spd_mobility)}}
         <br />
-        {{macros.personalInfoImmunizations()}}
+        {{macros.personalInfoImmunizations(spd_immunizations)}}
       </div>
     </div>
 
@@ -118,7 +120,9 @@
         <br />
         {{macros.personalInfoSuspensions([])}}
         <br />
-        {{macros.personalInfoSpecialEd([])}}
+        {{macros.personalInfoSpecialEdActive([])}}
+        <br />
+        {{macros.personalInfoSpecialEdInactive([])}}
       </div>
     </div>
 

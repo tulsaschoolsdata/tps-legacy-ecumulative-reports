@@ -78,9 +78,6 @@ async function runReport(browser: Browser, student_number: number) {
     const spd_mobility = await queries.spd_Mobility(student_number)
     const spd_immunizations = await queries.spd_Immunizations(student_number)
     const spd_demo = await queries.spd_Demo(student_number)
-    console.info('')
-    console.info("DEMO")
-    console.info(spd_demo)
     const new_iowa3 = newitbs.filter((row => {
        return row.GRADE == "03"
     }))
@@ -166,9 +163,9 @@ async function runReport(browser: Browser, student_number: number) {
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_personal_data_report,
-      //student_data_transcript,
+      student_data_transcript,
       spd_mobility,
-      //spd_immunizations,
+      spd_immunizations,
       // spd_special_ed_active,
       // spd_special_ed_inactive,
       // spd_suspensions,

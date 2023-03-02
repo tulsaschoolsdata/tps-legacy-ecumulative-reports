@@ -484,36 +484,6 @@
 </table>
 {% endmacro %}
 
-{% macro personalInfoSpecialEd(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1">SPECIAL ED:</th>
-      <th width="1">{{Active or Inactive}}</th>
-      <th width="1"></th>
-      <th width="1"></th>
-    </tr>
-    <tr>
-      <th width="1">Category</th>
-      <th width="1">Program Design</th>
-      <th width="1">Entry Date</th>
-      <th width="1">Exit Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-    <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endmacro %}
-
 {% macro testTablePlanRow(rowName, row, className) %}
     <tr class="{{ className }}">
       <td>{{ rowName }}</td>
@@ -622,14 +592,14 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.IMMUNIZATION_TYPE }}</td>
+      <td>{{ row.FIRST_DATE }}</td>
+      <td>{{ row.SECOND_DATE }}</td>
+      <td>{{ row.THIRD_DATE }}</td>
+      <td>{{ row.FOURT_HDATE }}</td>
+      <td>{{ row.FIFTH_DATE }}</td>
+      <td>{{ row.SIXTH_DATE }}</td>
+      <td>{{ row.CERTIFIED_BY }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -663,6 +633,66 @@
       <td>{{ row.ENTRY_REASON_CODE }}</td>
       <td>{{ row.EXIT_DATE }}</td>
       <td>{{ row.EXIT_REASON_CODE }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro personalInfoSpecialEdActive(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th width="1">SPECIAL ED:</th>
+      <th width="1">{{Active or Inactive}}</th>
+      <th width="1"></th>
+      <th width="1"></th>
+    </tr>
+    <tr>
+      <th width="1">Category</th>
+      <th width="1">Program Design</th>
+      <th width="1">Entry Date</th>
+      <th width="1">Exit Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro personalInfoSpecialEdInactive(rows) %}
+<table cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th width="1">SPECIAL ED:</th>
+      <th width="1">{{Active or Inactive}}</th>
+      <th width="1"></th>
+      <th width="1"></th>
+    </tr>
+    <tr>
+      <th width="1">Category</th>
+      <th width="1">Program Design</th>
+      <th width="1">Entry Date</th>
+      <th width="1">Exit Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set className = cycler("odd", "even") %}
+    {% for row in rows %}
+    <tr class="{{ className.next() }}">
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
+      <td>{{ "" }}</td>
     </tr>
     {% endfor %}
   </tbody>
