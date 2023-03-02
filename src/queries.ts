@@ -754,16 +754,16 @@ type Spd_Immunizations = {
 export const spd_Immunizations = (student_number: number): Promise<Spd_Immunizations[]> => prisma.$queryRaw<Spd_Immunizations[]>`Execute ECUM_Report_student.ecum_queries.spd_immunizations ${student_number}`
 
 type Spd_SpecialEdActive = {
-  SPEC_PREFIX: string
-  SPEC_NUMBER: number
+  SPEC_PREFIX_NUMBER: string
   SPEC_PROG_DESIGN: string
   SPEC_ENTRY_DATE: Date
+  SPEC_LOCATION: string
 }
 
 export const spd_SpecialEdActive = (student_number: number): Promise<Spd_SpecialEdActive[]> => prisma.$queryRaw<Spd_SpecialEdActive[]>`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_special_ed_active ${student_number}`
 
 type Spd_SpecialEdInactive = {
-  PREFIX_NUMBER: string
+  SPEC_PREFIX_NUMBER: string
   SPEC_PROG_DESIGN: string
   SPEC_ENTRY_DATE: Date
   SPEC_EXIT_DATE: Date
