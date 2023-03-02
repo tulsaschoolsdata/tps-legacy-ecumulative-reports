@@ -83,9 +83,8 @@ async function runReport(browser: Browser, student_number: number) {
 
     // queries testscores - OKLAHOMA CORE
     const oklacore = await queries.occ(student_number)
-    const oklacore5 = oklacore.filter(row => row.GRADE == "05")
-    const oklacore8 = oklacore.filter(row => row.GRADE == "08")
-    // TODO queries testscores - GATES - N+
+
+    // queries testscores - GATES
     const gates = await queries.reading(student_number)
 
     // queries testscores - EXPLORE - 8
@@ -118,8 +117,7 @@ async function runReport(browser: Browser, student_number: number) {
       otis,
       iowa3,
       iowa4,
-      oklacore5,
-      oklacore8,
+      oklacore,
       gates
     }))
 
