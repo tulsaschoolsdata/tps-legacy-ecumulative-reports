@@ -84,6 +84,7 @@ async function runReport(browser: Browser, student_number: number) {
     const eoi = await queries.eoi(student_number)
 
     // queries testscores - PLAN - 9
+    const plan = await queries.plan_test(student_number)
 
     // queries testscores - ACT - 12
     const act = await queries.act(student_number)
@@ -116,6 +117,7 @@ async function runReport(browser: Browser, student_number: number) {
       gates,
       explore,
       eoi,
+      plan,
       act
     }))
 

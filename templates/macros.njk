@@ -539,43 +539,62 @@
 </table>
 {% endmacro %}
 
-{% macro testTablePlanRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td class="blueBG">{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-{% endmacro %}
-
-{% macro testTablePlan(rowStandardScore, rowLocalPercentile, rowNationalPercentile) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1"></th>
-      <th width="1">English</th>
-      <th width="1">English Subscore:<br />Usage/Mechanical</th>
-      <th width="1">English Subscore:<br />Rhetorical</th>
-      <th width="1">Math</th>
-      <th width="1">Math Subscore:<br />Algebra</th>
-      <th width="1">Math Subscore:<br />Geometry</th>
-      <th width="1">Reading</th>
-      <th width="1">Science</th>
-      <th width="1">Composite</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTablePlanRow("Standard Score", rowStandard, "odd") }}
-      {{ testTablePlanRow("Local Percentile", rowLocalPercentile, "even") }}
-      {{ testTablePlanRow("National Percentile", rowNationalPercentile, "odd") }}
-  </tbody>
-</table>
+{% macro testTablePlan(row) %}
+  {{ testTableHeader(row) }}
+  <table cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th width="1"></th>
+        <th width="1">English</th>
+        <th width="1">English Subscore:<br />Usage/Mechanical</th>
+        <th width="1">English Subscore:<br />Rhetorical</th>
+        <th width="1">Math</th>
+        <th width="1">Math Subscore:<br />Algebra</th>
+        <th width="1">Math Subscore:<br />Geometry</th>
+        <th width="1">Reading</th>
+        <th width="1">Science</th>
+        <th width="1">Composite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="odd">
+        <td class="blueBG">Standard Score</td>
+        <td>{{ row.ENGLISH_SCR }}</td>
+        <td>{{ row.SUBSCORE_USE }}</td>
+        <td>{{ row.SUBSCORE_RHET }}</td>
+        <td>{{ row.MATH_SCR }}</td>
+        <td>{{ row.SUBSCORE_ALG }}</td>
+        <td>{{ row.SUBSCORE_GEO }}</td>
+        <td>{{ row.READING_SCR }}</td>
+        <td>{{ row.SCIENCE_SCR }}</td>
+        <td>{{ row.COMPOSITE_SCR }}</td>
+      </tr>
+      <tr class="even">
+        <td class="blueBG">Local Percentile</td>
+        <td>{{ row.ENGLISH_LOC_PERC }}</td>
+        <td>{{ row.LOC_PERC_UM }}</td>
+        <td>{{ row.LOC_PERC_RS }}</td>
+        <td>{{ row.MATH_LOC_PERC }}</td>
+        <td>{{ row.LOC_PERC_ALG }}</td>
+        <td>{{ row.LOC_PERC_GEO }}</td>
+        <td>{{ row.READING_LOC_PERC }}</td>
+        <td>{{ row.SCIENCE_LOC_PERC }}</td>
+        <td>{{ row.COMPOSITE_LOC_PERC }}</td>
+      </tr>
+      <tr class="odd">
+        <td class="blueBG">National Percentile</td>
+        <td>{{ row.ENGLISH_NAT_PERC }}</td>
+        <td>{{ row.NAT_PERC_UM }}</td>
+        <td>{{ row.NAT_PERC_RS }}</td>
+        <td>{{ row.MATH_NAT_PERC }}</td>
+        <td>{{ row.NAT_PERC_ALG }}</td>
+        <td>{{ row.NAT_PERC_GEO }}</td>
+        <td>{{ row.READING_NAT_PERC }}</td>
+        <td>{{ row.SCIENCE_NAT_PERC }}</td>
+        <td>{{ row.COMPOSITE_NAT_PERC }}</td>
+      </tr>
+    </tbody>
+  </table>
 {% endmacro %}
 
 {% macro testTableActRow(rowName, row, className) %}
