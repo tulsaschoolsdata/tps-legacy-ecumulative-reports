@@ -20,7 +20,7 @@ import type {
   TESTS_SAT9_CUSTOM,
   TESTS_EXPLTEST,
   TESTS_EOI,
-  TESTS_ACTTEST
+  TESTS_ACTTEST,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
