@@ -77,9 +77,7 @@ async function runReport(browser: Browser, student_number: number) {
     const otis = await queries.otis(student_number)
 
     // queries testscores - IOWA
-    const newitbs = await queries.newitbs(student_number)
-    const iowa3 = newitbs.filter(row => row.GRADE == "03")
-    const iowa4 = newitbs.filter(row => row.GRADE == "04")
+    const iowa_new = await queries.newitbs(student_number)
 
     // queries testscores - OKLAHOMA CORE
     const oklacore = await queries.occ(student_number)
@@ -115,8 +113,7 @@ async function runReport(browser: Browser, student_number: number) {
       student_data_transcript,
       admin,
       otis,
-      iowa3,
-      iowa4,
+      iowa_new,
       oklacore,
       gates
     }))

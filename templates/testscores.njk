@@ -78,17 +78,13 @@
         <h3>Student Test List</h3>
 
         {{ macros.student_test_list(admin) }}
-        {{ macros.testTableHeader("OTIS-LENNON", 2, "Date", "SchoolName") }}
         {{ macros.testTableOtis(otis) }}
 
       </div>
     </div>
     <div class="page" data-pageNum="2">
       <div class="no-break">
-        {{ macros.testTableHeader("IOWA TEST/TAP", 3, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(iowa3) }}
-        {{ macros.testTableHeader("IOWA TEST/TAP", 4, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(iowa4) }}
+        {{ macros.testTableIowa(iowa_new) }}
         {{ macros.testTableOklaCore(oklacore) }}
       </div>
     </div>
