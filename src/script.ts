@@ -67,26 +67,25 @@ async function runReport(browser: Browser, student_number: number) {
     // queries testscores - OTIS-LENNON
     const otis = await queries.otis(student_number)
 
-    // queries testscores - IOWA
+    // queries testscores - NEW IOWA
     const iowa_new = await queries.newitbs(student_number)
 
     // queries testscores - OKLAHOMA CORE
     const oklacore = await queries.occ(student_number)
 
-    // queries testscores - GATES
+    // queries testscores - GATES READING
     const gates = await queries.reading(student_number)
 
-    // queries testscores - EXPLORE - 8
-    // TODO needs iteration - currently uses explore[0]
+    // queries testscores - EXPLORE
     const explore = await queries.explore(student_number)
 
-    // queries testscores - END OF INSTRUCTION - 9,10
+    // queries testscores - END OF INSTRUCTION
     const eoi = await queries.eoi(student_number)
 
-    // queries testscores - PLAN - 9
+    // queries testscores - PLAN
     const plan = await queries.plan_test(student_number)
 
-    // queries testscores - ACT - 12
+    // queries testscores - ACT
     const act = await queries.act(student_number)
 
     // html transcript
