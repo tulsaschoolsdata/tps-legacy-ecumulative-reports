@@ -442,16 +442,6 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro testTableEndOfInstructionRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td class="blueBG">{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-{% endmacro %}
-
 {% macro testTableEndOfInstruction(rows) %}
   {% for row in rows %}
     {{ testTableHeader(row) }}
@@ -466,9 +456,27 @@
         </tr>
       </thead>
       <tbody>
-          {{ testTableEndOfInstructionRow("OPI Score", rowOpiScore, "odd") }}
-          {{ testTableEndOfInstructionRow("Performance Level", rowPerformanceLevel, "even") }}
-          {{ testTableEndOfInstructionRow("Pass/Fail", rowPassFail, "odd") }}
+        <tr class="odd">
+          <td class="blueBG">OPI Score</td>
+          <td>{{ row.ENGL_SCORE }}</td>
+          <td>{{ row.HIST_SCORE }}</td>
+          <td>{{ row.ALGE_SCORE }}</td>
+          <td>{{ row.BIOL_SCORE }}</td>
+        </tr>
+        <tr class="even">
+          <td class="blueBG">Performance Level</td>
+          <td>{{ row.ENGL_PERF_LVL }}</td>
+          <td>{{ row.HIST_PERF_LVL }}</td>
+          <td>{{ row.ALGE_PERF_LVL }}</td>
+          <td>{{ row.BIOL_PERF_LVL }}</td>
+        </tr>
+        <tr class="odd">
+          <td class="blueBG">Pass/Fail</td>
+          <td>{{ row.ENGL_PASS_FAIL }}</td>
+          <td>{{ row.HIST_PASS_FAIL }}</td>
+          <td>{{ row.ALGE_PASS_FAIL }}</td>
+          <td>{{ row.BIOL_PASS_FAIL }}</td>
+        </tr>
       </tbody>
     </table>
   {% endfor %}
