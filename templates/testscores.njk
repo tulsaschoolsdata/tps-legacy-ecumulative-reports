@@ -50,6 +50,12 @@
       .no-break {
         break-inside: avoid;
       }
+      .blueBG {
+        background-color: #5974B4;
+        color: #fff;
+        text-align: left;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -72,43 +78,27 @@
         <h3>Student Test List</h3>
 
         {{ macros.student_test_list(admin) }}
-        {{ macros.testTableHeader("OTIS-LENNON", 2, "Date", "SchoolName") }}
         {{ macros.testTableOtis(otis) }}
 
       </div>
     </div>
     <div class="page" data-pageNum="2">
       <div class="no-break">
-        {{ macros.testTableHeader("IOWA TEST/TAP", 3, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(new_iowa3_obj.GE[0], new_iowa3_obj.LPR[0], new_iowa3_obj.NCE[0], new_iowa3_obj.NPR[0], new_iowa3_obj.SPR[0]) }}
-        {{ macros.testTableHeader("IOWA TEST/TAP", 4, "Date", "SchoolName") }}
-        {{ macros.testTableIowa(new_iowa4_obj.GE[0], new_iowa4_obj.LPR[0], new_iowa4_obj.NCE[0], new_iowa4_obj.NPR[0], new_iowa4_obj.SPR[0]) }}
-        {{ macros.testTableHeader("OKLAHOMA CORE CURRICULUM TEST", 5, "Date", "SchoolName") }}
-        {{ macros.testTableOklaCore(occ) }}
+        {{ macros.testTableIowa(iowa_new) }}
+        {{ macros.testTableOklaCore(oklacore) }}
       </div>
     </div>
     <div class="page" data-pageNum="3">
       <div class="no-break">
-        {{ macros.testTableHeader("OKLAHOMA CORE CURRICULUM TEST", 8, "Date", "SchoolName") }}
-        {{ macros.testTableOklaCore(occ) }}
-        {{ macros.testTableHeader("GATES READING TEST", 5, "2001", "SchoolName") }}
-        {{ macros.testTableGates([]) }}
-        {{ macros.testTableHeader("GATES READING TEST", 5, "2002", "SchoolName") }}
-        {{ macros.testTableGates([]) }}
-        {{ macros.testTableHeader("EXPLORE TEST", 8, "Date", "SchoolName") }}
-        {{ macros.testTableExplore([]) }}
+        {{ macros.testTableGates(gates) }}
+        {{ macros.testTableExplore(explore) }}
       </div>
     </div>
     <div class="page" data-pageNum="4">
       <div class="no-break">
-        {{ macros.testTableHeader("END OF INSTRUCTION", 9, "Date", "SchoolName") }}
-        {{ macros.testTableEndOfInstruction([]) }}
-        {{ macros.testTableHeader("END OF INSTRUCTION", 10, "Date", "SchoolName") }}
-        {{ macros.testTableEndOfInstruction([]) }}
-        {{ macros.testTableHeader("PLAN TEST", 9, "Date", "SchoolName") }}
-        {{ macros.testTablePlan([]) }}
-        {{ macros.testTableHeader("ACT TEST", 12, "Date", "SchoolName") }}
-        {{ macros.testTableAct([]) }}
+        {{ macros.testTableEndOfInstruction(eoi) }}
+        {{ macros.testTablePlan(plan) }}
+        {{ macros.testTableAct(act) }}
       </div>
     </div>
 

@@ -194,45 +194,46 @@
 </table>
 {% endmacro %}
 
-{% macro testTableHeader(testName, gradeLevel, testDate, schoolName) %}
+{% macro testTableHeader(row) %}
   <div id="header">
-    {{ testName | upper }} {{gradeLevel}}
+    {{ row.TEST_NAME }}{{"   Grade: "}}{{row.GRADE}}{{"   Date: "}}{{row.DATE | formatDate }}{{"   School: "}}{{row.SCHOOL_NAME}}
   </div>
 {% endmacro %}
 
 {% macro testTableOtis(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1">Raw Score</th>
-      <th width="1">Ability Index by Age</th>
-      <th width="1">Percentile Rank by Age</th>
-      <th width="1">Stanine by Age</th>
-      <th width="1">Ability Index by Grade</th>
-      <th width="1">Percentile Rank by Grade</th>
-      <th width="1">Stanine by Grade</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-    <tr class="{{ className.next() }}">
-      <td>{{ row.OTIS_RAW_SCORE }}</td>
-      <td>{{ row.OTIS_SAI_SCORE }}</td>
-      <td>{{ row.OTIS_SAI_PCT }}</td>
-      <td>{{ row.OTIS_SAI_STANINE }}</td>
-      <td>{{ row.OTIS_GRD_ABILITY }}</td>
-      <td>{{ row.OTIS_GRD_PCT }}</td>
-      <td>{{ row.OTIS_GRD_STANINE }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Raw Score</th>
+          <th width="1">Ability Index by Age</th>
+          <th width="1">Percentile Rank by Age</th>
+          <th width="1">Stanine by Age</th>
+          <th width="1">Ability Index by Grade</th>
+          <th width="1">Percentile Rank by Grade</th>
+          <th width="1">Stanine by Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        <tr class="{{ className.next() }}">
+          <td>{{ row.OTIS_RAW_SCORE }}</td>
+          <td>{{ row.OTIS_SAI_SCORE }}</td>
+          <td>{{ row.OTIS_SAI_PCT }}</td>
+          <td>{{ row.OTIS_SAI_STANINE }}</td>
+          <td>{{ row.OTIS_GRD_ABILITY }}</td>
+          <td>{{ row.OTIS_GRD_PCT }}</td>
+          <td>{{ row.OTIS_GRD_STANINE }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
 
-{% macro testTableIowaRow(rowName, row, className) %}
+{% macro testTableIowaRow(row, className) %}
     <tr class="{{ className }}">
-      <td>{{ rowName }}</td>
+      <td class="blueBG">{{ row.MEASURE_RANK}}</td>
       <td>{{ row.VOCABULARY }}</td>
       <td>{{ row.COMPOSITION }}</td>
       <td>{{ row.READING_ADV_SK }}</td>
@@ -256,194 +257,334 @@
     </tr>
 {% endmacro %}
 
-{% macro testTableIowa(rowGE, rowLPR, rowNCE, rowNPR, rowSPR) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th></th>
-      <th width="1">Vocabulary</th>
-      <th width="1">Composition</th>
-      <th width="1">ReadAdv.Skills</th>
-      <th width="1">ReadingTotal</th>
-      <th width="1">Spelling</th>
-      <th width="1">Capitalization</th>
-      <th width="1">Punctuation</th>
-      <th width="1">Usage/Expression</th>
-      <th width="1">LanguageTotal</th>
-      <th width="1">MathConcept</th>
-      <th width="1">MathProb.Solve</th>
-      <th width="1">MathTotal</th>
-      <th width="1">MathTotalComp</th>
-      <th width="1">Soc.Studies</th>
-      <th width="1">Science</th>
-      <th width="1">MapsDiagrams</th>
-      <th width="1">ReferenceMat.</th>
-      <th width="1">SrceInfoTotal</th>
-      <th width="1">CoreTotal</th>
-      <th width="1">CoreTotalComp</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTableIowaRow("GE", rowGE, "odd") }}
-      {{ testTableIowaRow("LPR", rowLPR, "even") }}
-      {{ testTableIowaRow("NCE", rowNCE, "odd") }}
-      {{ testTableIowaRow("NPR", rowNPR, "even") }}
-      {{ testTableIowaRow("SPR", rowSPR, "odd") }}
-  </tbody>
-</table>
+{% macro testTableIowa(rows) %}
+  {% for date, rows in rows | groupby("SORT_DATE") %}
+
+    {% set header = rows[0] %}
+    {{ testTableHeader(header) }}
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th></th>
+          <th width="1">Voca<br />bula<br />ry</th>
+          <th width="1">Comp<br />osit<br />ion</th>
+          <th width="1">Read<br />Adv.<br />Skills</th>
+          <th width="1">Read<br />ing<br />Total</th>
+          <th width="1">Spel<br />ling<br /></th>
+          <th width="1">Capi<br />tali<br />zation</th>
+          <th width="1">Punc<br />tuat<br />ion</th>
+          <th width="1">Usag<br />e/Ex<br />pression</th>
+          <th width="1">Lang<br />uage<br />Total</th>
+          <th width="1">Math<br />Conc<br />ept</th>
+          <th width="1">Math<br />Prob.<br />Solve</th>
+          <th width="1">Math<br />Total<br /></th>
+          <th width="1">Math<br />Total<br />Comp</th>
+          <th width="1">Soc.<br />Stud<br />ies</th>
+          <th width="1">Scie<br />nce</th>
+          <th width="1">Maps<br />Diag<br />rams</th>
+          <th width="1">Refe<br />renc<br />eMat.</th>
+          <th width="1">Srce<br />Info<br />Total</th>
+          <th width="1">Core<br />Total<br /></th>
+          <th width="1">Core<br />Total<br />Comp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+          {{ testTableIowaRow(row, className.next()) }}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor%}
 {% endmacro %}
 
 {% macro testTableOklaCore(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1">Math<br />PL</th>
-      <th width="1">Math<br />OPI</th>
-      <th width="1">Science<br />PL</th>
-      <th width="1">Science<br />OPI</th>
-      <th width="1">Reading<br />PL</th>
-      <th width="1">Reading<br />OPI</th>
-      <th width="1">U.S. History<br />PL</th>
-      <th width="1">U.S. History<br />OPI</th>
-      <th width="1">Geography<br />PL</th>
-      <th width="1">Geography<br />OPI</th>
-      <th width="1">Arts<br />PL</th>
-      <th width="1">Arts<br />OPI</th>
-      <th width="1">Okla Hist<br />PL</th>
-      <th width="1">Okla Hist<br />OPI</th>
-      <th width="1">Writing<br />PL</th>
-      <th width="1">Writing Earned</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-    <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Math<br />PL</th>
+          <th width="1">Math<br />OPI</th>
+          <th width="1">Science<br />PL</th>
+          <th width="1">Science<br />OPI</th>
+          <th width="1">Reading<br />PL</th>
+          <th width="1">Reading<br />OPI</th>
+          <th width="1">U.S. History<br />PL</th>
+          <th width="1">U.S. History<br />OPI</th>
+          <th width="1">Geography<br />PL</th>
+          <th width="1">Geography<br />OPI</th>
+          <th width="1">Arts<br />PL</th>
+          <th width="1">Arts<br />OPI</th>
+          <th width="1">Okla Hist<br />PL</th>
+          <th width="1">Okla Hist<br />OPI</th>
+          <th width="1">Writing<br />PL</th>
+          <th width="1">Writing Earned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        <tr class="{{ className.next() }}">
+          <td>{{ row.MATH_PL }}</td>
+          <td>{{ row.MATH_OPI }}</td>
+          <td>{{ row.SCIENCE_PL }}</td>
+          <td>{{ row.SCIENCE_OPI }}</td>
+          <td>{{ row.READ_PL }}</td>
+          <td>{{ row.READ_OPI }}</td>
+          <td>{{ row.USHIST_PL }}</td>
+          <td>{{ row.USHIST_OPI }}</td>
+          <td>{{ row.GEOGRAPHY_PL }}</td>
+          <td>{{ row.GEOGRAPHY_OPI }}</td>
+          <td>{{ row.ARTS_PL }}</td>
+          <td>{{ row.ARTS_OPI }}</td>
+          <td>{{ row.OKHIST_PL }}</td>
+          <td>{{ row.OKHIST_OPI }}</td>
+          <td>{{ row.WRI_PL }}</td>
+          <td>{{ row.WRI_EARN }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
+
 
 
 {% macro testTableGates(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1">Raw Score 1</th>
-      <th width="1">Percentile 1</th>
-      <th width="1">GE 1</th>
-      <th width="1">Raw Score 2</th>
-      <th width="1">Percentile 2</th>
-      <th width="1">GE 2</th>
-      <th width="1">Raw Score 3</th>
-      <th width="1">Percentile 3</th>
-      <th width="1">GE 3</th>
-      <th width="1">Raw Score 4</th>
-      <th width="1">Percentile 4</th>
-      <th width="1">GE 4</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-    <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Raw Score 1</th>
+          <th width="1">Percentile 1</th>
+          <th width="1">GE 1</th>
+          <th width="1">Raw Score 2</th>
+          <th width="1">Percentile 2</th>
+          <th width="1">GE 2</th>
+          <th width="1">Raw Score 3</th>
+          <th width="1">Percentile 3</th>
+          <th width="1">GE 3</th>
+          <th width="1">Raw Score 4</th>
+          <th width="1">Percentile 4</th>
+          <th width="1">GE 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{ row.RAW_SCORE_1 }}</td>
+          <td>{{ row.PERCENTILE_1 }}</td>
+          <td>{{ row.GE_1 }}</td>
+          <td>{{ row.RAW_SCORE_2 }}</td>
+          <td>{{ row.PERCENTILE_2 }}</td>
+          <td>{{ row.GE_2 }}</td>
+          <td>{{ row.RAW_SCORE_3 }}</td>
+          <td>{{ row.PERCENTILE_3 }}</td>
+          <td>{{ row.GE_3 }}</td>
+          <td>{{ row.RAW_SCORE_4 }}</td>
+          <td>{{ row.PERCENTILE_4 }}</td>
+          <td>{{ row.GE_4 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
 
-{% macro testTableExploreRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
+{% macro testTableExplore(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1"></th>
+          <th width="1">English</th>
+          <th width="1">English Subscore:<br />Usage/Mechanical</th>
+          <th width="1">English Subscore:<br />Rhetorical</th>
+          <th width="1">Math</th>
+          <th width="1">Reading</th>
+          <th width="1">Science</th>
+          <th width="1">Composite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td class="blueBG">Standard Score</td>
+          <td>{{ row.ENGLISH_SCR }}</td>
+          <td>{{ row.SUBSCORE_UM }}</td>
+          <td>{{ row.SUBSCORE_RH }}</td>
+          <td>{{ row.MATH_SCR }}</td>
+          <td>{{ row.READING_SCR }}</td>
+          <td>{{ row.SCIENCE_SCR }}</td>
+          <td>{{ row.COMPOSITE_SCR }}</td>
+        </tr>
+        <tr class="even">
+          <td class="blueBG">Local Percentile</td>
+          <td>{{ row.ENGLISH_LOC_PERC }}</td>
+          <td>{{ row.LOC_PERC_UM }}</td>
+          <td>{{ row.LOC_PERC_RH }}</td>
+          <td>{{ row.MATH_LOC_PERC }}</td>
+          <td>{{ row.READING_LOC_PERC }}</td>
+          <td>{{ row.SCIENCE_LOC_PERC }}</td>
+          <td>{{ row.COMPOSITE_LOC_PERC }}</td>
+        </tr>
+        <tr class="odd">
+          <td class="blueBG">National Percentile</td>
+          <td>{{ row.ENGLISH_NAT_PERC }}</td>
+          <td>{{ row.NAT_PERC_UM }}</td>
+          <td>{{ row.NAT_PERC_RH }}</td>
+          <td>{{ row.MATH_NAT_PERC }}</td>
+          <td>{{ row.READING_NAT_PERC }}</td>
+          <td>{{ row.SCIENCE_NAT_PERC }}</td>
+          <td>{{ row.COMPOSITE_NAT_PERC }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
 
-{% macro testTableExplore(rowStandardScore, rowLocalPercentile, rowNationalPercentile) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1"></th>
-      <th width="1">English</th>
-      <th width="1">English Subscore:<br />Usage/Mechanical</th>
-      <th width="1">English Subscore:<br />Rhetorical</th>
-      <th width="1">Math</th>
-      <th width="1">Reading</th>
-      <th width="1">Science</th>
-      <th width="1">Composite</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTableExploreRow("Standard Score", rowStandard, "odd") }}
-      {{ testTableExploreRow("Local Percentile", rowLocalPercentile, "even") }}
-      {{ testTableExploreRow("National Percentile", rowNationalPercentile, "odd") }}
-  </tbody>
-</table>
+{% macro testTableEndOfInstruction(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1"></th>
+          <th width="1">English II</th>
+          <th width="1">U.S. History</th>
+          <th width="1">Algebra I</th>
+          <th width="1">Biology I</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td class="blueBG">OPI Score</td>
+          <td>{{ row.ENGL_SCORE }}</td>
+          <td>{{ row.HIST_SCORE }}</td>
+          <td>{{ row.ALGE_SCORE }}</td>
+          <td>{{ row.BIOL_SCORE }}</td>
+        </tr>
+        <tr class="even">
+          <td class="blueBG">Performance Level</td>
+          <td>{{ row.ENGL_PERF_LVL }}</td>
+          <td>{{ row.HIST_PERF_LVL }}</td>
+          <td>{{ row.ALGE_PERF_LVL }}</td>
+          <td>{{ row.BIOL_PERF_LVL }}</td>
+        </tr>
+        <tr class="odd">
+          <td class="blueBG">Pass/Fail</td>
+          <td>{{ row.ENGL_PASS_FAIL }}</td>
+          <td>{{ row.HIST_PASS_FAIL }}</td>
+          <td>{{ row.ALGE_PASS_FAIL }}</td>
+          <td>{{ row.BIOL_PASS_FAIL }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
 
-{% macro testTableEndOfInstructionRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
+{% macro testTablePlan(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1"></th>
+          <th width="1">English</th>
+          <th width="1">English Subscore:<br />Usage/Mechanical</th>
+          <th width="1">English Subscore:<br />Rhetorical</th>
+          <th width="1">Math</th>
+          <th width="1">Math Subscore:<br />Algebra</th>
+          <th width="1">Math Subscore:<br />Geometry</th>
+          <th width="1">Reading</th>
+          <th width="1">Science</th>
+          <th width="1">Composite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td class="blueBG">Standard Score</td>
+          <td>{{ row.ENGLISH_SCR }}</td>
+          <td>{{ row.SUBSCORE_USE }}</td>
+          <td>{{ row.SUBSCORE_RHET }}</td>
+          <td>{{ row.MATH_SCR }}</td>
+          <td>{{ row.SUBSCORE_ALG }}</td>
+          <td>{{ row.SUBSCORE_GEO }}</td>
+          <td>{{ row.READING_SCR }}</td>
+          <td>{{ row.SCIENCE_SCR }}</td>
+          <td>{{ row.COMPOSITE_SCR }}</td>
+        </tr>
+        <tr class="even">
+          <td class="blueBG">Local Percentile</td>
+          <td>{{ row.ENGLISH_LOC_PERC }}</td>
+          <td>{{ row.LOC_PERC_UM }}</td>
+          <td>{{ row.LOC_PERC_RS }}</td>
+          <td>{{ row.MATH_LOC_PERC }}</td>
+          <td>{{ row.LOC_PERC_ALG }}</td>
+          <td>{{ row.LOC_PERC_GEO }}</td>
+          <td>{{ row.READING_LOC_PERC }}</td>
+          <td>{{ row.SCIENCE_LOC_PERC }}</td>
+          <td>{{ row.COMPOSITE_LOC_PERC }}</td>
+        </tr>
+        <tr class="odd">
+          <td class="blueBG">National Percentile</td>
+          <td>{{ row.ENGLISH_NAT_PERC }}</td>
+          <td>{{ row.NAT_PERC_UM }}</td>
+          <td>{{ row.NAT_PERC_RS }}</td>
+          <td>{{ row.MATH_NAT_PERC }}</td>
+          <td>{{ row.NAT_PERC_ALG }}</td>
+          <td>{{ row.NAT_PERC_GEO }}</td>
+          <td>{{ row.READING_NAT_PERC }}</td>
+          <td>{{ row.SCIENCE_NAT_PERC }}</td>
+          <td>{{ row.COMPOSITE_NAT_PERC }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
 {% endmacro %}
 
-{% macro testTableEndOfInstruction(rowOpiScore, rowPerformanceLevel, rowPassFail) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1"></th>
-      <th width="1">English II</th>
-      <th width="1">U.S. History</th>
-      <th width="1">Algebra I</th>
-      <th width="1">Biology I</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTableEndOfInstructionRow("OPI Score", rowOpiScore, "odd") }}
-      {{ testTableEndOfInstructionRow("Performance Level", rowPerformanceLevel, "even") }}
-      {{ testTableEndOfInstructionRow("Pass/Fail", rowPassFail, "odd") }}
-  </tbody>
-</table>
+{% macro testTableActRow(rowName, row, className) %}
 {% endmacro %}
+
+{% macro testTableAct(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1"></th>
+          <th width="1">English</th>
+          <th width="1">Eng Subscore:<br />Usage/Mechanical</th>
+          <th width="1">Eng Subscore:<br />Rhetorical Skills</th>
+          <th width="1">Math</th>
+          <th width="1">Math Subscore:<br />Elem. Algebra</th>
+          <th width="1">Math Subscore:<br />Algebra/Geom.</th>
+          <th width="1">Math Subscore:<br />Geometry/Trig.</th>
+          <th width="1">Reading</th>
+          <th width="1">Reading Subscore:<br />Social Science</th>
+          <th width="1">Read Subscore:<br />Arts/Literature</th>
+          <th width="1">Science</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td class="blueBG">Score</td>
+          <td>{{ row.SCORE_ENGLISH }}</td>
+          <td>{{ row.SUBSCORE_UM }}</td>
+          <td>{{ row.SUBSCORE_RH }}</td>
+          <td>{{ row.SCORE_MATH }}</td>
+          <td>{{ row.SUBSCORE_EA }}</td>
+          <td>{{ row.SUBSCORE_AG }}</td>
+          <td>{{ row.SUBSCORE_GT }}</td>
+          <td>{{ row.SCORE_READING }}</td>
+          <td>{{ row.SUBSCORE_SS }}</td>
+          <td>{{ row.SUBSCORE_AL }}</td>
+          <td>{{ row.SCORE_SCIENCE }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
 
 {% macro personalInfoSuspensions(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -510,86 +651,6 @@
       <td>{{ "" }}</td>
     </tr>
     {% endfor %}
-  </tbody>
-</table>
-{% endmacro %}
-
-{% macro testTablePlanRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-{% endmacro %}
-
-{% macro testTablePlan(rowStandardScore, rowLocalPercentile, rowNationalPercentile) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1"></th>
-      <th width="1">English</th>
-      <th width="1">English Subscore:<br />Usage/Mechanical</th>
-      <th width="1">English Subscore:<br />Rhetorical</th>
-      <th width="1">Math</th>
-      <th width="1">Math Subscore:<br />Algebra</th>
-      <th width="1">Math Subscore:<br />Geometry</th>
-      <th width="1">Reading</th>
-      <th width="1">Science</th>
-      <th width="1">Composite</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTablePlanRow("Standard Score", rowStandard, "odd") }}
-      {{ testTablePlanRow("Local Percentile", rowLocalPercentile, "even") }}
-      {{ testTablePlanRow("National Percentile", rowNationalPercentile, "odd") }}
-  </tbody>
-</table>
-{% endmacro %}
-
-{% macro testTableActRow(rowName, row, className) %}
-    <tr class="{{ className }}">
-      <td>{{ rowName }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-{% endmacro %}
-
-{% macro testTableAct(row) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1"></th>
-      <th width="1">English</th>
-      <th width="1">Eng Subscore:<br />Usage/Mechanical</th>
-      <th width="1">Eng Subscore:<br />Rhetorical Skills</th>
-      <th width="1">Math</th>
-      <th width="1">Math Subscore:<br />Elem. Algebra</th>
-      <th width="1">Math Subscore:<br />Algebra/Geom.</th>
-      <th width="1">Math Subscore:<br />Geometry/Trig.</th>
-      <th width="1">Reading</th>
-      <th width="1">Reading Subscore:<br />Social Science</th>
-      <th width="1">Read Subscore:<br />Arts/Literature</th>
-      <th width="1">Science</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{ testTableActRow("Score", row, "odd") }}
   </tbody>
 </table>
 {% endmacro %}

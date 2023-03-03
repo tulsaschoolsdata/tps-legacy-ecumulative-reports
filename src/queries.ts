@@ -233,7 +233,7 @@ type Otis = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
   'SORT_DATE' |
-  'SORT_GRADE'  
+  'SORT_GRADE'
   > & Pick<TESTS_OTIS,
   'STUDENT_NUMBER' |
   'SCHOOL_NAME' |
@@ -515,6 +515,7 @@ export const occ = async (student_number: number): Promise<Occ[]> => {
 type Reading = Pick<TESTS_ADMINISTERED,
   'STUDENT_NUMBER' |
   'GRADE' |
+  'DATE' |
   'SORT_DATE' |
   'SORT_GRADE'
     >
@@ -566,32 +567,32 @@ type Sat9 = Pick<TESTS_ADMINISTERED,
   'GRADE' |
   'SORT_DATE' |
   'SORT_GRADE'> & Pick<TESTS_SAT9_CUSTOM,
-  'SCHOOL_NAME' |
+  'COMPLETE_BATTERY' |
+  'ENVIRONMENT' |
+  'LANGUAGE_EXP' |
+  'LANGUAGE_MECH' |
+  'LANGUAGE_TOTAL' |
+  'LISTENING' |
   'MEASURE_RANK' |
-  'READING_TOTAL' |
-  'WORD_STUDY' |
-  'READING_VOCABULARY' |
-  'READING_COMPREH' |
-  'TOTAL_MATH' |
+  'NOT_ACTIVE' |
+  'PARTIAL_BATTERY' |
   'PROBLEM_SOLVING' |
   'PROCEDURES' |
-  'NOT_ACTIVE' |
-  'LANGUAGE_TOTAL' |
-  'LANGUAGE_MECH' |
-  'LANGUAGE_EXP' |
-  'SPELLING' |
-  'STUDY_SKILLS' |
-  'ENVIRONMENT' |
+  'READING_COMPREH' |
+  'READING_TOTAL' |
+  'READING_VOCABULARY' |
+  'SCHOOL_NAME' |
   'SCIENCE' |
   'SOCIAL_SCIENCE' |
-  'LISTENING' |
-  'USING_INFO' |
+  'SPELLING' |
+  'STUDY_SKILLS' |
   'THINKING_SKILLS' |
-  'PARTIAL_BATTERY' |
-  'COMPLETE_BATTERY' |
+  'THINKING_SKILLS_BB' |
   'THREE_R_TOTAL' |
+  'TOTAL_MATH' |
+  'USING_INFO' |
   'USING_INFO_BB' |
-  'THINKING_SKILLS_BB'
+  'WORD_STUDY'
   > & {
   TEST_NAME: string // TESTS_TEST
 }
@@ -607,28 +608,28 @@ type Explore = Pick<TESTS_ADMINISTERED,
   'SORT_DATE' |
   'SORT_GRADE'
   > & Pick<TESTS_EXPLTEST,
-  'SCHOOL_NAME' |
-  'ENGLISH_SCR' |
-  'MATH_SCR' |
-  'READING_SCR' |
-  'SCIENCE_SCR' |
-  'COMPOSITE_SCR' |
-  'SUBSCORE_UM' |
-  'SUBSCORE_RH' |
-  'ENGLISH_NAT_PERC' |
-  'MATH_NAT_PERC' |
-  'READING_NAT_PERC' |
-  'SCIENCE_NAT_PERC' |
-  'COMPOSITE_NAT_PERC' |
-  'NAT_PERC_UM' |
-  'NAT_PERC_RH' |
-  'ENGLISH_LOC_PERC' |
-  'MATH_LOC_PERC' |
-  'READING_LOC_PERC' |
-  'SCIENCE_LOC_PERC' |
   'COMPOSITE_LOC_PERC' |
+  'COMPOSITE_NAT_PERC' |
+  'COMPOSITE_SCR' |
+  'ENGLISH_LOC_PERC' |
+  'ENGLISH_NAT_PERC' |
+  'ENGLISH_SCR' |
+  'LOC_PERC_RH' |
   'LOC_PERC_UM' |
-  'LOC_PERC_RH'
+  'MATH_LOC_PERC' |
+  'MATH_NAT_PERC' |
+  'MATH_SCR' |
+  'NAT_PERC_RH' |
+  'NAT_PERC_UM' |
+  'READING_LOC_PERC' |
+  'READING_NAT_PERC' |
+  'READING_SCR' |
+  'SCHOOL_NAME' |
+  'SCIENCE_LOC_PERC' |
+  'SCIENCE_NAT_PERC' |
+  'SCIENCE_SCR' |
+  'SUBSCORE_RH' |
+  'SUBSCORE_UM'
 > & {
   TEST_NAME: string // TESTS_TEST
 }
@@ -696,7 +697,7 @@ export const act = async (student_number: number): Promise<Act[]> => {
   return act
 }
 
-//-------------- Student Personal Data Report Queries -------------------- 
+//-------------- Student Personal Data Report Queries --------------------
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
 'GOESBYNAME' |
@@ -708,9 +709,9 @@ type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_SEX' |
 'STUDENT_RACE'
   > & Pick<SCMISC_CICSTST1,
-  'CURR_TRANS_CD' |	
   'CURR_TRANS_CD' |
-  'HEALTH_CD' 
+  'CURR_TRANS_CD' |
+  'HEALTH_CD'
   > & {
   STUDENT_NAME: string,
   STUDENT_ADDRESS: string,
@@ -726,7 +727,7 @@ export const studentPersonalDataReport = async (student_number: number): Promise
 }
 
 type Spd_Mobility = Pick<MOBILITY,
-  'STUDENT_NUMBER' | 
+  'STUDENT_NUMBER' |
   'SCHOOL_CODE' |
   'ENTRY_DATE' |
   'TRANSFER_CODE' |
@@ -801,7 +802,7 @@ export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
 export const queries = {
   studentNumbers,
   studentDataTranscript,
-  studentDataTests, 
+  studentDataTests,
   ecum,
   demo,
   misc,

@@ -38,17 +38,7 @@ const classHistReducer = (prev: any, curr: any): any => {
   return prev
 }
 
-const testTableHeader = (testName: string, gradeLevel: number, testDateStr: string, schoolName: string): string => {
-  const date = new Date(testDateStr)
-  const formattedDate = date.getMonth() + "/" + date.getFullYear()
-  const name = testName.toUpperCase()
-  const grade = String(gradeLevel).padStart(2, '0')
-  const school = schoolName.toUpperCase()
-  return `${name}    Grade: ${grade}  Date: ${formattedDate}  School: ${school}`
-}
-
 async function runReport(browser: Browser, student_number: number) {
-  // console.info(`Student Number: ${student_number}`)
 
   const transcript_html_path = outFilePath(`${student_number}-transcript.html`)
   const transcript_pdf_path = outFilePath(`${student_number}-transcript.pdf`)
@@ -59,6 +49,7 @@ async function runReport(browser: Browser, student_number: number) {
   const merged_pdf_path = outFilePath(`${student_number}.pdf`)
 
   try {
+    // queries
     const student_data_transcript = await queries.studentDataTranscript(student_number)
     const student_data_tests = await queries.studentDataTests(student_number)
     const ecum = await queries.ecum(student_number)
@@ -72,61 +63,32 @@ async function runReport(browser: Browser, student_number: number) {
     const mobility = await queries.mobility(student_number)
     const address_history = await queries.addressHistory(student_number)
     const admin = await queries.admin(student_number)
+
+    // queries testscores - OTIS-LENNON
     const otis = await queries.otis(student_number)
-    const newitbs = await queries.newitbs(student_number)
-    const new_iowa3 = newitbs.filter((row => {
-       return row.GRADE == "03"
-    }))
-    const new_iowa4 = newitbs.filter((row => {
-       return row.GRADE == "04"
-    }))
-    const new_iowa3_ge = new_iowa3.filter((row => {
-       return row.MEASURE_RANK.trim() == 'GE'
-    }))
-    const new_iowa4_ge = new_iowa4.filter((row => {
-       return row.MEASURE_RANK.trim() == 'GE'
-    }))
-    const new_iowa3_lpr = new_iowa3.filter((row => {
-       return row.MEASURE_RANK == 'LPR'
-    }))
-    const new_iowa4_lpr = new_iowa4.filter((row => {
-       return row.MEASURE_RANK == 'LPR'
-    }))
-    const new_iowa3_nce = new_iowa3.filter((row => {
-       return row.MEASURE_RANK == 'NCE'
-    }))
-    const new_iowa4_nce = new_iowa4.filter((row => {
-       return row.MEASURE_RANK == 'NCE'
-    }))
-    const new_iowa3_npr = new_iowa3.filter((row => {
-       return row.MEASURE_RANK == 'NPR'
-    }))
-    const new_iowa4_npr = new_iowa4.filter((row => {
-       return row.MEASURE_RANK == 'NPR'
-    }))
-    const new_iowa3_spr = new_iowa3.filter((row => {
-       return row.MEASURE_RANK == 'SPR'
-    }))
-    const new_iowa4_spr = new_iowa4.filter((row => {
-       return row.MEASURE_RANK == 'SPR'
-    }))
 
-    const new_iowa3_obj = {
-      "GE": new_iowa3_ge,
-      "LPR": new_iowa3_lpr,
-      "NCE": new_iowa3_nce,
-      "NPR": new_iowa3_npr,
-      "SPR": new_iowa3_spr,
-    }
+    // queries testscores - NEW IOWA
+    const iowa_new = await queries.newitbs(student_number)
 
-    const new_iowa4_obj = {
-      "GE": new_iowa4_ge,
-      "LPR": new_iowa4_lpr,
-      "NCE": new_iowa4_nce,
-      "NPR": new_iowa4_npr,
-      "SPR": new_iowa4_spr,
-    }
+    // queries testscores - OKLAHOMA CORE
+    const oklacore = await queries.occ(student_number)
 
+    // queries testscores - GATES READING
+    const gates = await queries.reading(student_number)
+
+    // queries testscores - EXPLORE
+    const explore = await queries.explore(student_number)
+
+    // queries testscores - END OF INSTRUCTION
+    const eoi = await queries.eoi(student_number)
+
+    // queries testscores - PLAN
+    const plan = await queries.plan_test(student_number)
+
+    // queries testscores - ACT
+    const act = await queries.act(student_number)
+
+    // html transcript
     fs.writeFile(transcript_html_path, render('transcript.njk', {
       date: REPORT_DATE,
       student_data_transcript,
@@ -143,24 +105,28 @@ async function runReport(browser: Browser, student_number: number) {
       address_history,
     }))
 
-    // console.info('Rendering Test Scores HTML…')
+    // html testscores
     fs.writeFile(testscores_html_path, render('testscores.njk', {
       date: REPORT_DATE,
       student_data_transcript,
       admin,
       otis,
-      newitbs,
-      new_iowa3_obj,
-      new_iowa4_obj,
+      iowa_new,
+      oklacore,
+      gates,
+      explore,
+      eoi,
+      plan,
+      act
     }))
 
-    // console.info('Rendering Personal Info HTML…')
+    // html personalinfo
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_data_transcript,
     }))
 
-    // console.info('Generating Transcript PDF…')
+    // pdf transcript
     await report.pdf(browser, transcript_html_path, {
       path: transcript_pdf_path,
       format: 'letter',
@@ -174,7 +140,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Test Scores PDF…')
+    // pdf testscores
     await report.pdf(browser, testscores_html_path, {
       path: testscores_pdf_path,
       format: 'letter',
@@ -188,7 +154,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Generating Personal Info PDF…')
+    // pdf personalinfo
     await report.pdf(browser, personalinfo_html_path, {
       path: personalinfo_pdf_path,
       format: 'letter',
@@ -201,7 +167,7 @@ async function runReport(browser: Browser, student_number: number) {
       }
     })
 
-    // console.info('Merging PDFs…')
+    // merge all of the pdf files
     const merger = new PDFMerger()
     await merger.add(transcript_pdf_path)
     await merger.add(testscores_pdf_path)
