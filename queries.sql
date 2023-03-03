@@ -889,19 +889,33 @@ GO
 CREATE PROCEDURE ecum_queries.student_personal_data_report @student_number INT AS
 SELECT
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER,
-  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LNAME)+', '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_FNAME)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_MI) as STUDENT_NAME,
+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LNAME)+', '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_FNAME)+' '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_MI) as STUDENT_NAME,
+
   ECUM_Report_Student.ECUM.STUDENT.GOESBYNAME,
-  rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_HOUSE_NO as varchar))+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_DIRECTION)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_STREET)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_APT_NO)+' '+rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LOT_NO)+' '+rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_ZIP1 as varchar)) as STUDENT_ADDRESS,
+
+  rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_HOUSE_NO as varchar))+' '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_DIRECTION)+' '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_STREET)+' '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_APT_NO)+' '+
+  rtrim(ECUM_Report_Student.ECUM.STUDENT.STUDENT_LOT_NO)+' '+
+  rtrim(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_ZIP1 as varchar)) as STUDENT_ADDRESS,
+
   CASE WHEN substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,1) = '0' THEN 'Unknown'
-	WHEN  substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3) = '918' THEN '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),7,4)
-ELSE '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,4)
- END as STUDENT_PHONE,
-  CASE when ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'A' then 'Active'  when ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'I' then 'Inactive' else 'Unknown' END as STUDENT_STATUS,
+	     WHEN substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3) = '918' THEN '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),7,4)
+       ELSE '(918) '+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),1,3)+'-'+substring(cast(ECUM_Report_Student.ECUM.STUDENT.STUDENT_PHONE as varchar),4,4)
+       END as STUDENT_PHONE,
+  CASE WHEN ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'A' THEN 'Active'
+       WHEN ECUM_Report_Student.ECUM.STUDENT.STUDENT_STATUS = 'I' THEN 'Inactive'
+       ELSE 'Unknown'
+       END as STUDENT_STATUS,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_CURR_SCH,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_ENTRY_DATE,
-  CASE  WHEN ECUM_Report_Student.ECUM.SCMISC_CICSTST1.CURR_TRANS_CD = '  ' THEN ECUM_Report_Student.ECUM.SCMISC_CICSTST1.ENTRY_REASON ELSE ECUM_Report_Student.ECUM.SCMISC_CICSTST1.ENTRY_REASON+'-'+ECUM_Report_Student.ECUM.SCMISC_CICSTST1.CURR_TRANS_CD END as MISC_REASON_CODE
-
-,
+  CASE WHEN ECUM_Report_Student.ECUM.SCMISC_CICSTST1.CURR_TRANS_CD = '  ' THEN ECUM_Report_Student.ECUM.SCMISC_CICSTST1.ENTRY_REASON
+       ELSE ECUM_Report_Student.ECUM.SCMISC_CICSTST1.ENTRY_REASON+'-'+ECUM_Report_Student.ECUM.SCMISC_CICSTST1.CURR_TRANS_CD
+       END as MISC_REASON_CODE,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_BIRTHDATE,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_GRADE,
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_SEX,
@@ -990,39 +1004,41 @@ GO
 CREATE PROCEDURE ecum_queries.spd_suspensions @student_number INT AS
 SELECT
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL,
-  Table__12."Suspended School",
+  Table__12."Suspended School" as SUSPEND_SCHOOL,
   CASE WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '1' THEN 'Phone'
-          WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '2' THEN 'Written'
-          ELSE null END,
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '2' THEN 'Written'
+       ELSE NULL
+       END AS SUSPEND_NOTIFICATION,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.START_DATE,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.END_DATE,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.NUMBER_DAYS,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES.REASON_DESCRIPTION,
-  CASE when MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'PLACEMENT' then 'Placement'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'PARENT OPTION' then 'Parent Option'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'HOMEBASED' then 'Home Based'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '01' then 'Class Room/Library'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '02' then 'Halls'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '03' then 'Restroom'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '04' then 'Cafeteria'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '05' then 'Outside Building'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '06' then 'School Bus'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '07' then 'Parking Lot'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '08' then 'Off Campus'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '09' then 'Gym'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '10' then 'Auditorium'
-	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '11' then 'Other'
-ELSE null
-END as SUSPEND_LOCATION -- Alias for case starting line 1001
+  CASE WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'PLACEMENT' THEN 'Placement'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'PARENT OPTION' THEN 'Parent Option'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.COMMENT_LINE_1 = 'HOMEBASED' THEN 'Home Based'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '01' THEN 'Class Room/Library'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '02' THEN 'Halls'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '03' THEN 'Restroom'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '04' THEN 'Cafeteria'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '05' THEN 'Outside Building'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '06' THEN 'School Bus'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '07' THEN 'Parking Lot'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '08' THEN 'Off Campus'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '09' THEN 'Gym'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '10' THEN 'Auditorium'
+       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '11' THEN 'Other'
+       ELSE NULL
+       END AS SUSPEND_LOCATION
 FROM
-  ECUM_Report_Student.ECUM.STUDENT LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.STUDID=ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER)
-   LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.REASON=MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES.REASON)
-   LEFT OUTER JOIN (
-  select DISTINCT ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY as 'BLDG_KEY', ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_NAME as 'Suspended School'
-from ECUM_Report_Student.ECUM.BUILDING_MASTER
-inner join MFLegacy_Student.TSTU_Yr0809.SUSPEND
-on ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY=MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL
-  )  Table__12 ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL=Table__12.BLDG_KEY)
+  ECUM_Report_Student.ECUM.STUDENT
+LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.STUDID=ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER)
+LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.REASON=MFLegacy_Student.TSTU_Yr0809.SUSPEND_REASON_CODES.REASON)
+LEFT OUTER JOIN (
+  SELECT DISTINCT ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY as 'BLDG_KEY'
+       , ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_NAME as 'Suspended School'
+  FROM ECUM_Report_Student.ECUM.BUILDING_MASTER
+  INNER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND ON ECUM_Report_Student.ECUM.BUILDING_MASTER.BLDG_KEY=MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL
+) Table__12 ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL=Table__12.BLDG_KEY)
 
 WHERE
   ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER  = @student_number
