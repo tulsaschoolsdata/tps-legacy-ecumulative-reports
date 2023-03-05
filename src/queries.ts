@@ -699,10 +699,15 @@ export const act = async (student_number: number): Promise<Act[]> => {
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
+'STUDEN_NAME' |
 'GOESBYNAME' |
+'STUDENT_ADDRESS' |
+'STUDENT_PHONE' |
+'STUDENT_STATUS' |
 'STUDENT_STATUS' |
 'STUDENT_CURR_SCH' |
 'STUDENT_ENTRY_DATE' |
+'MISC_REASON_CODE'  |
 'STUDENT_BIRTHDATE' |
 'STUDENT_GRADE' |
 'STUDENT_SEX' |
@@ -711,13 +716,7 @@ type StudentPersonalDataReport = Pick<STUDENT,
   'CURR_TRANS_CD' |	
   'CURR_TRANS_CD' |
   'HEALTH_CD' 
-  > & {
-  STUDENT_NAME: string,
-  STUDENT_ADDRESS: string,
-  STUDENT_PHONE: string,
-  STUDENT_STATUS: string,
-  MISC_REASON_CODE: string,
-  }
+  >
 
 
 export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
@@ -773,12 +772,13 @@ export const spd_SpecialEdInactive = (student_number: number): Promise<Spd_Speci
 
 type Spd_Suspensions = {
   SCHOOL: string              // SUSPEND
-  NOTIFICATION: string        // SUSPEND
+  SUSPEND_SCHOOL: string      // SUSPEND
+  SUSPEND_NOTIFICATION: string// SUSPEND
   START_DATE: Date            // SUSPEND
   END_DATE: Date              // SUSPEND
   NUMBER_DAYS: number         // SUSPEND
   COMMENT_LINE_1: string      // SUSPEND
-  LOCATION: string            // SUSPEND
+  SUSPEND_LOCATION: string    // SUSPEND
   REASON_DESCRIPTION: string  // SUSPEND_REASON_CODES
 }
 

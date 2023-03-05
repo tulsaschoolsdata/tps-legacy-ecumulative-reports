@@ -61,7 +61,7 @@ async function runReport(browser: Browser, student_number: number) {
   try {
     const student_data_transcript = await queries.studentDataTranscript(student_number)
     const student_data_tests = await queries.studentDataTests(student_number)
-    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
+    //const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
     const ecum = await queries.ecum(student_number)
     const demo = await queries.demo(student_number)
     const misc = await queries.misc(student_number)
@@ -78,8 +78,9 @@ async function runReport(browser: Browser, student_number: number) {
     const spd_mobility = await queries.spd_Mobility(student_number)
     const spd_immunizations = await queries.spd_Immunizations(student_number)
     const spd_demo = await queries.spd_Demo(student_number)
-    //const spd_suspensions = await queries.spd_Suspensions(student_number)
-    //const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
+    const spd_suspensions = await queries.spd_Suspensions(student_number)
+    const spd_special_ed_active = await queries.spd_SpecialEdActive(student_number)
+    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
     const new_iowa3 = newitbs.filter((row => {
        return row.GRADE == "03"
     }))
@@ -164,13 +165,13 @@ async function runReport(browser: Browser, student_number: number) {
     // console.info('Rendering Personal Info HTML…')
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
-      student_personal_data_report,
+      //student_personal_data_report,
       student_data_transcript,
       spd_mobility,
       spd_immunizations,
-      // spd_special_ed_active,
-      // spd_special_ed_inactive,
-      // spd_suspensions,
+      spd_special_ed_active,
+      spd_special_ed_inactive,
+      spd_suspensions,
       spd_demo,
     }))
 
