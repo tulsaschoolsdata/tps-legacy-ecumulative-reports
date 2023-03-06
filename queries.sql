@@ -964,7 +964,8 @@ GO
 -- Student Personal Data - Special Ed (Active)
 CREATE PROCEDURE ecum_queries.spd_special_ed_active @student_number INT AS
 SELECT
-  ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBER as SPEC_PREFIX_NUMBER, -- alias for concatenated line
+  ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBERECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBER as 
+  SPEC_PREFIX_NUMBER, -- alias for concatenated line,
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PROG_DESIGN,
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_ENTRY_DATE
 FROM
@@ -981,7 +982,8 @@ GO
 -- Student Personal Data (spd) - Special Ed (Inactive)
 CREATE PROCEDURE ecum_queries.spd_special_ed_inactive @student_number INT AS
 SELECT
-  ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBER as SPEC_PREFIX_NUMBER, -- alias for concatenated line
+  ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBERECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PREFIX+ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_NUMBER as 
+  SPEC_PREFIX_NUMBER, -- alias for concatenated line    ,
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_PROG_DESIGN,
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_ENTRY_DATE,
   ECUM_Report_Student.ECUM.SPED_CICSTST1.SPEC_EXIT_DATE
@@ -1002,9 +1004,8 @@ SELECT
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.SCHOOL,
   Table__12."Suspended School" as SUSPEND_SCHOOL,
   CASE WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '1' THEN 'Phone'
-       WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '2' THEN 'Written'
-       ELSE NULL
-       END AS SUSPEND_NOTIFICATION,
+          WHEN MFLegacy_Student.TSTU_Yr0809.SUSPEND.NOTIFICATION = '2' THEN 'Written'
+          ELSE null END AS SUSPEND_NOTIFICATION,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.START_DATE,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.END_DATE,
   MFLegacy_Student.TSTU_Yr0809.SUSPEND.NUMBER_DAYS,
@@ -1023,8 +1024,8 @@ SELECT
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '09' then 'Gym'
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '10' then 'Auditorium'
 	 when MFLegacy_Student.TSTU_Yr0809.SUSPEND.LOCATION = '11' then 'Other'
-ELSE null
-END AS SUSPEND_LOCATION
+ELSE null AS SUSPEND_LOCATION
+END
 FROM
   ECUM_Report_Student.ECUM.STUDENT
   LEFT OUTER JOIN MFLegacy_Student.TSTU_Yr0809.SUSPEND ON (MFLegacy_Student.TSTU_Yr0809.SUSPEND.STUDID=ECUM_Report_Student.ECUM.STUDENT.STUDENT_NUMBER)

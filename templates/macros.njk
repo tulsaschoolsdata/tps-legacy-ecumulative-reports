@@ -757,12 +757,12 @@
     {% for row in rows %}
     <tr class="{{ className.next() }}">
       <td>{{ rows.SCHOOL }}</td>
-      <td>{{ rows.NOTIFICATION }}</td>
-      <td>{{ rows.START_DATE | formatDate }}</td>
-      <td>{{ rows.END_DATE | formatDate }}</td>
-      <td>{{ rows.DAYS }}</td>
-      <td>{{ rows.COMMENT_LINE_1 }}</td>
-      <td>{{ rows.LOCATION }}</td>
+      <td>{{ row.SUSPEND_NOTIFICATION }}</td>
+      <td>{{ row.START_DATE | formatDate }}</td>
+      <td>{{ row.END_DATE | formatDate }}</td>
+      <td>{{ row.NUMBER_DAYS }}</td>
+      <td>{{ row.REASON_DESCRIPTION }}</td>
+      <td>{{ row.SUSPEND_LOCATION }}</td>
     </tr>
     {% endfor %}
   </tbody>
