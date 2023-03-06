@@ -699,15 +699,10 @@ export const act = async (student_number: number): Promise<Act[]> => {
 //-------------- Student Personal Data Report Queries -------------------- 
 type StudentPersonalDataReport = Pick<STUDENT,
 'STUDENT_NUMBER' |
-'STUDEN_NAME' |
 'GOESBYNAME' |
-'STUDENT_ADDRESS' |
-'STUDENT_PHONE' |
-'STUDENT_STATUS' |
 'STUDENT_STATUS' |
 'STUDENT_CURR_SCH' |
 'STUDENT_ENTRY_DATE' |
-'MISC_REASON_CODE'  |
 'STUDENT_BIRTHDATE' |
 'STUDENT_GRADE' |
 'STUDENT_SEX' |
@@ -716,11 +711,17 @@ type StudentPersonalDataReport = Pick<STUDENT,
   'CURR_TRANS_CD' |	
   'CURR_TRANS_CD' |
   'HEALTH_CD' 
-  >
+  > & {
+  STUDENT_NAME: string,
+  STUDENT_ADDRESS: string,
+  STUDENT_PHONE: string,
+  STUDENT_STATUS: string,
+  MISC_REASON_CODE: string,
+  }
 
 
-export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport[]> => {
-  const student_personal_data_report = (await prisma.$queryRaw<StudentPersonalDataReport[]>`Execute ECUM_Report_Student.ecum_queries.student_personal_data_report ${student_number}`)
+export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport> => {
+  const student_personal_data_report = (await prisma.$queryRaw<StudentPersonalDataReport[]>`Execute ECUM_Report_Student.ecum_queries.student_personal_data_report ${student_number}`)[0]
   return student_personal_data_report
 }
 
@@ -793,8 +794,8 @@ type Spd_Demo = Pick<STUDENT_DEMO,
   'SPARENT_MNAME'
   >
 
-export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
-  const spd_demo = (await prisma.$queryRaw<Spd_Demo[]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)
+export const spd_Demo = async (student_number: number): Promise<Spd_Demo> => {
+  const spd_demo = (await prisma.$queryRaw<Spd_Demo[]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)[0]
   return spd_demo
 }
 

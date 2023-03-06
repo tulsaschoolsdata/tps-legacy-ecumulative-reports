@@ -64,45 +64,44 @@
         <div class="date">Date: {{ date | formatDate }}</div>
       </div>
       <div class="student-name">
-        {{ student_data_transcript.STUDENT_LNAME | trim }},
-        {{ student_data_transcript.STUDENT_FNAME | trim }}
-        {{ student_data_transcript.STUDENT_MI | trim }}
+        {{ student_personal_data_report.STUDENT_NAME | trim }},
       </div>
       <div id="subheader" style="display: flex; column-gap: 1rem;">
         <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 0.5rem;">
           <div>
-            {{ student_data_transcript.STUDENT_HOUSE_NO }}
-            {{ student_data_transcript.STUDENT_DIRECTION }}
-            {{ student_data_transcript.STUDENT_STREET }}
-            {{ student_data_transcript.STUDENT_ZIP1 }}
+            {{ student_personal_data_report.STUDENT_ADDRESS }}
           </div>
-          <div>…phone…</div>
+          <div>{{ student_personal_data_report.STUDENT_PHONE }}</div>
           <div style="display: flex; column-gap: 1rem;">
-            <div>…gender…</div>
-            <div>…race…</div>
+            <div>Gender: {{ student_personal_data_report.STUDENT_SEX }}</div>
+            <div>Race: {{ student_personal_data_report.STUDENT_RACE }}</div>
           </div>
           <div style="display: flex; column-gap: 1rem;">
             <div>Birthday: {{ student_data_transcript.STUDENT_BIRTHDATE | formatDate }}</div>
-            <div>Health Code: ?</div>
           </div>
           <div style="display: flex; column-gap: 1rem;">
             <div>Parent/Guardian:</div>
             <div>
-              <div>…father…</div>
-              <div>…mother…</div>
+              <div>{{spd_demo.PARENT_FNAME}} 
+              {{ spd_demo.PARENT_MI }} 
+              {{ spd_demo.PARENT_LNAME }}
+              </div>
+              <div>{{spd_demo.SPARENT_FNAME}} 
+              {{ spd_demo.SPARENT_MI }} 
+              {{ spd_demo.SPARENT_LNAME }}</div>
             </div>
           </div>
         </div>
         <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 0.5rem;">
-          <div>Student Number: ?</div>
-          <div>Current School: ?</div>
-          <div>Entry Date: ?</div>
-          <div>Status: ?</div>
+          <div>Student Number: {{ student_personal_data_report.STUDENT_NUMBER }}</div>
+          <div>Current School: {{ student_personal_data_report.STUDENT_CURR_SCH }}</div>
+          <div>Entry Date: {{ student_personal_data_report.STUDENT_ENTRY_DATE | formatDate }}</div>
+          <div>Status: {{ student_personal_data_report.STUDENT_STATUS }}</div>
         </div>
         <div style="flex-grow: 1; display: flex; flex-direction: column; row-gap: 0.5rem;">
-          <div>Goes By: ?</div>
-          <div>Grade: ?</div>
-          <div>Reason Code: ?</div>
+          <div>Goes By: {{ student_personal_data_report.GOESBYNAME }}</div>
+          <div>Grade: {{ student_personal_data_report.STUDENT_GRADE }}</div>
+          <div>Reason Code: {{ student_personal_data_report.MISC_REASON_CODE }}</div>
         </div>
       </div>
     </div>
@@ -119,11 +118,11 @@
     <div class="page" data-pageNum="2">
       <div class="no-break">
         <br />
-        {{macros.personalInfoSuspensions(spd_suspensions)}}
+        {{macros.personalInfoSuspensions([])}}
         <br />
-        {{macros.personalInfoSpecialEdActive(spd_special_ed_active)}}
+        {{macros.personalInfoSpecialEdActive([])}}
         <br />
-        {{macros.personalInfoSpecialEdInactive(spd_special_ed_inactive)}}
+        {{macros.personalInfoSpecialEdInactive([])}}
       </div>
     </div>
     <div id="footer">
