@@ -729,3 +729,256 @@
   </tbody>
 </table>
 {% endmacro %}
+
+{% macro testTableITBS(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Lis<br>ten<br>ing</th>
+          <th width="1">Word<br>Ana-<br>lysis</th>
+          <th width="1">Voc<br>abu<br>lary</th>
+          <th width="1">Re<br>ad<br>ing</th>
+          <th width="1">Sp<br>ell<br>ing</th>
+          <th width="1">Capi<br>taliz<br>ation</th>
+          <th width="1">Punc<br>tuat<br>ion</th>
+          <th width="1">Usage<br>/Expre<br>ssion</th>
+          <th width="1">Lang<br>uage<br>Total</th>
+          <th width="1">Vis<br>ual<br>Mat.</th>
+          <th width="1">Refe<br>rence<br>Mat.</th>
+          <th width="1">Work<br>Study<br>Total</th>
+          <th width="1">Riv.<br>Rea<br>ding</th>
+          <th width="1">Math<br>Con<br>cept</th>
+          <th width="1">Math<br>Prob.<br>Solve</th>
+          <th width="1">Math<br>Comp<br>utation</th>
+          <th width="1">Math<br>Tot.</th>
+          <th width="1">Compl<br>Comp<br>osition</th>
+          <th width="1">Total<br>Comp<br>osition</th>
+          <th width="1">Soc.<br>Stu<br>dies</th>
+          <th width="1">Sc<br>ien<br>ce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{row.LISTENING}}</td>
+          <td>{{row.WORD_ANALYSIS}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
+{% macro testTableNAGL(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Raw<br>Score</th>
+          <th width="1">Scale<br>Score</th>
+          <th width="1">NAI<br>Score</th>
+          <th width="1">NAI<br>Pct</th>
+          <th width="1">NAI<br>Stanine</th>
+          <th width="1">Grade<br>Ability</th>
+          <th width="1">Grade<br>Pct</th>
+          <th width="1">Grade<br>Stanine</th>
+          <th width="1">Adj.<br>NAI<br>Score</th>
+          <th width="1">Adj.<br>NAI<br>Pct</th>
+          <th width="1">Adj.<br>NAI<br>Stanine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
+{% macro testTableStanford9(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Re<br>ad<br>Tot.</th>
+          <th width="1">Wo<br>rd<br>Stdy</th>
+          <th width="1">Re<br>ad<br>Voc</th>
+          <th width="1">Re<br>ad<br>Cmp</th>
+          <th width="1">Ma<br>th<br>Tot</th>
+          <th width="1">Prb<br>lem<br>Solv</th>
+          <th width="1">Pro<br>ced<br>ures</th>
+          <th width="1">Lang<br>uage<br>Tot</th>
+          <th width="1">Lang<br>uage<br>Mech</th>
+          <th width="1">Lang<br>uage<br>Expr</th>
+          <th width="1">Sp<br>ell<br>ing</th>
+          <th width="1">St<br>dy<br>Skil</th>
+          <th width="1">Env<br>ion<br>mnt</th>
+          <th width="1">Sc<br>ien<br>ce</th>
+          <th width="1">Soc<br>Scie<br>nce</th>
+          <th width="1">Lis<br>ten<br>ing</th>
+          <th width="1">Us<br>ing<br>Info</th>
+          <th width="1">Th<br>ink<br>Skl</th>
+          <th width="1">Par<br>tial<br>Batt</th>
+          <th width="1">Com<br>plet<br>Batt</th>
+          <th width="1">Thre<br>R<br>Tot</th>
+          <th width="1">Use<br>Info<br>BB</th>
+          <th width="1">Thk<br>Skil<br>BB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
+{% macro testTablePBP(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Re<br>ad<br>ing</th>
+          <th width="1">Gen<br>Ma<br>th</th>
+          <th width="1">Eng<br>.I</th>
+          <th width="1">Ma<br>th</th>
+          <th width="1">Pre-<br>Alg.</th>
+          <th width="1">Eng<br>.<br>II</th>
+          <th width="1">Sci<br>en<br>ce</th>
+          <th width="1">Alg<br>.I</th>
+          <th width="1">Eng<br>.<br>III</th>
+          <th width="1">Soc<br>Stu<br>dies</th>
+          <th width="1">Alg<br>.<br>II</th>
+          <th width="1">Eng<br>.<br>IV</th>
+          <th width="1">La<br>ng<br>Art</th>
+          <th width="1">Ge<br>om<br>etry</th>
+          <th width="1">Sp<br>an<br>ish<br>I</th>
+          <th width="1">Ci<br>vi<br>cs</th>
+          <th width="1">Phy<br>Sci</th>
+          <th width="1">Fre<br>nch<br>I</th>
+          <th width="1">OK<br>Hist</th>
+          <th width="1">Ea<br>rth<br>Sci</th>
+          <th width="1">Gov<br>ern<br>ment</th>
+          <th width="1">U.S<br>Hist</th>
+          <th width="1">Bio<br>lo<br>gy</th>
+          <th width="1">Wor<br>ld<br>Geo</th>
+          <th width="1">Wor<br>ld<br>Hist</th>
+          <th width="1">Che<br>mis<br>try</th>
+          <th width="1">Ph<br>ys<br>ics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+          <td>{{row.}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
+{% macro testTableSAT(rows) %}
+  {% for row in rows %}
+    {{ testTableHeader(row) }}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">Verbal<br>Score</th>
+          <th width="1">Verbal<br>Percentage</th>
+          <th width="1">Math<br>Score</th>
+          <th width="1">Math<br>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>{{row.VERBAL_SCORE}}</td>
+          <td>{{row.VERBAL_PERCENT}}</td>
+          <td>{{row.MATH_SCORE}}</td>
+          <td>{{row.MATH_PERCENT}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% endfor %}
+{% endmacro %}
+
