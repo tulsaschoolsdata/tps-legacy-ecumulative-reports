@@ -784,8 +784,7 @@ type Spd_Suspensions = {
   REASON_DESCRIPTION: string  // SUSPEND_REASON_CODES
 }
 
-export const spd_Suspensions = (student_number: number): Promise<Spd_Suspensions[]> =>
-  prisma.$queryRaw<Spd_Suspensions[]>`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_suspensions ${student_number}`
+export const spd_Suspensions = (student_number: number): Promise<Spd_Suspensions[]> => prisma.$queryRaw<Spd_Suspensions[]>`Execute ECUM_Report_student.ecum_queries.spd_suspensions ${student_number}`
 
 type Spd_Demo = Pick<STUDENT_DEMO,
   'PARENT_LNAME' |
