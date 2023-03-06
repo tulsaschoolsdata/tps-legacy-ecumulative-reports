@@ -62,7 +62,6 @@ async function runReport(browser: Browser, student_number: number) {
     const student_data_transcript = await queries.studentDataTranscript(student_number)
     const student_data_tests = await queries.studentDataTests(student_number)
     const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
-    console.info(student_personal_data_report)
     const ecum = await queries.ecum(student_number)
     const demo = await queries.demo(student_number)
     const misc = await queries.misc(student_number)
