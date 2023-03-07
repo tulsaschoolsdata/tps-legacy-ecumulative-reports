@@ -838,12 +838,43 @@
   {% endfor %}
 {% endmacro %}
 
+{% macro testTableStanford9Row(row,className) %}
+  <tr class={{className}}>
+    <td class="blueBG">{{row.MEASURE_RANK}}</td>
+    <td>{{row.READING_TOTAL}}</td>
+    <td>{{row.WORD_STUDY}}</td>
+    <td>{{row.READING_VOCABULARY}}</td>
+    <td>{{row.READING_COMPREH}}</td>
+    <td>{{row.TOTAL_MATH}}</td>
+    <td>{{row.PROBLEM_SOLVING}}</td>
+    <td>{{row.PROCEDURES}}</td>
+    <td>{{row.LANGUAGE_TOTAL}}</td>
+    <td>{{row.LANGUAGE_MECH}}</td>
+    <td>{{row.LANGUAGE_EXP}}</td>
+    <td>{{row.SPELLING}}</td>
+    <td>{{row.STUDY_SKILLS}}</td>
+    <td>{{row.ENVIRONMENT}}</td>
+    <td>{{row.SCIENCE}}</td>
+    <td>{{row.SOCIAL_SCIENCE}}</td>
+    <td>{{row.LISTENING}}</td>
+    <td>{{row.USING_INFO}}</td>
+    <td>{{row.THINKING_SKILLS}}</td>
+    <td>{{row.PARTIAL_BATTERY}}</td>
+    <td>{{row.COMPLETE_BATTERY}}</td>
+    <td>{{row.THREE_R_TOTAL}}</td>
+    <td>{{row.USING_INFO_BB}}</td>
+    <td>{{row.THINKING_SKILLS_BB}}</td>
+  </tr>
+{% endmacro %}
 {% macro testTableStanford9(rows) %}
-  {% for row in rows %}
-    {{ testTableHeader(row) }}
+  {% for date, rows in rows | groupby("SORT_DATE") %}
+
+    {% set header = rows[0] %}
+    {{ testTableHeader(header) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
         <tr>
+          <th width="1"></th>
           <th width="1">Re<br>ad<br>Tot.</th>
           <th width="1">Wo<br>rd<br>Stdy</th>
           <th width="1">Re<br>ad<br>Voc</th>
@@ -870,31 +901,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="odd">
-          <td>{{row.READING_TOTAL}}</td>
-          <td>{{row.WORD_STUDY}}</td>
-          <td>{{row.READING_VOCABULARY}}</td>
-          <td>{{row.READING_COMPREH}}</td>
-          <td>{{row.TOTAL_MATH}}</td>
-          <td>{{row.PROBLEM_SOLVING}}</td>
-          <td>{{row.PROCEDURES}}</td>
-          <td>{{row.LANGUAGE_TOTAL}}</td>
-          <td>{{row.LANGUAGE_MECH}}</td>
-          <td>{{row.LANGUAGE_EXP}}</td>
-          <td>{{row.SPELLING}}</td>
-          <td>{{row.STUDY_SKILLS}}</td>
-          <td>{{row.ENVIRONMENT}}</td>
-          <td>{{row.SCIENCE}}</td>
-          <td>{{row.SOCIAL_SCIENCE}}</td>
-          <td>{{row.LISTENING}}</td>
-          <td>{{row.USING_INFO}}</td>
-          <td>{{row.THINKING_SKILLS}}</td>
-          <td>{{row.PARTIAL_BATTERY}}</td>
-          <td>{{row.COMPLETE_BATTERY}}</td>
-          <td>{{row.THREE_R_TOTAL}}</td>
-          <td>{{row.USING_INFO_BB}}</td>
-          <td>{{row.THINKING_SKILLS_BB}}</td>
-        </tr>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+          {{ testTableStanford9Row(row, className.next()) }}
+        {% endfor %}
       </tbody>
     </table>
   {% endfor %}
