@@ -102,7 +102,7 @@ async function runReport(browser: Browser, student_number: number) {
     const sta9 = await queries.sat9(student_number)
     const sat = await queries.sat(student_number)
     const itbs = await queries.itbs(student_number)
-    // const nagl = await queries.nagl(student_number)
+    const nagle = await queries.nagle(student_number)
 
     // html transcript
     fs.writeFile(
@@ -143,6 +143,7 @@ async function runReport(browser: Browser, student_number: number) {
         sta9,
         sat,
         itbs,
+        nagle
       })
     )
 
