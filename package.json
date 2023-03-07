@@ -11,8 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/cli-progress": "^3.11.0",
+    "@types/mssql": "^8.1.2",
     "@types/node": "^18.11.15",
     "@types/nunjucks": "^3.2.1",
+    "dotenv": "^16.0.3",
+    "mssql": "^9.1.1",
     "prisma": "^4.7.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1",
