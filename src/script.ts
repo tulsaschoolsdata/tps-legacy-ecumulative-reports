@@ -72,32 +72,17 @@ async function runReport(browser: Browser, student_number: number) {
     const attend = await queries.attend(student_number)
     const mobility = await queries.mobility(student_number)
     const address_history = await queries.addressHistory(student_number)
-    const admin = await queries.admin(student_number)
 
-    // queries testscores - OTIS-LENNON
+    // testscores
+    const studentTestList = await queries.admin(student_number)
     const otis = await queries.otis(student_number)
-
-    // queries testscores - NEW IOWA
     const iowa_new = await queries.newitbs(student_number)
-
-    // queries testscores - OKLAHOMA CORE
     const oklacore = await queries.occ(student_number)
-
-    // queries testscores - GATES READING
     const gates = await queries.reading(student_number)
-
-    // queries testscores - EXPLORE
     const explore = await queries.explore(student_number)
-
-    // queries testscores - END OF INSTRUCTION
     const eoi = await queries.eoi(student_number)
-
-    // queries testscores - PLAN
     const plan = await queries.plan_test(student_number)
-
-    // queries testscores - ACT
     const act = await queries.act(student_number)
-
     const pbp = await queries.pbp(student_number)
     const sta9 = await queries.sat9(student_number)
     const sat = await queries.sat(student_number)
@@ -130,7 +115,7 @@ async function runReport(browser: Browser, student_number: number) {
       render('testscores.njk', {
         date: REPORT_DATE,
         student_data_transcript,
-        admin,
+        studentTestList,
         otis,
         iowa_new,
         oklacore,
