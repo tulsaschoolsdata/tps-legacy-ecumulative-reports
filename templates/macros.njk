@@ -628,29 +628,27 @@
 {% endmacro %}
 
 {% macro personalInfoSpecialEd(rows) %}
+{% if rows[0].SPEC_PREFIX-NUMBER %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th width="1">SPECIAL ED:</th>
-      <th width="1">{{Active or Inactive}}</th>
-      <th width="1"></th>
+      <th width="1">Aactive</th>
       <th width="1"></th>
     </tr>
     <tr>
       <th width="1">Category</th>
       <th width="1">Program Design</th>
       <th width="1">Entry Date</th>
-      <th width="1">Exit Date</th>
     </tr>
   </thead>
   <tbody>
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+        <td>{{ row.SPEC_PREFIX_NUMBER }}</td>
+        <td>{{ row.SPEC_PROG_DESIGN }}</td>
+        <td>{{ row.SPEC_ENTRY_DATE | formatDate }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -699,7 +697,6 @@
 </table>
 {% endmacro %}
 
-
 {% macro personalInfoMobility(rows) %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
@@ -722,11 +719,11 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.SCHOOL_CODE }}</td>
+      <td>{{ row.ENTRY_DATE | formatDate }}</td>
+      <td>{{ row.ENTRY_REASON_CODE }}</td>
+      <td>{{ row.EXIT_DATE | formatDate }}</td>
+      <td>{{ row.EXIT_REASON_CODE }}</td>
     </tr>
     {% endfor %}
   </tbody>
