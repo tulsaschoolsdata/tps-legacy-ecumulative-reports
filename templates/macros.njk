@@ -587,72 +587,73 @@
 
 
 {% macro personalInfoSuspensions(rows) %}
-<table cellpadding="0" cellspacing="0" width="100%">
-  <thead>
-    <tr>
-      <th width="1">SUSPENSIONS:</th>
-      <th width="1"></th>
-      <th width="1"></th>
-      <th width="1"></th>
-      <th width="1"></th>
-      <th width="1"></th>
-      <th width="1"></th>
-    </tr>
-    <tr>
-      <th width="1">School</th>
-      <th width="1">Notification</th>
-      <th width="1">Begin Date</th>
-      <th width="1">Ending Date</th>
-      <th width="1">Days</th>
-      <th width="1">Incident Description</th>
-      <th width="1">Incident Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
-    <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  {% if rows[0].SUSPEND_SCHOOL %}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">SUSPENSIONS:</th>
+          <th width="1"></th>
+          <th width="1"></th>
+          <th width="1"></th>
+          <th width="1"></th>
+          <th width="1"></th>
+          <th width="1"></th>
+        </tr>
+        <tr>
+          <th width="1">School</th>
+          <th width="1">Notification</th>
+          <th width="1">Begin Date</th>
+          <th width="1">Ending Date</th>
+          <th width="1">Days</th>
+          <th width="1">Incident Description</th>
+          <th width="1">Incident Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+        <tr class="{{ className.next() }}">
+          <td>{{ row.SUSPEND_SCHOOL }}</td>
+          <td>{{ row.SUSPEND_NOTIFICATION }}</td>
+          <td>{{ row.START_DATE | formatDate }}</td>
+          <td>{{ row.END_DATE | formatDate }}</td>
+          <td>{{ row.NUMBER_DAYS }}</td>
+          <td>{{ row.REASON_DESCRIPTION }}</td>
+          <td>{{ row.SUSPEND_LOCATION }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 {% endmacro %}
 
 {% macro personalInfoSpecialEd(rows) %}
+{% if rows[0].SPEC_PREFIX-NUMBER %}
 <table cellpadding="0" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th width="1">SPECIAL ED:</th>
-      <th width="1">{{Active or Inactive}}</th>
-      <th width="1"></th>
+      <th width="1">Active</th>
       <th width="1"></th>
     </tr>
     <tr>
       <th width="1">Category</th>
       <th width="1">Program Design</th>
       <th width="1">Entry Date</th>
-      <th width="1">Exit Date</th>
     </tr>
   </thead>
   <tbody>
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+        <td>{{ row.SPEC_PREFIX_NUMBER }}</td>
+        <td>{{ row.SPEC_PROG_DESIGN }}</td>
+        <td>{{ row.SPEC_ENTRY_DATE | formatDate }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% endif %}
 {% endmacro %}
 
 {% macro personalInfoImmunizations(rows) %}
@@ -666,7 +667,7 @@
       <th width="1"></th>
       <th width="1"></th>
       <th width="1"></th>
-      <th width="1">Immun. Status: {{ "" }}</th>
+      <th width="1">Immun. Status: {{ rows[0].IMMUN_STATUS }}</th>
     </tr>
     <tr>
       <th>Type and Date</th>
@@ -683,14 +684,14 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.IMMUNIZATION_TYPE }}</td>
+      <td>{{ row.FIRST_DATE | formatDate }}</td>
+      <td>{{ row.SECOND_DATE | formatDate }}</td>
+      <td>{{ row.THIRD_DATE | formatDate }}</td>
+      <td>{{ row.FOURT_HDATE | formatDate }}</td>
+      <td>{{ row.FIFTH_DATE | formatDate }}</td>
+      <td>{{ row.SIXTH_DATE |formatDate }}</td>
+      <td>{{ row.CERTIFIED_BY }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -719,11 +720,11 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows %}
     <tr class="{{ className.next() }}">
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
-      <td>{{ "" }}</td>
+      <td>{{ row.SCHOOL_CODE }}</td>
+      <td>{{ row.ENTRY_DATE | formatDate }}</td>
+      <td>{{ row.ENTRY_REASON_CODE }}</td>
+      <td>{{ row.EXIT_DATE | formatDate }}</td>
+      <td>{{ row.EXIT_REASON_CODE }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -1034,4 +1035,35 @@
       </tbody>
     </table>
   {% endfor %}
+{% endmacro %}
+{% macro personalInfoSpecialEdInactive(rows) %}
+  {% if rows[0].SPEC_PREFIX_NUMBER %}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">SPECIAL ED:</th>
+          <th width="1">Inactive</th>
+          <th width="1"></th>
+          <th width="1"></th>
+        </tr>
+        <tr>
+          <th width="1">Category</th>
+          <th width="1">Program Design</th>
+          <th width="1">Entry Date</th>
+          <th width="1">Exit Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+        <tr class="{{ className.next() }}">
+          <td>{{ row.SPEC_PREFIX_NUMBER }}</td>
+          <td>{{ row.SPEC_PROG_DESIGN }}</td>
+          <td>{{ row.SPEC_ENTRY_DATE | formatDate }}</td>
+          <td>{{ row.SPEC_EXIT_DATE | formatDate }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 {% endmacro %}
