@@ -1,7 +1,5 @@
 import path from 'path'
 import fs from 'fs/promises'
-import  { prisma } from '~/queries'
-import { Prisma } from '@prisma/client';
 import mssql from 'mssql'
 
 require('dotenv').config()
