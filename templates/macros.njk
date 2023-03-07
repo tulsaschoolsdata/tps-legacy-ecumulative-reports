@@ -257,7 +257,7 @@
     </tr>
 {% endmacro %}
 
-{% macro testTableIowa(rows) %}
+{% macro testTableIowaTap(rows) %}
   {% for date, rows in rows | groupby("SORT_DATE") %}
 
     {% set header = rows[0] %}
@@ -731,12 +731,42 @@
 {% endmacro %}
 
 ##########
+{% macro testTableITBSRow(row, className) %}
+  <tr class="{{ className }}">
+    <td class="blueBG">{{ row.MEASURE_RANK}}</td>
+    <td>{{row.LISTENING}}</td>
+    <td>{{row.WORD_ANALYSIS}}</td>
+    <td>{{row.VOCABULARY}}</td>
+    <td>{{row.READING}}</td>
+    <td>{{row.SPELLING}}</td>
+    <td>{{row.CAPITALIZATION}}</td>
+    <td>{{row.PUNCTUATION}}</td>
+    <td>{{row.USAGE_AND_EXPRESSION}}</td>
+    <td>{{row.LANGUAGE_TOTAL}}</td>
+    <td>{{row.VISUAL_MATERIALS}}</td>
+    <td>{{row.REFERENCE_MATERIALS}}</td>
+    <td>{{row.WORK_STUDY_TOTAL}}</td>
+    <td>{{row.RIV_READ_SS_NPR_NCE}}</td>
+    <td>{{row.MATH_CONCEPTS}}</td>
+    <td>{{row.MATH_PROBLEM_SOLVING}}</td>
+    <td>{{row.MATH_COMPUTATION}}</td>
+    <td>{{row.MATH_TOTAL}}</td>
+    <td>{{row.COMPLETE_COMPOSITE}}</td>
+    <td>{{row.TOTAL_COMPOSITE}}</td>
+    <td>{{row.SOCIAL_STUDIES}}</td>
+    <td>{{row.SCIENCE}}</td>
+  </tr>
+{% endmacro %}
 {% macro testTableITBS(rows) %}
-  {% for row in rows %}
-    {{ testTableHeader(row) }}
+  {% for date, rows in rows | groupby("SORT_DATE") %}
+
+    {% set header = rows[0] %}
+    {{ testTableHeader(header) }}
+
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
         <tr>
+          <th width="1"></th>
           <th width="1">Lis<br>ten<br>ing</th>
           <th width="1">Word<br>Ana-<br>lysis</th>
           <th width="1">Voc<br>abu<br>lary</th>
@@ -761,29 +791,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="odd">
-          <td>{{row.LISTENING}}</td>
-          <td>{{row.WORD_ANALYSIS}}</td>
-          <td>{{row.VOCABULARY}}</td>
-          <td>{{row.READING}}</td>
-          <td>{{row.SPELLING}}</td>
-          <td>{{row.CAPITALIZATION}}</td>
-          <td>{{row.PUNCTUATION}}</td>
-          <td>{{row.USAGE_AND_EXPRESSION}}</td>
-          <td>{{row.LANGUAGE_TOTAL}}</td>
-          <td>{{row.VISUAL_MATERIALS}}</td>
-          <td>{{row.REFERENCE_MATERIALS}}</td>
-          <td>{{row.WORK_STUDY_TOTAL}}</td>
-          <td>{{row.RIV_READ_SS_NPR_NCE}}</td>
-          <td>{{row.MATH_CONCEPTS}}</td>
-          <td>{{row.MATH_PROBLEM_SOLVING}}</td>
-          <td>{{row.MATH_COMPUTATION}}</td>
-          <td>{{row.MATH_TOTAL}}</td>
-          <td>{{row.COMPLETE_COMPOSITE}}</td>
-          <td>{{row.TOTAL_COMPOSITE}}</td>
-          <td>{{row.SOCIAL_STUDIES}}</td>
-          <td>{{row.SCIENCE}}</td>
-        </tr>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+          {{ testTableITBSRow(row, className.next()) }}
+        {% endfor %}
       </tbody>
     </table>
   {% endfor %}
@@ -1014,4 +1025,3 @@
     </table>
   {% endfor %}
 {% endmacro %}
-
