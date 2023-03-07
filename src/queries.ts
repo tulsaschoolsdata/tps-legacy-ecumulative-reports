@@ -20,7 +20,8 @@ import type {
   TESTS_SAT9_CUSTOM,
   TESTS_EXPLTEST,
   TESTS_EOI,
-  TESTS_ACTTEST
+  TESTS_ACTTEST,
+  TESTS_NAGL,
   // CLASS_HISTORY_CUSTOM, // … no primary key
   // TESTS_TEST, // … no primary key
 } from '@prisma/client'
@@ -665,6 +666,35 @@ type Eoi = Pick<TESTS_ADMINISTERED,
 export const eoi = async (student_number: number): Promise<Eoi[]> => {
   const eoi = (await prisma.$queryRaw<Eoi[]>`EXECUTE ECUM_Report_Student.ecum_queries.eoi ${student_number}`)
   return eoi
+}
+
+type Nagle = Pick<TESTS_ADMINISTERED,
+  'STUDENT_NUMBER' |
+  'GRADE' |
+  'SORT_DATE' |
+  'SORT_GRADE'
+> & Pick<TESTS_NAGL,
+  'SCHOOL_NAME' |
+  'NAGL_AGE_YEARS' |
+  'NAGL_AGE_MNTHS' |
+  'NAGL_RAW_SCORE' |
+  'NAGL_NAI_SCORE' |
+  'NAGL_NAI_PCT' |
+  'NAGL_NAI_STANINE' |
+  'NAGL_GRD_ABILITY' |
+  'NAGL_GRD_PCT' |
+  'NAGL_GRD_STANINE' |
+  'NAGL_SCALE_SCORE' |
+  'NAGL_ADJ_NAI_SCORE' |
+  'NAGL_ADJ_NAI_PCT' |
+  'NAGL_ADJ_NAI_STANINE' 
+> & {
+  TEST_NAME: string // TESTS_TEST
+}
+
+export const nagle = async (student_number: number): Promise<Nagle[]> => {
+  const nagle = (await prisma.$queryRaw<Nagle[]>`EXECUTE ECUM_Report_Student.ecum_queries.nagle ${student_number}`)
+  return nagle
 }
 
 type Act = Pick<TESTS_ADMINISTERED,
