@@ -57,6 +57,7 @@ async function runReport(browser: Browser, student_number: number) {
       student_number
     )
     const student_data_tests = await queries.studentDataTests(student_number)
+    const student_personal_data_report = await queries.studentPersonalDataReport(student_number)
     const ecum = await queries.ecum(student_number)
     const demo = await queries.demo(student_number)
     const misc = await queries.misc(student_number)
@@ -87,14 +88,13 @@ async function runReport(browser: Browser, student_number: number) {
     const sta9 = await queries.sat9(student_number)
     const sat = await queries.sat(student_number)
     const itbs = await queries.itbs(student_number)
-    const nagle = await queries.nagle(student_number)
 
     const spd_mobility = await queries.spd_Mobility(student_number)
     const spd_immunizations = await queries.spd_Immunizations(student_number)
     const spd_demo = await queries.spd_Demo(student_number)
     const spd_suspensions = await queries.spd_Suspensions(student_number)
-    const spd_special_ed = await queries.spd_SpecialEd(student_number)
-    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
+    //const spd_special_ed = await queries.spd_SpecialEd(student_number)
+    //const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
 
 
     // html transcript
@@ -136,7 +136,6 @@ async function runReport(browser: Browser, student_number: number) {
         sta9,
         sat,
         itbs,
-        nagle
       })
     )
 
@@ -147,8 +146,8 @@ async function runReport(browser: Browser, student_number: number) {
       student_data_transcript,
       spd_mobility,
       spd_immunizations,
-      spd_special_ed,
-      spd_special_ed_inactive,
+      //spd_special_ed,
+      //spd_special_ed_inactive,
       spd_suspensions,
       spd_demo,
     }))
