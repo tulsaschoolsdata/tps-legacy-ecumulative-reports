@@ -1038,3 +1038,34 @@
     </table>
   {% endfor %}
 {% endmacro %}
+{% macro personalInfoSpecialEdInactive(rows) %}
+  {% if rows[0].SPEC_PREFIX_NUMBER %}
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="1">SPECIAL ED:</th>
+          <th width="1">Inactive</th>
+          <th width="1"></th>
+          <th width="1"></th>
+        </tr>
+        <tr>
+          <th width="1">Category</th>
+          <th width="1">Program Design</th>
+          <th width="1">Entry Date</th>
+          <th width="1">Exit Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set className = cycler("odd", "even") %}
+        {% for row in rows %}
+        <tr class="{{ className.next() }}">
+          <td>{{ row.SPEC_PREFIX_NUMBER }}</td>
+          <td>{{ row.SPEC_PROG_DESIGN }}</td>
+          <td>{{ row.SPEC_ENTRY_DATE | formatDate }}</td>
+          <td>{{ row.SPEC_EXIT_DATE | formatDate }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endmacro %}
