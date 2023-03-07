@@ -843,12 +843,8 @@ type StudentPersonalDataReport = Pick<
     MISC_REASON_CODE: string
   }
 
-export const studentPersonalDataReport = async (
-  student_number: number
-): Promise<StudentPersonalDataReport[]> => {
-  const student_personal_data_report = await prisma.$queryRaw<
-    StudentPersonalDataReport[]
-  >`Execute ECUM_Report_Student.ecum_queries.student_personal_data_report ${student_number}`
+export const studentPersonalDataReport = async (student_number: number): Promise<StudentPersonalDataReport> => {
+  const student_personal_data_report = (await prisma.$queryRaw<StudentPersonalDataReport[]>`Execute ECUM_Report_Student.ecum_queries.student_personal_data_report ${student_number}`)[0]
   return student_personal_data_report
 }
 
@@ -891,66 +887,49 @@ export const spd_Immunizations = (
     Spd_Immunizations[]
   >`Execute ECUM_Report_student.ecum_queries.spd_immunizations ${student_number}`
 
-type Spd_SpecialEdActive = {
-  SPEC_PREFIX: string
-  SPEC_NUMBER: number
+type Spd_SpecialEd = {
+  SPEC_PREFIX_NUMBER: string
   SPEC_PROG_DESIGN: string
   SPEC_ENTRY_DATE: Date
+  SPEC_LOCATION: string
 }
 
-export const spd_SpecialEdActive = (
-  student_number: number
-): Promise<Spd_SpecialEdActive[]> =>
-  prisma.$queryRaw<
-    Spd_SpecialEdActive[]
-  >`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_special_ed_active ${student_number}`
+export const spd_SpecialEd = (student_number: number): Promise<Spd_SpecialEd[]> => prisma.$queryRaw<Spd_SpecialEd[]>`Execute ECUM_Report_student.ecum_queries.spd_special_ed_active ${student_number}`
 
 type Spd_SpecialEdInactive = {
-  SPEC_PREFIX: string
-  SPEC_NUMBER: number
+  SPEC_PREFIX_NUMBER: string
   SPEC_PROG_DESIGN: string
   SPEC_ENTRY_DATE: Date
+  SPEC_EXIT_DATE: Date
 }
 
-export const spd_SpecialEdInactive = (
-  student_number: number
-): Promise<Spd_SpecialEdInactive[]> =>
-  prisma.$queryRaw<
-    Spd_SpecialEdInactive[]
-  >`Execute ECUM_Report_Student.ECUM.ecum_queries.spd_special_ed_inactive ${student_number}`
+export const spd_SpecialEdInactive = (student_number: number): Promise<Spd_SpecialEdInactive[]> => prisma.$queryRaw<Spd_SpecialEdInactive[]>`Execute ECUM_Report_student.ecum_queries.spd_special_ed_inactive ${student_number}`
 
 type Spd_Suspensions = {
-  SCHOOL: string // SUSPEND
-  NOTIFICATION: string // SUSPEND
-  START_DATE: Date // SUSPEND
-  END_DATE: Date // SUSPEND
-  NUMBER_DAYS: number // SUSPEND
-  COMMENT_LINE_1: string // SUSPEND
-  LOCATION: string // SUSPEND
-  REASON_DESCRIPTION: string // SUSPEND_REASON_CODES
+ SCHOOL: string              // SUSPEND
+  SUSPEND_SCHOOL: string      // SUSPEND
+  SUSPEND_NOTIFICATION: string// SUSPEND
+  START_DATE: Date            // SUSPEND
+  END_DATE: Date              // SUSPEND
+  NUMBER_DAYS: number         // SUSPEND
+  COMMENT_LINE_1: string      // SUSPEND
+  SUSPEND_LOCATION: string    // SUSPEND
+  REASON_DESCRIPTION: string  // SUSPEND_REASON_CODES
 }
 
-export const spd_Suspensions = (
-  student_number: number
-): Promise<Spd_Suspensions[]> =>
-  prisma.$queryRaw<
-    Spd_Suspensions[]
-  >`Execute ECUM_ReportStudent.Ecum.ecum_queries.spd_suspensions ${student_number}`
+export const spd_Suspensions = (student_number: number): Promise<Spd_Suspensions[]> => prisma.$queryRaw<Spd_Suspensions[]>`Execute ECUM_Report_student.ecum_queries.spd_suspensions ${student_number}`
 
-type Spd_Demo = Pick<
-  STUDENT_DEMO,
-  | 'PARENT_LNAME'
-  | 'PARENT_FNAME'
-  | 'PARENT_MI'
-  | 'SPARENT_LNAME'
-  | 'SPARENT_FNAME'
-  | 'SPARENT_MNAME'
->
+type Spd_Demo = Pick<STUDENT_DEMO,
+  'PARENT_LNAME' |
+  'PARENT_FNAME' |
+  'PARENT_MI' |
+  'SPARENT_LNAME' |
+  'SPARENT_FNAME' |
+  'SPARENT_MNAME'
+  >
 
-export const spd_Demo = async (student_number: number): Promise<Spd_Demo[]> => {
-  const spd_demo = await prisma.$queryRaw<
-    Spd_Demo[]
-  >`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`
+export const spd_Demo = async (student_number: number): Promise<Spd_Demo> => {
+  const spd_demo = (await prisma.$queryRaw<Spd_Demo[]>`EXECUTE ECUM_Report_Student.ecum_queries.spd_demo ${student_number}`)[0]
   return spd_demo
 }
 
@@ -984,10 +963,9 @@ export const queries = {
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
-  spd_SpecialEdActive,
+  spd_SpecialEd,
   spd_SpecialEdInactive,
   spd_Suspensions,
   spd_Demo,
-  nagle
 }
 export default queries

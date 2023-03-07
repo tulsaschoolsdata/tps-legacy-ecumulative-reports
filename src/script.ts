@@ -89,6 +89,14 @@ async function runReport(browser: Browser, student_number: number) {
     const itbs = await queries.itbs(student_number)
     const nagle = await queries.nagle(student_number)
 
+    const spd_mobility = await queries.spd_Mobility(student_number)
+    const spd_immunizations = await queries.spd_Immunizations(student_number)
+    const spd_demo = await queries.spd_Demo(student_number)
+    const spd_suspensions = await queries.spd_Suspensions(student_number)
+    const spd_special_ed = await queries.spd_SpecialEd(student_number)
+    const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
+
+
     // html transcript
     fs.writeFile(
       transcript_html_path,
@@ -132,14 +140,18 @@ async function runReport(browser: Browser, student_number: number) {
       })
     )
 
-    // html personalinfo
-    fs.writeFile(
-      personalinfo_html_path,
-      render('personalinfo.njk', {
-        date: REPORT_DATE,
-        student_data_transcript,
-      })
-    )
+    // console.info('Rendering Personal Info HTML…')
+    fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
+      date: REPORT_DATE,
+      student_personal_data_report,
+      student_data_transcript,
+      spd_mobility,
+      spd_immunizations,
+      spd_special_ed,
+      spd_special_ed_inactive,
+      spd_suspensions,
+      spd_demo,
+    }))
 
     // pdf transcript
     await report.pdf(browser, transcript_html_path, {
@@ -176,8 +188,8 @@ async function runReport(browser: Browser, student_number: number) {
       printBackground: true,
       margin: {
         bottom: '0.25in',
-        left: '0.25in',
-        right: '0.25in',
+        left: '1in',
+        right: '1in',
         top: '0.25in',
       },
     })
@@ -198,6 +210,9 @@ async function runReport(browser: Browser, student_number: number) {
         transcript_pdf_path,
         testscores_html_path,
         testscores_pdf_path,
+        personalinfo_html_path,
+        personalinfo_pdf_path,
+
       ].map(fs.unlink)
     )
   }
