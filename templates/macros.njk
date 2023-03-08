@@ -133,11 +133,11 @@
   </thead>
   <tbody>
     {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
+    {% for row in rows|sort(attribute="ENTRY_DATE") %}
     <tr class="{{ className.next() }}">
       <td>{{ row.SCHOOL_CODE }}</td>
       <td>{{ row.ENTRY_DATE | formatDate }}</td>
-      <td>{{ row.ENTRY_REASON_CODE }}</td>
+      <td>{{ "FIXME " }}</td>
       <td>{{ row.EXIT_DATE | formatDate }}</td>
       <td>{{ row.EXIT_REASON_CODE }}</td>
     </tr>
