@@ -196,7 +196,10 @@
 
 {% macro testTableHeader(row) %}
   <div id="header">
-    {{ row.TEST_NAME }}{{"   Grade: "}}{{row.GRADE}}{{"   Date: "}}{{row.DATE | formatDate }}{{"   School: "}}{{row.SCHOOL_NAME}}
+    <span class="testName">{{ row.TEST_NAME }}</span>
+    Grade:<span class="testMetaAttr">{{ row.GRADE }}</span>
+    Date:<span class="testMetaAttr">{{row.SORT_DATE | formatDate }}</span>
+    School:<span class="testMetaAttr">{{row.SCHOOL_NAME}}</span>
   </div>
 {% endmacro %}
 

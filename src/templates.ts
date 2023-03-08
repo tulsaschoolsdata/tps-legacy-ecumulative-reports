@@ -2,7 +2,7 @@ import path from 'path'
 import nunjucks from 'nunjucks'
 
 export function formatDate(date: Date): string {
-    return new Intl.DateTimeFormat().format(date)
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'CST' }).format(date)
   }
 
 const templates = nunjucks
