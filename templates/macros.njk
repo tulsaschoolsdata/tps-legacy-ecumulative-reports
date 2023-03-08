@@ -183,11 +183,11 @@
   </thead>
   <tbody>
     {% set className = cycler("odd", "even") %}
-    {% for row in rows %}
+    {% for row in rows|sort(attribute="SORT_DATE") %}
     <tr class="{{ className.next() }}">
       <td>{{ row.GRADE }}</td>
       <td>{{ row.TEST_NAME }}</td>
-      <td>{{ row.DATE }}</td>
+      <td>{{ row.SORT_DATE | formatDate }}</td>
     </tr>
     {% endfor %}
   </tbody>
