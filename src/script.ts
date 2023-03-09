@@ -88,6 +88,7 @@ async function runReport(browser: Browser, student_number: number) {
     const sta9 = await queries.sat9(student_number)
     const sat = await queries.sat(student_number)
     const itbs = await queries.itbs(student_number)
+    const nagle = await queries.nagle(student_number)
 
     const spd_mobility = await queries.spd_Mobility(student_number)
     const spd_immunizations = await queries.spd_Immunizations(student_number)
@@ -136,6 +137,7 @@ async function runReport(browser: Browser, student_number: number) {
         sta9,
         sat,
         itbs,
+        nagle
       })
     )
 
