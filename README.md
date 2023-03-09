@@ -30,7 +30,7 @@ Student Number Count: 3
 progress [----------------------------------------] 0% | ETA: 0s | 0/1
 ```
 
-Run the script for all student numbers.
+Run the `script.ts` file to generate pdf files for all student numbers.
 
 ```console
 $ npx ts-node src/script.ts
@@ -39,11 +39,20 @@ Student Number Count: 172012
 progress [----------------------------------------] 0% | ETA: 1854s | 60/172012
 ```
 
+Run the `generate_csv.ts` file to generate a csv containing metadata for all student numbers.
+
+```console
+$ npx ts-node src/generate_csv.ts
+Launching Browser…
+Student Number Count: 172012
+```
+
 Output files are generated in `out/`
 
 ```console
-$ ls out | head -n3
+$ ls out | head -n4
 280222.pdf
 282051.pdf
 284261.pdf
+index.csv
 ```
