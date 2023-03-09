@@ -208,7 +208,7 @@
 {% endmacro %}
 
 {% macro testTableOtis(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -307,7 +307,7 @@
 {% endmacro %}
 
 {% macro testTableOklaCore(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -398,7 +398,7 @@
 {% endmacro %}
 
 {% macro testTableExplore(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -450,7 +450,7 @@
 {% endmacro %}
 
 {% macro testTableEndOfInstruction(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -490,7 +490,7 @@
 {% endmacro %}
 
 {% macro testTablePlan(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -553,7 +553,7 @@
 {% endmacro %}
 
 {% macro testTableAct(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -809,7 +809,7 @@
 {% endmacro %}
 
 {% macro testTableNAGL(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -919,7 +919,7 @@
 {% endmacro %}
 
 {% macro testTablePBP(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
@@ -1021,7 +1021,7 @@
 {% endmacro %}
 
 {% macro testTableSAT(rows) %}
-  {% for row in rows %}
+  {% for row in rows|sort(attribute="SORT_DATE") %}
     {{ testTableHeader(row) }}
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
