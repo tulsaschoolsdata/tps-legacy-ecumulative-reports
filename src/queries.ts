@@ -237,13 +237,6 @@ export const mobility = async (student_number: number): Promise<Mobility[]> => {
   const mobility = await prisma.$queryRaw<
     Mobility[]
   >`EXECUTE ECUM_Report_Student.ecum_queries.mobility ${student_number}`
-  mobility.sort((a, b) =>
-    a.ENTRY_DATE == b.ENTRY_DATE
-      ? 0
-      : (a.ENTRY_DATE || 0) > (b.ENTRY_DATE || 0)
-      ? 1
-      : -1
-  )
   return mobility
 }
 
