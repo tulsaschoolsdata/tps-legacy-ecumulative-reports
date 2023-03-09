@@ -195,11 +195,15 @@
 {% endmacro %}
 
 {% macro testTableHeader(row) %}
+  {% set bldgName = row.BLDG_NAME %}
+  {% set schoolName = row.SCHOOL_NAME %}
+  {% set displaySchoolName = schoolName  if schoolName  !== undefined else bldgName %}
+
   <div id="header">
     <span class="testName">{{ row.TEST_NAME }}</span>
     Grade:<span class="testMetaAttr">{{ row.GRADE }}</span>
     Date:<span class="testMetaAttr">{{row.SORT_DATE | formatDate }}</span>
-    School:<span class="testMetaAttr">{{row.SCHOOL_NAME}}</span>
+    School:<span class="testMetaAttr">{{displaySchoolName}}</span>
   </div>
 {% endmacro %}
 
