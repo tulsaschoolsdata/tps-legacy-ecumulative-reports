@@ -766,7 +766,7 @@
   </tr>
 {% endmacro %}
 {% macro testTableITBS(rows) %}
-  {% for date, rows in rows | groupby("SORT_DATE") %}
+  {% for date, rows in rows|sort(attribute="SORT_DATE") | groupby("SORT_DATE") %}
 
     {% set header = rows[0] %}
     {{ testTableHeader(header) }}
