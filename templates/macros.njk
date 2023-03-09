@@ -620,7 +620,7 @@
         {% set className = cycler("odd", "even") %}
         {% for row in rows %}
         <tr class="{{ className.next() }}">
-          <td>{{ row.SUSPEND_SCHOOL }}</td>
+          <td>{{ row.SCHOOL }} {{ row.SUSPEND_SCHOOL|trim|truncate(10) }}</td>
           <td>{{ row.SUSPEND_NOTIFICATION }}</td>
           <td>{{ row.START_DATE | formatDate }}</td>
           <td>{{ row.END_DATE | formatDate }}</td>
