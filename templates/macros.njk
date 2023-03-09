@@ -688,12 +688,12 @@
     {% for row in rows %}
     <tr class="{{ className.next() }}">
       <td>{{ row.IMMUNIZATION_TYPE }}</td>
-      <td>{{ row.FIRST_DATE | formatDate }}</td>
-      <td>{{ row.SECOND_DATE | formatDate }}</td>
-      <td>{{ row.THIRD_DATE | formatDate }}</td>
-      <td>{{ row.FOURT_HDATE | formatDate }}</td>
-      <td>{{ row.FIFTH_DATE | formatDate }}</td>
-      <td>{{ row.SIXTH_DATE |formatDate }}</td>
+      <td>{{ (row.FIRST_DATE | formatDate) if row.FIRST_DATE else "" }}</td>
+      <td>{{ (row.SECOND_DATE | formatDate) if row.SECOND_DATE else "" }}</td>
+      <td>{{ (row.THIRD_DATE | formatDate) if row.THIRD_DATE else "" }}</td>
+      <td>{{ (row.FOURTH_DATE | formatDate) if row.FOURTH_DATE else "" }}</td>
+      <td>{{ (row.FIFTH_DATE | formatDate) if row.FIFTH_DATE else "" }}</td>
+      <td>{{ (row.SIXTH_DATE | formatDate) if row.SIXTH_DATE else "" }}</td>
       <td>{{ row.CERTIFIED_BY }}</td>
     </tr>
     {% endfor %}
