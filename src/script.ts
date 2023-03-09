@@ -139,7 +139,7 @@ async function runReport(browser: Browser, student_number: number) {
       })
     )
 
-    // console.info('Rendering Personal Info HTML…')
+    // html personalinfo
     fs.writeFile(personalinfo_html_path, render('personalinfo.njk', {
       date: REPORT_DATE,
       student_personal_data_report,
