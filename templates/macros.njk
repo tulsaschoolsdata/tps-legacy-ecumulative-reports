@@ -197,7 +197,7 @@
 {% macro testTableHeader(row) %}
   {% set bldgName = row.BLDG_NAME %}
   {% set schoolName = row.SCHOOL_NAME %}
-  {% set displaySchoolName = row.SCHOOL_NAME if row.SCHOOL_NAME !== undefined else row.BLDG_NAME %}
+  {% set displaySchoolName = schoolName  if schoolName  !== undefined else bldgName %}
 
   <div id="header">
     <span class="testName">{{ row.TEST_NAME }}</span>
