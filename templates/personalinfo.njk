@@ -53,10 +53,13 @@
       .no-break {
         break-inside: avoid;
       }
+      .pb-20 {
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
-    <div id="header">
+    <div id="header" class="pb-20">
       <div class="banner">
         <div>Student Personal Information Report</div>
         <div>Tulsa Public Schools</div>
@@ -82,12 +85,12 @@
           <div style="display: flex; column-gap: 1rem;">
             <div>Parent/Guardian:</div>
             <div>
-              <div>{{spd_demo.PARENT_FNAME}} 
-              {{ spd_demo.PARENT_MI }} 
+              <div>{{spd_demo.PARENT_FNAME}}
+              {{ spd_demo.PARENT_MI }}
               {{ spd_demo.PARENT_LNAME }}
               </div>
-              <div>{{spd_demo.SPARENT_FNAME}} 
-              {{ spd_demo.SPARENT_MI }} 
+              <div>{{spd_demo.SPARENT_FNAME}}
+              {{ spd_demo.SPARENT_MI }}
               {{ spd_demo.SPARENT_LNAME }}</div>
             </div>
           </div>
@@ -106,22 +109,20 @@
       </div>
     </div>
 
-    <div class="page" data-pageNum="1">
-      <div class="no-break">
-        <br />
+    <div class="page">
+      <div class="no-break pb-20">
         {{macros.personalInfoMobility(spd_mobility)}}
-        <br />
+      </div>
+      <div class="no-break pb-20">
         {{macros.personalInfoImmunizations(spd_immunizations)}}
       </div>
-    </div>
-
-    <div class="page" data-pageNum="2">
-      <div class="no-break">
-        <br />
+      <div class="no-break pb-20">
         {{macros.personalInfoSuspensions(spd_suspensions)}}
-        <br />
+      </div>
+      <div class="no-break pb-20">
         {{macros.personalInfoSpecialEd(spd_special_ed)}}
-        <br />
+      </div>
+      <div class="no-break pb-20">
         {{macros.personalInfoSpecialEdInactive(spd_special_ed_inactive)}}
       </div>
     </div>
