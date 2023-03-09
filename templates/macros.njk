@@ -614,7 +614,7 @@
       </thead>
       <tbody>
         {% set className = cycler("odd", "even") %}
-        {% for row in rows %}
+        {% for row in rows|sort(attribute="START_DATE") %}
         <tr class="{{ className.next() }}">
           <td>{{ row.SUSPEND_SCHOOL }}</td>
           <td>{{ row.SUSPEND_NOTIFICATION }}</td>
@@ -1062,8 +1062,8 @@
         <tr class="{{ className.next() }}">
           <td>{{ row.SPEC_PREFIX_NUMBER }}</td>
           <td>{{ row.SPEC_PROG_DESIGN }}</td>
-          <td>{{ row.SPEC_ENTRY_DATE | formatDate }}</td>
-          <td>{{ row.SPEC_EXIT_DATE | formatDate }}</td>
+          <td>{{ (row.SPEC_ENTRY_DATE | formatDate) if row.SPEC_ENTRY_DATE else "" }}</td>
+          <td>{{ (row.SPEC_EXIT_DATE | formatDate) if row.SPEC_EXIT_DATE else "" }}</td>
         </tr>
         {% endfor %}
       </tbody>
