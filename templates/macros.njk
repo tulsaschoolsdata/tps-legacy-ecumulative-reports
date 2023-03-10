@@ -199,11 +199,11 @@
   {% set schoolName = row.SCHOOL_NAME %}
   {% set displaySchoolName = schoolName  if schoolName  !== undefined else bldgName %}
 
-  <div id="header">
-    <span class="testName">{{ row.TEST_NAME }}</span>
+  <div id="header" class="testTableHeader">
+    <span class="testName">{{ row.TEST_NAME|truncate(24,true,"") }}</span>
     Grade:<span class="testMetaAttr">{{ row.GRADE }}</span>
-    Date:<span class="testMetaAttr">{{row.SORT_DATE | formatDate }}</span>
-    School:<span class="testMetaAttr">{{displaySchoolName}}</span>
+    Date:<span class="testMetaAttr">{{ row.SORT_DATE | formatDate }}</span>
+    School:<span class="testMetaAttr">{{ displaySchoolName }}</span>
   </div>
 {% endmacro %}
 
