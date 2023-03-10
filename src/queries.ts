@@ -953,6 +953,7 @@ export const queries = {
   explore,
   eoi,
   act,
+  nagle,
   studentPersonalDataReport,
   spd_Mobility,
   spd_Immunizations,
