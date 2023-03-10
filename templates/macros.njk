@@ -727,7 +727,7 @@
     {% set className = cycler("odd", "even") %}
     {% for row in rows|sort(attribute="ENTRY_DATE") %}
     <tr class="{{ className.next() }}">
-      <td>{{ row.SCHOOL_CODE }}</td>
+      <td>{{ row.SCHOOL_CODE }} {{ row.BLDG_NAME|trim|truncate(12) }}</td>
       <td>{{ row.ENTRY_DATE | formatDate }}</td>
       <td>{{ row.ENTRY_TRANSFER_REASON_CODE }}</td>
       <td>{{ row.EXIT_DATE | formatDate }}</td>
