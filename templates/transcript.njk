@@ -154,7 +154,11 @@
           Ranks {{ misc.RANK_STUD.replace(r/^0+/, '') if misc.RANK_STUD|length }} in class of {{ misc.RANK_CLASS.replace(r/^0+/, '') if misc.RANK_CLASS|length }}
         </div>
         <div style="flex-grow: 1;">
+          {% if misc.GRADUATION_DATE %}
           Graduation Date: {{ misc.GRADUATION_DATE.slice(0,2) }}-{{ misc.GRADUATION_DATE.slice(2,4) }}-{{ misc.GRADUATION_DATE.slice(4,6) }}
+          {% else %}
+          Graduation Date:
+          {% endif %}
         </div>
       </div>
 
