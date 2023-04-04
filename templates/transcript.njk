@@ -62,9 +62,9 @@
         <div class="date">Date: {{ date | formatDate }}</div>
       </div>
       <div class="student-name">
-        {{ student_data_transcript.STUDENT_LNAME | trim }},
-        {{ student_data_transcript.STUDENT_FNAME | trim }}
-        {{ student_data_transcript.STUDENT_MI | trim }}
+        {{ student_data_transcript.STUDENT_LNAME|trim if student_data_transcript.STUDENT_LNAME|length }},
+        {{ student_data_transcript.STUDENT_FNAME|trim if student_data_transcript.STUDENT_FNAME|length}}
+        {{ student_data_transcript.STUDENT_MI|trim if student_data_transcript.STUDENT_MI|length}}
       </div>
     </div>
 
@@ -104,13 +104,13 @@
           <div>
             Male:
             {% if demo.PARENT_LNAME %}
-              {{ demo.PARENT_LNAME | trim }}, {{ demo.PARENT_FNAME }} {{ demo.PARENT_MI }}
+              {{ demo.PARENT_LNAME|trim if demo.PARENT_LNAME|length }}, {{ demo.PARENT_FNAME }} {{ demo.PARENT_MI }}
             {% endif %}
           </div>
           <div>
             Female:
             {% if demo.SPARENT_LNAME %}
-              {{ demo.SPARENT_LNAME | trim }}, {{ demo.SPARENT_FNAME }} {{ demo.SPARENT_MI }}
+              {{ demo.SPARENT_LNAME|trim if demo.SPARENT_LNAME|length }}, {{ demo.SPARENT_FNAME }} {{ demo.SPARENT_MI }}
             {% endif %}
           </div>
 
@@ -151,10 +151,14 @@
 
       <div style="display: flex; column-gap: 1rem; margin: 1rem 0; text-align: center; font-weight: bold;">
         <div style="flex-grow: 1;">
-          Ranks {{ misc.RANK_STUD.replace(r/^0+/, '') }} in class of {{ misc.RANK_CLASS.replace(r/^0+/, '') }}
+          Ranks {{ misc.RANK_STUD.replace(r/^0+/, '') if misc.RANK_STUD|length }} in class of {{ misc.RANK_CLASS.replace(r/^0+/, '') if misc.RANK_CLASS|length }}
         </div>
         <div style="flex-grow: 1;">
+          {% if misc.GRADUATION_DATE %}
           Graduation Date: {{ misc.GRADUATION_DATE.slice(0,2) }}-{{ misc.GRADUATION_DATE.slice(2,4) }}-{{ misc.GRADUATION_DATE.slice(4,6) }}
+          {% else %}
+          Graduation Date:
+          {% endif %}
         </div>
       </div>
 

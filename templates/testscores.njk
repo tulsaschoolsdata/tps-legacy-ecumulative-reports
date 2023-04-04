@@ -77,9 +77,9 @@
         <div class="date">Date: {{ date | formatDate }}</div>
       </div>
       <div class="student-name">
-        {{ student_data_transcript.STUDENT_LNAME | trim }},
-        {{ student_data_transcript.STUDENT_FNAME | trim }}
-        {{ student_data_transcript.STUDENT_MI | trim }}
+        {{ student_data_transcript.STUDENT_LNAME|trim if student_data_transcript.STUDENT_LNAME|length }},
+        {{ student_data_transcript.STUDENT_FNAME|trim if student_data_transcript.STUDENT_FNAME|length}}
+        {{ student_data_transcript.STUDENT_MI|trim if student_data_transcript.STUDENT_MI|length}}
       </div>
     </div>
 
