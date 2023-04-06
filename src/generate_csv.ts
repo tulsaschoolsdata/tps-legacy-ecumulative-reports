@@ -12,7 +12,7 @@ type StudentNumberNameDob = Pick<
   | 'STUDENT_FNAME'
   | 'STUDENT_MI'
   | 'STUDENT_BIRTHDATE'
->
+> & { BIRTHDATE: string }
 
 const studentsData = async (): Promise<StudentNumberNameDob[]> =>
   await prisma.$queryRaw<
@@ -21,17 +21,25 @@ const studentsData = async (): Promise<StudentNumberNameDob[]> =>
 
 async function generateCSV(): Promise<void> {
   const queryResults = await studentsData()
+  const queryResultsCustomized = queryResults.map(
+    (result: StudentNumberNameDob) => {
+      let newResult = result
+      newResult.BIRTHDATE =
+        result.STUDENT_BIRTHDATE?.toISOString().split('T')[0]
+      return newResult
+    }
+  )
 
   await fs.writeFile(
     'out/index.csv',
-    csvStringify(queryResults, {
+    csvStringify(queryResultsCustomized, {
       header: true,
       columns: [
         'STUDENT_NUMBER',
         'STUDENT_LNAME',
         'STUDENT_FNAME',
         'STUDENT_MI',
-        'STUDENT_BIRTHDATE',
+        'BIRTHDATE',
       ],
     })
   )
