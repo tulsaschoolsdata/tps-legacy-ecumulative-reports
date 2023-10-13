@@ -232,7 +232,6 @@ async function runReports(
   const rows = list.split(',')
   rows.forEach((row) => {
     row = row.substring(row.lastIndexOf('"') + 1, row.length)
-    console.info("row = ", row)
     student_numbers.push(Number(row))
   })
 
