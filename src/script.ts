@@ -7,9 +7,10 @@ import fs from 'fs/promises'
 import PDFMerger from 'pdf-merger-js'
 import fastq from 'fastq'
 import CliProgress from 'cli-progress'
+import { parse } from 'csv-parse';
 
 import { render } from '~/templates'
-import { queries, prisma } from '~/queries'
+import { queries, prisma, studentNumbers } from '~/queries'
 import { launchBrowser, closeBrowser } from '~/browser'
 
 const errors: Error[] = []
@@ -18,6 +19,7 @@ type Task = {
   browser: Browser
   student_number: number
 }
+
 
 type StudentNumberFilter = number[]
 
@@ -96,7 +98,6 @@ async function runReport(browser: Browser, student_number: number) {
     const spd_suspensions = await queries.spd_Suspensions(student_number)
     const spd_special_ed = await queries.spd_SpecialEd(student_number)
     const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
-
 
     // html transcript
     fs.writeFile(
@@ -223,13 +224,21 @@ async function runReports(
   browser: Browser,
   student_number_filter?: StudentNumberFilter
 ) {
-  const student_numbers = (await queries.studentNumbers())
-    .map((o) => o.STUDENT_NUMBER)
-    .filter(
-      (number) =>
-        !student_number_filter || student_number_filter.includes(number)
-    )
+  const headers = ['STUDENT_NUMBER']
+  const sped_csv_path = path.resolve(__dirname, '../sped_list/ecum_sped_student_number.csv')
+  const student_numbers: Array<number> = []
+  const list = (await fs.readFile(sped_csv_path, { encoding: 'utf-8' }))
+
+  const rows = list.split(',')
+  rows.forEach((row) => {
+    row = row.substring(row.lastIndexOf('"') + 1, row.length)
+    console.info("row = ", row)
+    student_numbers.push(Number(row))
+  })
+
+
   console.info('Student Number Count:', student_numbers.length)
+  console.info('student numbers type:', typeof student_numbers);
 
   progress.start(student_numbers.length, 0)
 
@@ -241,7 +250,6 @@ async function runReports(
       })
       .finally(() => progress.increment())
   })
-
   await q.drained().then(() => progress.stop())
 }
 
@@ -268,14 +276,14 @@ process.on('exit', () => {
 
   return Promise.all([disconnectPromise, closePromise])
 })
-;(async () => {
-  try {
-    await fs.mkdir(OUT_DIRECTORY, { recursive: true })
-    const browser = await launchBrowser()
-    await runReports(browser, studentNumbersFilter())
-    process.exit(0)
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  }
-})()
+  ; (async () => {
+    try {
+      await fs.mkdir(OUT_DIRECTORY, { recursive: true })
+      const browser = await launchBrowser()
+      await runReports(browser, studentNumbersFilter())
+      process.exit(0)
+    } catch (error) {
+      console.error(error)
+      process.exit(1)
+    }
+  })()
