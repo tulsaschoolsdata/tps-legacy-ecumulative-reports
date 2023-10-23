@@ -8,7 +8,6 @@ import * as readline from 'node:readline/promises';
 import PDFMerger from 'pdf-merger-js'
 import fastq from 'fastq'
 import CliProgress from 'cli-progress'
-import { parse } from 'csv-parse';
 
 import { render } from '~/templates'
 import { queries, prisma, studentNumbers } from '~/queries'
@@ -290,11 +289,7 @@ process.on('exit', () => {
     try {
       await fs.mkdir(OUT_DIRECTORY, { recursive: true })
       const browser = await launchBrowser()
-<<<<<<< HEAD
-      await runReports(browser, studentNumbersFilter())
-=======
       await runReports(browser, await studentNumbersFilter())
->>>>>>> jwz/hotfix/sped
       process.exit(0)
     } catch (error) {
       console.error(error)
