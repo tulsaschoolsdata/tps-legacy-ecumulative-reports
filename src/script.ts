@@ -4,12 +4,13 @@ import type { Browser } from '~/browser'
 import report from 'puppeteer-report'
 import path from 'path'
 import fs from 'fs/promises'
+import * as readline from 'node:readline/promises';
 import PDFMerger from 'pdf-merger-js'
 import fastq from 'fastq'
 import CliProgress from 'cli-progress'
 
 import { render } from '~/templates'
-import { queries, prisma } from '~/queries'
+import { queries, prisma, studentNumbers } from '~/queries'
 import { launchBrowser, closeBrowser } from '~/browser'
 
 const errors: Error[] = []
@@ -18,6 +19,7 @@ type Task = {
   browser: Browser
   student_number: number
 }
+
 
 type StudentNumberFilter = number[]
 
@@ -96,7 +98,6 @@ async function runReport(browser: Browser, student_number: number) {
     const spd_suspensions = await queries.spd_Suspensions(student_number)
     const spd_special_ed = await queries.spd_SpecialEd(student_number)
     const spd_special_ed_inactive = await queries.spd_SpecialEdInactive(student_number)
-
 
     // html transcript
     fs.writeFile(
@@ -218,17 +219,13 @@ async function runReport(browser: Browser, student_number: number) {
     )
   }
 }
-
+// race conditions can occur if there are long write times to a remote drive.
 async function runReports(
   browser: Browser,
   student_number_filter?: StudentNumberFilter
 ) {
-  const student_numbers = (await queries.studentNumbers())
-    .map((o) => o.STUDENT_NUMBER)
-    .filter(
-      (number) =>
-        !student_number_filter || student_number_filter.includes(number)
-    )
+  const student_numbers: Array<number> = []
+
   console.info('Student Number Count:', student_numbers.length)
 
   progress.start(student_numbers.length, 0)
@@ -241,17 +238,26 @@ async function runReports(
       })
       .finally(() => progress.increment())
   })
-
   await q.drained().then(() => progress.stop())
 }
 
-function studentNumbersFilter(): StudentNumberFilter | undefined {
+async function studentNumbersFilter(): Promise<StudentNumberFilter | undefined> {
+
+  const stdin_integers = []
+  if (!(process.stdin.isTTY)) {
+    for await (const line of readline.createInterface({ input: process.stdin })) {
+      const student_number = parseInt(line.trim())
+      if (student_number) stdin_integers.push(student_number);
+    }
+
+  }
+
   const argv_integers = process.argv
     .map(Number)
     .filter((n) => n % 1 == 0 && n > 0)
-
-  if (argv_integers.length) {
-    return argv_integers
+  const integers = stdin_integers.concat(argv_integers)
+  if (integers.length) {
+    return integers
   }
 }
 
@@ -268,14 +274,14 @@ process.on('exit', () => {
 
   return Promise.all([disconnectPromise, closePromise])
 })
-;(async () => {
-  try {
-    await fs.mkdir(OUT_DIRECTORY, { recursive: true })
-    const browser = await launchBrowser()
-    await runReports(browser, studentNumbersFilter())
-    process.exit(0)
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
-  }
-})()
+  ;(async () => {
+    try {
+      await fs.mkdir(OUT_DIRECTORY, { recursive: true })
+      const browser = await launchBrowser()
+      await runReports(browser, await studentNumbersFilter())
+      process.exit(0)
+    } catch (error) {
+      console.error(error)
+      process.exit(1)
+    }
+  })()
