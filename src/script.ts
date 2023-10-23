@@ -219,7 +219,7 @@ async function runReport(browser: Browser, student_number: number) {
     )
   }
 }
-
+// race conditions can occur if there are long write times to a remote drive.
 async function runReports(
   browser: Browser,
   student_number_filter?: StudentNumberFilter
@@ -251,9 +251,8 @@ async function studentNumbersFilter(): Promise<StudentNumberFilter | undefined> 
   const stdin_integers = []
   if (!(process.stdin.isTTY)) {
     for await (const line of readline.createInterface({ input: process.stdin })) {
-      const numRegex = /\d+/g
-      const student_number = line.match(numRegex)?.join('')
-      stdin_integers.push(Number(student_number));
+      const student_number = parseInt(line.trim())
+      if (student_number) stdin_integers.push(student_number);
     }
 
   }
