@@ -224,20 +224,9 @@ async function runReports(
   browser: Browser,
   student_number_filter?: StudentNumberFilter
 ) {
-  const headers = ['STUDENT_NUMBER']
-  const sped_csv_path = path.resolve(__dirname, '../sped_list/ecum_sped_student_number.csv')
   const student_numbers: Array<number> = []
-  const list = (await fs.readFile(sped_csv_path, { encoding: 'utf-8' }))
-
-  const rows = list.split(',')
-  rows.forEach((row) => {
-    row = row.substring(row.lastIndexOf('"') + 1, row.length)
-    student_numbers.push(Number(row))
-  })
-
 
   console.info('Student Number Count:', student_numbers.length)
-  console.info('student numbers type:', typeof student_numbers);
 
   progress.start(student_numbers.length, 0)
 
