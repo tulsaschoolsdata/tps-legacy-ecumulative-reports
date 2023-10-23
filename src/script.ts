@@ -274,7 +274,7 @@ process.on('exit', () => {
 
   return Promise.all([disconnectPromise, closePromise])
 })
-  ; (async () => {
+  ;(async () => {
     try {
       await fs.mkdir(OUT_DIRECTORY, { recursive: true })
       const browser = await launchBrowser()
