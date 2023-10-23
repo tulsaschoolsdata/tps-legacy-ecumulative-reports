@@ -4,6 +4,7 @@ import type { Browser } from '~/browser'
 import report from 'puppeteer-report'
 import path from 'path'
 import fs from 'fs/promises'
+import * as readline from 'node:readline/promises';
 import PDFMerger from 'pdf-merger-js'
 import fastq from 'fastq'
 import CliProgress from 'cli-progress'
@@ -219,7 +220,7 @@ async function runReport(browser: Browser, student_number: number) {
     )
   }
 }
-
+// race conditions can occur if there are long write times to a remote drive.
 async function runReports(
   browser: Browser,
   student_number_filter?: StudentNumberFilter
@@ -252,13 +253,23 @@ async function runReports(
   await q.drained().then(() => progress.stop())
 }
 
-function studentNumbersFilter(): StudentNumberFilter | undefined {
+async function studentNumbersFilter(): Promise<StudentNumberFilter | undefined> {
+
+  const stdin_integers = []
+  if (!(process.stdin.isTTY)) {
+    for await (const line of readline.createInterface({ input: process.stdin })) {
+      const student_number = parseInt(line.trim())
+      if (student_number) stdin_integers.push(student_number);
+    }
+
+  }
+
   const argv_integers = process.argv
     .map(Number)
     .filter((n) => n % 1 == 0 && n > 0)
-
-  if (argv_integers.length) {
-    return argv_integers
+  const integers = stdin_integers.concat(argv_integers)
+  if (integers.length) {
+    return integers
   }
 }
 
@@ -279,7 +290,11 @@ process.on('exit', () => {
     try {
       await fs.mkdir(OUT_DIRECTORY, { recursive: true })
       const browser = await launchBrowser()
+<<<<<<< HEAD
       await runReports(browser, studentNumbersFilter())
+=======
+      await runReports(browser, await studentNumbersFilter())
+>>>>>>> jwz/hotfix/sped
       process.exit(0)
     } catch (error) {
       console.error(error)
